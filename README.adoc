@@ -1,4 +1,4 @@
-= Address Book (Level 4)
+= ResuMaker (name pending)
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/se-edu/addressbook-level4[image:https://travis-ci.org/se-edu/addressbook-level4.svg?branch=master[Build Status]]
@@ -32,4 +32,5 @@ endif::[]
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
 * Adapted from: https://github.com/nus-cs2103-AY1819S1/addressbook-level4[AddressBook Level 4]
+
 == Licence : link:LICENSE[MIT]
