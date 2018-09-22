@@ -15,8 +15,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::anubh-v.jpg[width="150", align="left"]
 {empty}[https://github.com/anubh-v[github]] [<<johndoe#, portfolio>>]
 
-Role: 
-
+Role:
 '''
 
 === John Roe
