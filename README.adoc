@@ -1,4 +1,4 @@
-ResuMaker
+= ResuMaker
 
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
