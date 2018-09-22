@@ -19,7 +19,7 @@ Role: SoC Awareness
 '''
 
 === Jiang Hengyuan
-image::jhengy.jpg[width="150", align="left"]
+image::jhengy.jpeg[width="150", align="left"]
 {empty}[https://github.com/jhengy[github]] [<<johndoe#, portfolio>>]
 
 Role: Data Management
