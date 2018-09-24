@@ -10,7 +10,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 == Project Team
 
 === Anubhav
-image::anubh-v.jpg[width="150", align="left"]
+image::anubh-v.png[width="150", align="left"]
 {empty}[https://github.com/anubh-v[github]] [<<johndoe#, portfolio>>]
 
 Role: SoC Awareness
@@ -18,7 +18,7 @@ Role: SoC Awareness
 '''
 
 === Jiang Hengyuan
-image::jhengy.jpeg[width="150", align="left"]
+image::jhengy.png[width="150", align="left"]
 {empty}[https://github.com/jhengy[github]] [<<johndoe#, portfolio>>]
 
 Role: Data Management
@@ -34,7 +34,7 @@ Role: Resume Configuration Management
 '''
 
 === Ong Shu Peng
-image::ongspxm.jpeg[width="150", align="left"]
+image::ongspxm.png[width="150", align="left"]
 {empty}[http://github.com/ongspxm[github]] [<<johndoe#, portfolio>>]
 
 Role: Data Filtering
@@ -42,7 +42,7 @@ Role: Data Filtering
 '''
 
 === Gu Wangfan
-image::scalarmotion.jpg[width="150", align="left"]
+image::scalarmotion.png[width="150", align="left"]
 {empty}[http://github.com/scalarmotion[github]] [<<johndoe#, portfolio>>]
 
 Role: Resume Generation
