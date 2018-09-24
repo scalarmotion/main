@@ -42,7 +42,7 @@ Role: Data Filtering
 '''
 
 === Gu Wangfan
-image::scalarmotion.png[width="150", align="left"]
+image::scalarmotion.jpg[width="150", align="left"]
 {empty}[http://github.com/scalarmotion[github]] [<<johndoe#, portfolio>>]
 
 Role: Resume Generation
