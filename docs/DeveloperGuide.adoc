@@ -1,4 +1,4 @@
-= AddressBook Level 4 - Developer Guide
+= ResuMaker - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -12,9 +12,9 @@ ifdef::env-github[]
 :note-caption: :information_source:
 :warning-caption: :warning:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4/tree/master
+:repoURL: https://github.com/CS2103-AY1819S1-W17-1/main/tree/master
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -815,13 +815,14 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing over mouse input
-* is reasonably comfortable using CLI apps
+* SoC students with work/project experience/CS skills who are applying for programmes/ internships/jobs/etc
 
-*Value proposition*: manage contacts faster than a typical mouse/GUI driven app
+*Value proposition*:
+
+* Easy to use: CLI makes things fast and simple
+* Flexible: Able to customise resume for specific job requirements
+* SOC-aware: Save time with built in support for School of Computing programmes
+
 
 [appendix]
 == User Stories
@@ -831,17 +832,46 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |Student |Save pieces of information about my relevant experience |Generate resumes without having to type the same things every time
 
-|`* * *` |user |add a new person |
+|`* * *` |Student |Generate a resume with only information relevant to a particular field of CS | Conveniently customise my resume for different applications.
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Student |Have my Work Experiences and Projects sorted by relevance to job requirements, on my resume |Ensure my resume is relevant to the employer
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Student |Search for entries using filters | Check my saved entries conveniently
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Student |Generate resumes in common file formats like PDF |My resumes are accepted by everyone
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |Student |Update or delete my personal information conveniently |Ensure that the resumes the tool generates are up to date
+
+|`* * *` |Student |Have my contact information and other “standard” information automatically added to my resumes | Focus on crafting the more valuable information in my resume
+
+|`* *` |Student |Save custom combinations of tags |Filter the exact entries I want to be put in my resume
+
+|`* *` |Student |Receive feedback from my CLI commands |Be sure of the results of my commands
+
+|`* *` |SoC Student |My resume to automatically contain descriptions of common SOC programmes (Orbital, NOC, etc) |Save time instead of having to input standard information manually
+|`* *` |SoC Student |Pick standard SOC awards (Honour Roll, etc) from a list rather than type them out manually |Save time instead of having to input standard information manually
+
+|`* *` |Student |Have common NUS acronyms auto-translated into their full forms|So that I may type information using acronyms conveniently
+
+|`* *` |Student with existing work|Import my existing projects from Github |Save time typing them out manually
+
+|`*` |Student |Undo commands and revert any changes made |Quickly recover from making a typo
+
+|`*` |Student with multiple computers |Export my saved information and import it on another computer |Generate resumes wherever I go
+
+|`*` |Student |Undo commands and revert any changes made |Quickly recover from making a typo
+
+|`*` |Student |Conveniently contact people I have worked with in the past | Request testimonials or keep in touch for networking purposes
+
+|`*` |Student |Easily learn how to use the tool from a built-in tutorial |Get started and work more efficiently
+
+|`*` |Student |Auto-fill information about special SoC programs | Saves the effect to input it by myself
+
+|`*` |Student |Conveniently contact people I have worked with in the past | Request testimonials or keep in touch for networking purposes
+
+
 |=======================================================================
 
 _{More to be added}_
@@ -849,44 +879,72 @@ _{More to be added}_
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is `ResuMaker` and the *Actor* is the `Student`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+
+=== Add information about a SoC / NUS Event (e.g. Hack N Roll, Student Exchange, Independent Work module)
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1. User enters command to create new project, together with the “nus” keyword and the name of his Event
+2. System recognises the name of the Event, as well as its type (Project, Work Experience, Skill, etc)
+3. System prompts user to fill in further details of his Event, but also pre-fills some fields (such as duration, nature of Event)
+4. User finalises the Event details
+5. System prompts user to tag the Event, but  also pre-selects some tags
+6. User finalises the tags applicable to the Event
+7. System saves the Event as an Entry
 +
 Use case ends.
 
 *Extensions*
 
+* 1a. User enters slang or an acronym instead of the full name of his Event (e.g. "ug research opps" instead of Undergraduate Research Opportunites Programme)
++
 [none]
-* 2a. The list is empty.
+** 1a1. System matches the slang / acronym to the full Event name in the database, if possible.
++
+Use case continues from Step 2.
+
+* 2a. System does not recognises the Project as a SOC project
++
+[none]
+** 2a1. System informs the User that no default information is available, and all information must be entered manually (UC09)
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+[discrete]
+=== Add an SoC Award entry
+
+*MSS*
+
+1. User enters command to view list of SOC Awards
+2. System displays an indexed list of SOC Awards
+3. User selects a particular SOC Award by specifying its index.
+4. System prompts user to enter further details about the SOC Award (e.g. year)
+5. User completes data entry
+6. System saves the Award entry
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User does not find his award in the list
 +
 [none]
-** 3a1. AddressBook shows an error message.
+** 3a1. User enters command to manually create an Award entry.
 +
-Use case resumes at step 2.
-
-_{More to be added}_
+Use case ends.
 
 [appendix]
 == Non Functional Requirements
 
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
-.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
-
-_{More to be added}_
+.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster  using commands than using the mouse.
+. The primary mode of input should be a Command Line Interface.
+. All application data must be stored locally, and in a human editable file
+. There should be no installer for the application.
+. Resume generation should be fast (within 2 minutes).
 
 [appendix]
 == Glossary
@@ -894,8 +952,44 @@ _{More to be added}_
 [[mainstream-os]] Mainstream OS::
 Windows, Linux, Unix, OS-X
 
-[[private-contact-detail]] Private contact detail::
-A contact detail that is not meant to be shared with others
+[[entries]] Entry::
+Contact, Education, Work Experience, Project, Skill or Award
+
+[[event]] Event::
+Work Experience, Project
+
+[[section]] Section::
+A distinct category of a generated resume (Work Experience, Project, etc)
+
+[[work-experience]] Work Experience::
+Any professional work (internship, freelance, job)
+
+[[project]] Project::
+Any work done by student outside school/work requirements
+
+[[skill]] Skill::
+Proficiency in any language / framework / tool relevant to Computer Science professionals
+
+[[award]] Award::
+Any award / recognition
+
+[[contact]] Contact::
+Student’s email address, mobile phone number and GitHub Profile
+
+[[education]] Education::
+University name, degree programme name, Year of Study
+
+[[standard-information]] Standard Information::
+Student’s Contact and Education Details
+
+[[configuration]] Configuration::
+Sets of tags for each Section of a resume - to be used to custom generate a resume
+
+[[config-file]] Config File::
+A plaintext file containing a Configuration
+
+[[tag]] Tag::
+A keyword
 
 [appendix]
 == Product Survey
