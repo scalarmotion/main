@@ -209,6 +209,7 @@ asciidoctor {
         'site-root': "${sourceDir}",  // must be the same as sourceDir, do not modify
 
         // removes SE-EDU navbar
+        // Anubhav learnt about this from this group: https://github.com/nus-cs2103-AY1819S1/addressbook-level4/pull/18
         'site-name': 'ResuMaker',
         'site-githuburl': 'https://github.com/CS2103-AY1819S1-W17-1/main',
     ]
