@@ -11,7 +11,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Anubhav
 image::anubh-v.png[width="150", align="left"]
-{empty}[https://github.com/anubh-v[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/anubh-v[github]] [<<anubhav#, portfolio>>]
 
 Role: SoC Awareness
 
@@ -19,7 +19,7 @@ Role: SoC Awareness
 
 === Jiang Hengyuan
 image::jhengy.png[width="150", align="left"]
-{empty}[https://github.com/jhengy[github]] [<<johndoe#, portfolio>>]
+{empty}[https://github.com/jhengy[github]] [<<hengyuan#, portfolio>>]
 
 Role: Data Management
 
@@ -27,7 +27,7 @@ Role: Data Management
 
 === Marvin Tan Xu Dong
 image::marvintxd.png[width="150", align="left"]
-{empty}[http://github.com/marvintxd[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/marvintxd[github]] [<<marvin#, portfolio>>]
 
 Role: Resume Configuration Management
 
@@ -35,7 +35,7 @@ Role: Resume Configuration Management
 
 === Ong Shu Peng
 image::ongspxm.png[width="150", align="left"]
-{empty}[http://github.com/ongspxm[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/ongspxm[github]] [<<shupeng#, portfolio>>]
 
 Role: Data Filtering
 
@@ -43,7 +43,7 @@ Role: Data Filtering
 
 === Gu Wangfan
 image::scalarmotion.png[width="150", align="left"]
-{empty}[http://github.com/scalarmotion[github]] [<<johndoe#, portfolio>>]
+{empty}[http://github.com/scalarmotion[github]] [<<wangfan#, portfolio>>]
 
 Role: Resume Generation
 
