@@ -1,4 +1,4 @@
-= AddressBook Level 4 - User Guide
+= ResuMaker - User Guide
 :site-section: UserGuide
 :toc:
 :toc-title:
@@ -12,13 +12,13 @@ ifdef::env-github[]
 :tip-caption: :bulb:
 :note-caption: :information_source:
 endif::[]
-:repoURL: https://github.com/se-edu/addressbook-level4
+:repoURL: https://github.com/CS2103-AY1819S1-W17-1/main
 
-By: `Team SE-EDU`      Since: `Jun 2016`      Licence: `MIT`
+By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
 == Introduction
 
-AddressBook Level 4 (AB4) is for those who *prefer to use a desktop app for managing contacts*. More importantly, AB4 is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB4 can get your contact management tasks done faster than traditional GUI apps. Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+ResuMaker is for *computer Science students looking for a fast and flexble way to generate their resumes*. It is especially *optimized for students at the National University of Singapore's School of Computing*. Unlike most resume generation webapps, ResuMaker can tailor your resume to fit the specific requirements of a job.  Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 == Quick Start
 
@@ -153,6 +153,34 @@ Selects the 2nd person in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st person in the results of the `find` command.
+
+
+=== Creating a SoC / NUS Event (Project / Work Experience / Skill): `nus`
+Auto-populates a resume Entry based on a matching SoC / NUS Event.
+Format: `nus EVENT_NAME`
+
+[TIP]
+The `EVENT_NAME` can be an Event's full name (Mathematics and Computer Science Double Degree Programme), its acronym (math - cs ddp), or even a
+partially matching phrase (math - comp sci double deg prog)
+
+Examples:
+
+* `nus orb` +
+Creates a Project Entry for `Orbital`
+* `nus hack n roll` +
+Creates a Project Entry for `Hack n Roll`
+* `nus ta cs2040` +
+Creates a Work Experience entry for `Teaching Assistant CS2040`
+
+[NOTE]
+Slang and acronyms must be correctly configured in application data. ResuMaker ships with correct data for commonly used slang and acronyms.
+
+=== Viewing SoC awards: `fetch-awards`
+
+Lists all awards at SoC in a numbered list.
+Format: `fetch-awards` or `fetch-awards INDEX`
+
+The latter format adds the specified award as a resume Entry.
 
 === Listing entered commands : `history`
 
