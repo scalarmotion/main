@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`listEntry* ~work #java`: lists all resume entries under section work and tagged as java
-* **`addEntry`**`~experience` `#java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`: adds an entry under section experience with assigned title, subheader and duration of internship
-* **`deleteEntry`**`3` : deletes the 3rd entry shown in the current entry list
+* *`listEntry* ~work #java`: Lists all the Work related Entries tagged with `java`
+* **`addEntry`**`~work` `#java t/The Source Enterprise s/Data Science Intern d/ May 2010 - Aug 2010`: Adds a new Entry classified under Work Experiences, with the given title, subheader and duration
+* **`deleteEntry`**`3` : deletes the 3rd Entry shown in the current Entry list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
