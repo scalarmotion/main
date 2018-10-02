@@ -21,7 +21,7 @@ By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 Do you find the need to maintain multiple versions of your resume? +
 Perhaps you find youself reorganising your resumes before making a job application?
 
-If so - welcome to ResuMaker: a *fast and flexible resume generator aimed at computer science students*  
+If so - welcome to ResuMaker: a *fast and flexible resume generator aimed at computer science students* 
 
 Unlike most resume generation webapps, ResuMaker tailors your resume to fit the specific requirements of a job. +
 It can also pick up contextual awareness about your world - with out-of-the-box support for the National University of Singapore's School of Computing. +
