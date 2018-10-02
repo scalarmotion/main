@@ -70,37 +70,38 @@ Examples:
 * `addEntry ~experience #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
 * `addEntry ~awards #java`
 
-=== Adding a bullet point: `addDescription`
+=== Adding a bullet point: `addBullet`
 
 Adds a bullet point under the description of an entry in the ResuMaker +
 Format: `addBullet CONTENTTOADD`
 
 Examples:
 
-* `addBullet  research design and implement scalable java`
+* `addBullet implement scalable application for data visualization using java`
 
-=== editing a bullet point: `editDescription`
+=== Editing a bullet point: `editBullet`
 
-edits a bullet point under the description of an entry in the resuMaker +
+edits a bullet point under the description of an entry in the ResuMaker +
 Format: `editBullet INDEX EDITTEDCONTENT`
 
 Examples:
 
-* `editBullet 0  research design and implement scalable java application`
+* `editBullet 0  implement scalable application for data visualization using java`
 
 
 === Listing entries : `listEntry`
 
-list particular entries in the resuMaker. Both section and tags are optional - running with no arguments will display all entries. +
+list particular entries in the ResuMaker. Both section and tags are optional - running with no arguments will display all entries. +
 Format: `listEntry [~SECTION] [#TAG]...`
+
 
 Examples:
 
 * `listEntry ~education java`
 
-=== viewing a particular entry : `vieWEntry`
+=== Viewing a particular entry : `viewEntry`
 
-views a particular entry in the resuMaker.+
+views a particular entry in the ResuMaker.+
 Format: `vieWEntry INDEX`
 
 Examples:
@@ -109,7 +110,7 @@ Examples:
 
 === Editing an entry : `editEntry`
 
-Edits an existing entry in the resuMaker. +
+Edits an existing entry in the ResuMaker. +
 Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [t/TAG]...`
 
 ****
@@ -127,8 +128,7 @@ edits the entry at index 1 by replacing its title as R company and replace all i
 
 
 
-
-=== deleting an entry: `deleteEntry`
+=== Deleting an entry: `deleteEntry`
 
 Finds persons whose names contain any of the given keywords. +
 Format: `deleteEntry INDEX`
