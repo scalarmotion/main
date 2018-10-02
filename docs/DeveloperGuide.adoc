@@ -758,7 +758,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |Student |Have my Work Experiences and Projects sorted by relevance to job requirements, on my resume |Ensure my resume is relevant to the employer
 
-|`* * *` |Student |Search for entries using filters | Check my saved entries conveniently
+|`* * *` |Student |Search for entries using filters |Check my saved entries conveniently
 
 |`* * *` |Student |Generate resumes in common file formats like PDF |My resumes are accepted by everyone
 
@@ -779,7 +779,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |Student with multiple computers |Export my saved information and import it on another computer |Generate resumes wherever I go
 
-|`*` |Student |Conveniently contact people I have worked with in the past | Request testimonials or keep in touch for networking purposes
+|`*` |Student |Undo commands and revert any changes made |Quickly recover from making a typo
 
 |`*` |Student |Easily learn how to use the tool from a built-in tutorial |Get started and work more efficiently
 
@@ -796,6 +796,93 @@ _{More to be added}_
 == Use Cases
 
 (For all use cases below, the *System* is `ResuMaker` and the *Actor* is the `Student`, unless specified otherwise)
+
+[discrete]
+
+=== Add Personal Information of the user
+
+*MSS*
+
+1. User enters command to set his contact details
+2. System prompts user for his mobile number, email address and GitHub username
+3. User enters in his contact information
+4. System prompts user for a confirmation
+5. User confirms his data
+6. System saves contact information
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User enters invalid personal information
+
++
+[none]
+** 3a1. System prompts user to enter valid contact information
++
+Step 3 repeats as many times as necessary
+
+[discrete]
+
+=== Add a generic entry or major entry in the resuMaker
+
+*MSS*
+
+1. User enters command to create a genric entry ( Skills / Awards), or major entry (Experience / Education)
+2. System saves the Entry to the disk
+
++
+Use case ends.
+
+
+[discrete]
+
+=== Delete an Entry under a specific category
+
+*MSS*
+
+1. User filter the entries using specific tags,
+returning an indexed list of entries (UC04)
+2. User delete the corresponding entries in the list by indicating associated index for each entry to be deleted
+3. System saves the Entry to the disk
++
+Use case ends.
+
+*Extensions*
+
+* *a. User input command using the wrong syntax
+** *a1. System prompts the user to re-enter the command
+** *a2. User re-enters the command
+* 3a. User inputs an index out of range
+** 3a.1 System prompts for invalid input and asks user to re-enter the command
+** 3a.2 return to step 4 for the user to re-enter the command
+
+
+[discrete]
+
+=== edit an Entry under a specific index
+
+*MSS*
+
+1. User searches for a set of Entries, using some tags (UC04)
+2. System displays an indexed list of Entries matching the search tags (UC04)
+3. User enters command to edit Entries, and specifies an index and also the updated information
+4. System displays the updated Entry for reference
+5. System saves the Entry to the disk
+
++
+Use case ends.
+
+*Extensions*
+
+* *a. User input command using the wrong syntax
+** *a1. System prompts the user to re-enter the command
+** *a2. User re-enters the command
+* 3a. User inputs an index out of range
+** 3a.1 System prompts for invalid input and asks user to re-enter the command
+** 3a.2 return to step 4 for the user to re-enter the command
+
 
 [discrete]
 

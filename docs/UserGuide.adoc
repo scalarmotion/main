@@ -23,7 +23,7 @@ ResuMaker is for *computer Science students looking for a fast and flexble way t
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
-.  Download the latest `addressbook.jar` link:{repoURL}/releases[here].
+.  Download the latest `resumaker.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Address Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
@@ -33,9 +33,9 @@ image::Ui.png[width="790"]
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Some example commands you can try:
 
-* *`list`* : lists all contacts
-* **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : adds a contact named `John Doe` to the Address Book.
-* **`delete`**`3` : deletes the 3rd contact shown in the current list
+* *`listEntry* ~work #java`: lists all resume entries under section work and tagged as java
+* **`addEntry`**`~experience` `#java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`: adds an entry under section experience with assigned title, subheader and duration of internship
+* **`deleteEntry`**`3` : deletes the 3rd entry shown in the current entry list
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for details of each command.
@@ -46,41 +46,74 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
-* Items in square brackets are optional e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION #TAGNAME t/TITLE, [s/SUBHEADER]`, `SECTION`, `TAGNAME`, `TITLE`  are parameters which can be used as `addEntry t/The Source Enterprise`.
+* Items in square brackets are optional e.g `t/TITLE [s/SUBHEADER]` can be used as `t/The Source Enterprise` or as `t/The Source Enterprise s/Java programmer`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
+* Parameters can be in any order e.g. if the command specifies `t/TITLE s/SUBHEADER`, `s/SUBHEADER T/TITLE` is also acceptable.
 ====
 
 === Viewing help : `help`
 
 Format: `help`
 
-=== Adding a person: `add`
+=== Adding an entry: `addEntry`
 
 Adds a person to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `addEntry ~SECTION [#TAG]... t/TITLE [s/SUBHEADER] d/DURATION`
 
 [TIP]
-A person can have any number of tags (including 0)
+An entry can have any number of tags (including 0)
+An entry contains description, which can be added using addDescription as a separate command
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `addEntry ~experience #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
+* `addEntry ~awards #java`
 
-=== Listing all persons : `list`
+=== Adding a bullet point: `addDescription`
 
-Shows a list of all persons in the address book. +
-Format: `list`
+Adds a bullet point under the description of an entry in the ResuMaker +
+Format: `addBullet CONTENTTOADD`
 
-=== Editing a person : `edit`
+Examples:
 
-Edits an existing person in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+* `addBullet  research design and implement scalable java`
+
+=== editing a bullet point: `editDescription`
+
+edits a bullet point under the description of an entry in the resuMaker +
+Format: `editBullet INDEX EDITTEDCONTENT`
+
+Examples:
+
+* `editBullet 0  research design and implement scalable java application`
+
+
+=== Listing entries : `listEntry`
+
+list particular entries in the resuMaker. Both section and tags are optional - running with no arguments will display all entries. +
+Format: `listEntry [~SECTION] [#TAG]...`
+
+Examples:
+
+* `listEntry ~education java`
+
+=== viewing a particular entry : `vieWEntry`
+
+views a particular entry in the resuMaker.+
+Format: `vieWEntry INDEX`
+
+Examples:
+
+* `viewEntry 2`
+
+=== Editing an entry : `editEntry`
+
+Edits an existing entry in the resuMaker. +
+Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [t/TAG]...`
 
 ****
-* Edits the person at the specified `INDEX`. The index refers to the index number shown in the displayed person list. The index *must be a positive integer* 1, 2, 3, ...
+* Edits the entry at the specified `INDEX`. The index refers to the index number shown in the displayed entry list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
@@ -89,37 +122,17 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
 
 Examples:
 
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st person to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd person to be `Betsy Crower` and clears all existing tags.
+* `editEntry 1 t/ R company t/ C++` +
+edits the entry at index 1 by replacing its title as R company and replace all its tags by C++
 
-=== Locating persons by name: `find`
+
+
+
+=== deleting an entry: `deleteEntry`
 
 Finds persons whose names contain any of the given keywords. +
-Format: `find KEYWORD [MORE_KEYWORDS]`
+Format: `deleteEntry INDEX`
 
-****
-* The search is case insensitive. e.g `hans` will match `Hans`
-* The order of the keywords does not matter. e.g. `Hans Bo` will match `Bo Hans`
-* Only the name is searched.
-* Only full words will be matched e.g. `Han` will not match `Hans`
-* Persons matching at least one keyword will be returned (i.e. `OR` search). e.g. `Hans Bo` will return `Hans Gruber`, `Bo Yang`
-****
-
-Examples:
-
-* `find John` +
-Returns `john` and `John Doe`
-* `find Betsy Tim John` +
-Returns any person having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a person : `delete`
-
-Deletes the specified person from the address book. +
-Format: `delete INDEX`
-
-****
 * Deletes the person at the specified `INDEX`.
 * The index refers to the index number shown in the displayed person list.
 * The index *must be a positive integer* 1, 2, 3, ...
@@ -129,30 +142,11 @@ Examples:
 
 * `list` +
 `delete 2` +
-Deletes the 2nd person in the address book.
-* `find Betsy` +
+Deletes the 2nd entry in the address book.
+* `list ~education` +
 `delete 1` +
-Deletes the 1st person in the results of the `find` command.
+Deletes the 1st entry displayed under education section
 
-=== Selecting a person : `select`
-
-Selects the person identified by the index number used in the displayed person list. +
-Format: `select INDEX`
-
-****
-* Selects the person and loads the Google search page the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* `1, 2, 3, ...`
-****
-
-Examples:
-
-* `list` +
-`select 2` +
-Selects the 2nd person in the address book.
-* `find Betsy` +
-`select 1` +
-Selects the 1st person in the results of the `find` command.
 
 
 === Creating a SoC / NUS Event (Project / Work Experience / Skill): `nus`
