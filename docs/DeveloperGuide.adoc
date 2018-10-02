@@ -938,6 +938,25 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== View a template
+
+*MSS*
+
+1. User enters command to view desired template using its filename
+2. System displays contents of the config
+3. User continues using the system
++
+Use case ends.
+
+*Extensions*
+* 2a. Entered config name does not match any existing config.
++
+[none]
+** 2a1. System displays a warning.
++
+Use case returns to Step 1.
+
+[discrete]
 === Adding tag to an entry
 
 *MSS*
@@ -1013,7 +1032,7 @@ Use case ends.
 *MSS*
 
 1. Student enters command to create resume and specifies a template file, by providing the file path to the template file
-6. System saves a markdown file containing a resume based on the template and the entries specified by the template
+2. System saves a markdown file containing a resume based on the template and the entries specified by the template
 +
 Use case ends.
 
@@ -1024,13 +1043,13 @@ Use case ends.
 [none]
 ** 1a1. System uses a pre-defined default template file instead
 +
-Use case resumes from Step 4.
+Use case resumes from Step 2.
 * 1b. User specifies a template file using an alias instead of a filepath
 +
 [none]
 ** 1b1. System reads application settings to match the file’s alias with its filepath
 +
-Use case resumes from Step 4.
+Use case resumes from Step 2.
 
 
 [appendix]

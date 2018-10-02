@@ -224,6 +224,16 @@ Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, addi
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
 
+=== Viewing template : `viewtemplate`
+
+Gives a preview of the template. +
+Format: `viewtemplate FILEPATH`
+
+Examples:
+
+* `viewtemplate google.txt` +
+Previews the template specified in `google.txt`
+
 [NOTE]
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
