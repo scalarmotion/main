@@ -758,7 +758,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |Student |Have my Work Experiences and Projects sorted by relevance to job requirements, on my resume |Ensure my resume is relevant to the employer
 
-|`* * *` |Student |Search for entries using filters | Check my saved entries conveniently
+|`* * *` |Student |Search for entries using filters |Check my saved entries conveniently
 
 |`* * *` |Student |Generate resumes in common file formats like PDF |My resumes are accepted by everyone
 
@@ -779,7 +779,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`*` |Student with multiple computers |Export my saved information and import it on another computer |Generate resumes wherever I go
 
-|`*` |Student |Conveniently contact people I have worked with in the past | Request testimonials or keep in touch for networking purposes
+|`*` |Student |Undo commands and revert any changes made |Quickly recover from making a typo
 
 |`*` |Student |Easily learn how to use the tool from a built-in tutorial |Get started and work more efficiently
 
@@ -798,7 +798,92 @@ _{More to be added}_
 (For all use cases below, the *System* is `ResuMaker` and the *Actor* is the `Student`, unless specified otherwise)
 
 [discrete]
+=== Add Personal Information of the user
 
+*MSS*
+
+1. User enters command to set his contact details
+2. System prompts user for his mobile number, email address and GitHub username
+3. User enters in his contact information
+4. System prompts user for a confirmation
+5. User confirms his data
+6. System saves contact information
+
++
+Use case ends.
+
+*Extensions*
+
+* 3a. User enters invalid personal information
+
++
+[none]
+** 3a1. System prompts user to enter valid contact information
++
+Step 3 repeats as many times as necessary
+
+[discrete]
+
+=== Add a generic entry or major entry in the resuMaker
+
+*MSS*
+
+1. User enters command to create a genric entry ( Skills / Awards), or major entry (Experience / Education)
+2. System saves the Entry to the disk
+
++
+Use case ends.
+
+
+[discrete]
+
+=== Delete an Entry under a specific category
+
+*MSS*
+
+1. User filter the entries using specific tags,
+returning an indexed list of entries (UC04)
+2. User delete the corresponding entries in the list by indicating associated index for each entry to be deleted
+3. System saves the Entry to the disk
++
+Use case ends.
+
+*Extensions*
+
+* *a. User input command using the wrong syntax
+** *a1. System prompts the user to re-enter the command
+** *a2. User re-enters the command
+* 3a. User inputs an index out of range
+** 3a.1 System prompts for invalid input and asks user to re-enter the command
+** 3a.2 return to step 4 for the user to re-enter the command
+
+
+[discrete]
+
+=== edit an Entry under a specific index
+
+*MSS*
+
+1. User searches for a set of Entries, using some tags (UC04)
+2. System displays an indexed list of Entries matching the search tags (UC04)
+3. User enters command to edit Entries, and specifies an index and also the updated information
+4. System displays the updated Entry for reference
+5. System saves the Entry to the disk
+
++
+Use case ends.
+
+*Extensions*
+
+* *a. User input command using the wrong syntax
+** *a1. System prompts the user to re-enter the command
+** *a2. User re-enters the command
+* 3a. User inputs an index out of range
+** 3a.1 System prompts for invalid input and asks user to re-enter the command
+** 3a.2 return to step 4 for the user to re-enter the command
+
+
+[discrete]
 === Add information about a SoC / NUS Event (e.g. Hack N Roll, Student Exchange, Independent Work module)
 
 *MSS*
@@ -853,12 +938,101 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== View a template
+
+*MSS*
+
+1. User enters command to view desired template using its filename
+2. System displays contents of the config
+3. User continues using the system
++
+Use case ends.
+
+*Extensions*
+* 2a. Entered config name does not match any existing config.
++
+[none]
+** 2a1. System displays a warning.
++
+Use case returns to Step 1.
+
+[discrete]
+=== Adding tag to an entry
+
+*MSS*
+
+1. User enters command to list entries
+2. User enters command to add tag to entry
+3. System displays the entry with updated tags.
+
+*Extensions*
+
+* 1a. User wants to check existing tags first to ensure new tag is not duplicate
+** 1a1. User enters commands to view list of tags and its corresponding entries
+* 3a. User decides not to create new tag
+** 3a1. User enters command to remove tag from entry
+** 3a2. System display entry with updated tags.
+Use case ends.
+* 4a. New tag is a duplicate of an existing tag
+** 4a1. System ignores duplicated tag
+** 4a2. System displays entry with updated tags
++
+Use case ends.
+
+[discrete]
+=== Viewing all active tags in resume generation
+
+*MSS*
+
+1. User enters command to list all tags
+2. System displays all active tags and their entries' placement in the resume.
+
+[discrete]
+=== Filtering out entries of a specific tag
+
+*MSS*
+
+1. User enters command to list all entries containing a specific tag.
+2. System displays all selected tags and their corresponding entries.
+
+*Extensions*
+
+* 1a. No entries found for tag specified by user
+** 1a1. System outputs an empty list
+
+[discrete]
+=== Retagging tags of a specific entry.
+
+*MSS*
+
+1. User enters command to retag a specific entry.
+2. System displays all selected tags and their corresponding entries.
+
+*Extensions*
+
+* 1a. No entries with the specified index
+** 1a1. System displays an error message to alert user erroneous input.
+
+[discrete]
+=== Removing tags from a specific entry.
+
+*MSS*
+
+1. User enters command to remove all tags from specific entry.
+2. System displays selected entry void of tags.
+
+*Extensions*
+
+* 1a. No entries with the specified index
+** 1a1. System displays an error message to alert user erroneous input.
+
+[discrete]
 === Generate a resume
 
 *MSS*
 
 1. Student enters command to create resume and specifies a template file, by providing the file path to the template file
-6. System saves a markdown file containing a resume based on the template and the entries specified by the template
+2. System saves a markdown file containing a resume based on the template and the entries specified by the template
 +
 Use case ends.
 
@@ -869,13 +1043,14 @@ Use case ends.
 [none]
 ** 1a1. System uses a pre-defined default template file instead
 +
-Use case resumes from Step 4.
+Use case resumes from Step 2.
 * 1b. User specifies a template file using an alias instead of a filepath
 +
 [none]
 ** 1b1. System reads application settings to match the file’s alias with its filepath
 +
-Use case resumes from Step 4.
+Use case resumes from Step 2.
+
 
 [appendix]
 == Non Functional Requirements
@@ -898,9 +1073,6 @@ Contact, Education, Work Experience, Project, Skill or Award
 
 [[event]] Event::
 Work Experience, Project
-
-[[section]] Section::
-A distinct category of a generated resume (Work Experience, Project, etc)
 
 [[work-experience]] Work Experience::
 Any professional work (internship, freelance, job)
@@ -929,8 +1101,11 @@ Sets of tags for each Section of a resume - to be used to custom generate a resu
 [[template-file]] Template File::
 A plaintext file containing a Template
 
+[[category]] Category::
+A single-word keyword starting with `~` (e.g. `~work`, `~project`)
+
 [[tag]] Tag::
-A keyword
+A single-word keyword starting with `#`
 
 [appendix]
 == Product Survey
