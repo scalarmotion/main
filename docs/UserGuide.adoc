@@ -176,6 +176,49 @@ Format: `fetch-awards` or `fetch-awards INDEX`
 
 The latter format adds the specified award as a resume Entry.
 
+=== Tag related functions: `tag`
+These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
+
+==== Viewing currently active tags: `tag status`
+
+Lists all tags currently active, and will be generated in the resume.
+Format: `tag status` lists all the corresponding tags and categories that will appear in the resume.
+
+==== Listing entries under specific tags: `tag list` or `tag ls`
+
+List all entries under specific tags (space separated).
+
+By default, if a tag is not given, all the tags will be displayed.
+Format: `tag ls` list all the tags and the relevant entries for each tag.
+
+Format: `tag ls ~work ~projects #java` list all the `~work` and `~project` entries tagged with `#java`
+
+Entries displayed will be accompanied with their relevant entry id.
+
+==== Add particular tag to entry: `tag add`
+
+Add tags (space separated) to particular entry (identified by index).
+
+Duplicated tags will be ignored
+
+Format: `tag add 10 ~work #java` add tag `#java` and category `~work` to entry 10.
+
+==== Remove particular tag from entry: `tag remove` or `tag rm`
+
+Remove tags (space separated) from a particular entry (identified by index).
+
+By default, if no tags given, all tags will be removed from the entry.
+
+Format: `tag rm 1 ~work #java` remove category `~work` and tag `#java` from entry 1.
+
+Format: `tag rm 10` remove all tags and categories from entry 10.
+
+==== Retagging a particular entry: `tag retag` or `tag rt`
+
+Remove all current tags and replace it with current tags (space separated).
+
+Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, adding tag `#java` and category `~work` to entry 1.
+
 === Listing entered commands : `history`
 
 Lists all the commands that you have entered in reverse chronological order. +
@@ -246,5 +289,11 @@ e.g. `find James Jake`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
+* *Tag Status*: `tag status`
+* *Tag List*: `tag ls TAG [MORE_TAGS]` +
+e.g. `tag ls ~work #java`
+* *Tag Remove*: `tag rm INDEX TAG [MORE_TAGS]` +
+e.g. `tag rm 10 ~work #python`
+* *Tag Retag*: `tag tg INDEX TAG [MORE_TAGS]` +
+e.g. `tag rt 10 ~project #web`
 * *Generate Resume* : `make`
-

@@ -798,7 +798,6 @@ _{More to be added}_
 (For all use cases below, the *System* is `ResuMaker` and the *Actor* is the `Student`, unless specified otherwise)
 
 [discrete]
-
 === Add Personal Information of the user
 
 *MSS*
@@ -885,7 +884,6 @@ Use case ends.
 
 
 [discrete]
-
 === Add information about a SoC / NUS Event (e.g. Hack N Roll, Student Exchange, Independent Work module)
 
 *MSS*
@@ -940,6 +938,76 @@ Use case ends.
 Use case ends.
 
 [discrete]
+=== Adding tag to an entry
+
+*MSS*
+
+1. User enters command to list entries
+2. User enters command to add tag to entry
+3. System displays the entry with updated tags.
+
+*Extensions*
+
+* 1a. User wants to check existing tags first to ensure new tag is not duplicate
+** 1a1. User enters commands to view list of tags and its corresponding entries
+* 3a. User decides not to create new tag
+** 3a1. User enters command to remove tag from entry
+** 3a2. System display entry with updated tags.
+Use case ends.
+* 4a. New tag is a duplicate of an existing tag
+** 4a1. System ignores duplicated tag
+** 4a2. System displays entry with updated tags
++
+Use case ends.
+
+[discrete]
+=== Viewing all active tags in resume generation
+
+*MSS*
+
+1. User enters command to list all tags
+2. System displays all active tags and their entries' placement in the resume.
+
+[discrete]
+=== Filtering out entries of a specific tag
+
+*MSS*
+
+1. User enters command to list all entries containing a specific tag.
+2. System displays all selected tags and their corresponding entries.
+
+*Extensions*
+
+* 1a. No entries found for tag specified by user
+** 1a1. System outputs an empty list
+
+[discrete]
+=== Retagging tags of a specific entry.
+
+*MSS*
+
+1. User enters command to retag a specific entry.
+2. System displays all selected tags and their corresponding entries.
+
+*Extensions*
+
+* 1a. No entries with the specified index
+** 1a1. System displays an error message to alert user erroneous input.
+
+[discrete]
+=== Removing tags from a specific entry.
+
+*MSS*
+
+1. User enters command to remove all tags from specific entry.
+2. System displays selected entry void of tags.
+
+*Extensions*
+
+* 1a. No entries with the specified index
+** 1a1. System displays an error message to alert user erroneous input.
+
+[discrete]
 === Generate a resume
 
 *MSS*
@@ -964,6 +1032,7 @@ Use case resumes from Step 4.
 +
 Use case resumes from Step 4.
 
+
 [appendix]
 == Non Functional Requirements
 
@@ -985,9 +1054,6 @@ Contact, Education, Work Experience, Project, Skill or Award
 
 [[event]] Event::
 Work Experience, Project
-
-[[section]] Section::
-A distinct category of a generated resume (Work Experience, Project, etc)
 
 [[work-experience]] Work Experience::
 Any professional work (internship, freelance, job)
@@ -1016,8 +1082,11 @@ Sets of tags for each Section of a resume - to be used to custom generate a resu
 [[template-file]] Template File::
 A plaintext file containing a Template
 
+[[category]] Category::
+A single-word keyword starting with `~` (e.g. `~work`, `~project`)
+
 [[tag]] Tag::
-A keyword
+A single-word keyword starting with `#`
 
 [appendix]
 == Product Survey
