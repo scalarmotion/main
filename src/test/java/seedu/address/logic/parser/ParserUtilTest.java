@@ -16,6 +16,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.category.Category;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -29,6 +30,7 @@ public class ParserUtilTest {
     private static final String INVALID_ADDRESS = " ";
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
+    private static final String INVALID_CATEGORY = "#work";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_PHONE = "123456";
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_EMAIL = "rachel@example.com";
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
+    private static final String VALID_CATEGORY = "work";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -131,6 +134,31 @@ public class ParserUtilTest {
         String addressWithWhitespace = WHITESPACE + VALID_ADDRESS + WHITESPACE;
         Address expectedAddress = new Address(VALID_ADDRESS);
         assertEquals(expectedAddress, ParserUtil.parseAddress(addressWithWhitespace));
+    }
+
+    @Test
+    public void parseCategory_null_throwsNullPointerException() throws Exception {
+        thrown.expect(NullPointerException.class);
+        ParserUtil.parseCategory(null);
+    }
+
+    @Test
+    public void parseCategory_invalidValue_throwsParseException() throws Exception {
+        thrown.expect(ParseException.class);
+        ParserUtil.parseCategory(INVALID_CATEGORY);
+    }
+
+    @Test
+    public void parseCategory_validValueWithoutWhitespace_returnsCategory() throws Exception {
+        Category expectedTag = new Category(VALID_CATEGORY);
+        assertEquals(expectedTag, ParserUtil.parseCategory(VALID_CATEGORY));
+    }
+
+    @Test
+    public void parseCategory_validValueWithWhitespace_returnsTrimmedCategory() throws Exception {
+        String cateWithWhitespace = WHITESPACE + VALID_CATEGORY + WHITESPACE;
+        Category expectedCate = new Category(VALID_CATEGORY);
+        assertEquals(expectedCate, ParserUtil.parseCategory(cateWithWhitespace));
     }
 
     @Test
