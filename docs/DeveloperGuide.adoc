@@ -1,4 +1,4 @@
-= ResuMaker - Developer Guide
+﻿= ResuMaker - Developer Guide
 :site-section: DeveloperGuide
 :toc:
 :toc-title:
@@ -1050,7 +1050,6 @@ Use case resumes from Step 2.
 ** 1b1. System reads application settings to match the file’s alias with its filepath
 +
 Use case resumes from Step 2.
-
 
 [appendix]
 == Non Functional Requirements
