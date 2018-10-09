@@ -13,7 +13,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::anubh-v.png[width="150", align="left"]
 {empty}[https://github.com/anubh-v[github]] [<<anubhav#, portfolio>>]
 
-Role: SoC Awareness
+Role: Contextual Awareness, User Interface
 
 '''
 
@@ -21,7 +21,7 @@ Role: SoC Awareness
 image::jhengy.png[width="150", align="left"]
 {empty}[https://github.com/jhengy[github]] [<<hengyuan#, portfolio>>]
 
-Role: Data Management
+Role: Data Management, Logic
 
 '''
 
@@ -29,7 +29,7 @@ Role: Data Management
 image::marvintxd.png[width="150", align="left"]
 {empty}[http://github.com/marvintxd[github]] [<<marvin#, portfolio>>]
 
-Role: Resume Configuration Management
+Role: Resume Template Management, Storage
 
 '''
 
@@ -37,7 +37,7 @@ Role: Resume Configuration Management
 image::ongspxm.png[width="150", align="left"]
 {empty}[http://github.com/ongspxm[github]] [<<shupeng#, portfolio>>]
 
-Role: Data Filtering
+Role: Data Filtering, Commons
 
 '''
 
@@ -45,6 +45,6 @@ Role: Data Filtering
 image::scalarmotion.png[width="150", align="left"]
 {empty}[http://github.com/scalarmotion[github]] [<<wangfan#, portfolio>>]
 
-Role: Resume Generation
+Role: Resume Generation, Model
 
 '''
