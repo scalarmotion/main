@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.entry.MajorResumeEntry;
+import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 
 /**
@@ -13,20 +13,23 @@ import seedu.address.model.person.Person;
 public class TypicalEntrys {
 
     // manually added
-    public static final MajorResumeEntry WORK_FACEBOOK = new EntryBuilder().withCategory("work")
+    public static final ResumeEntry WORK_FACEBOOK = new EntryBuilder().withCategory("work")
             .withTitle("Facebook").withDuration("2010 - 2013")
             .withSubHeader("software engineering intern")
             .withTags("java").build();
 
-    public static final MajorResumeEntry NUS_EDUCATION = new EntryBuilder().withCategory("education")
+    public static final ResumeEntry NUS_EDUCATION = new EntryBuilder().withCategory("education")
             .withTitle("National University of Singapore").withDuration("2010 - 2014")
             .withSubHeader("Bachelor of computing")
             .withTags("machinelearning").build();
 
-    public static final MajorResumeEntry NUS_EDUCATION_WITH_SPACED_TAG = new EntryBuilder().withCategory("education")
+    public static final ResumeEntry NUS_EDUCATION_WITH_SPACED_TAG = new EntryBuilder().withCategory("education")
             .withTitle("National University of Singapore").withDuration("2010 - 2013")
             .withSubHeader("Bachelor of computing")
             .withTags("Machine Learning").build();
+
+    public static final ResumeEntry AWARD_WITH_NO_ENTRYINFO = new EntryBuilder()
+            .withCategory("Awards").buildMinorEntry();
 
 
 
