@@ -3,6 +3,7 @@ package seedu.address.storage.util;
 import net.steppschuh.markdowngenerator.list.UnorderedList;
 import net.steppschuh.markdowngenerator.text.Text;
 import net.steppschuh.markdowngenerator.text.TextBuilder;
+import net.steppschuh.markdowngenerator.text.emphasis.ItalicText;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 
 import seedu.address.model.entry.EntryDescription;
@@ -28,11 +29,9 @@ public final class MarkdownConverter {
     public static String toMarkdown(ResumeEntry entry) {
         return new TextBuilder()
                 .append(new Text(MarkdownConverter.toMarkdown(entry.getEntryInfo())))
-                .newLine()
-                .newLine()
+                .newLines(2)
                 .append(new Text(MarkdownConverter.toMarkdown(entry.getDescription())))
-                .newLine()
-                .newLine()
+                .newLines(2)
                 .toString();
     }
 
@@ -43,11 +42,12 @@ public final class MarkdownConverter {
     public static String toMarkdown(EntryInfo info) {
         return new TextBuilder()
                 .append(new Heading(info.getTitle(), 6))
+                .append(new Text(" ("))
+                .append(new ItalicText(info.getDuration()))
+                .append(new Text(")"))
                 .newLine()
                 .append(new Text(info.getSubHeader()))
-                .newLine()
-                .newLine()
-                .append(new Text(info.getDuration()))
+                .newLines(2)
                 .toString();
     }
 

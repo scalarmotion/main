@@ -1,6 +1,7 @@
 package seedu.address.storage.util;
 
 import static org.junit.Assert.assertEquals;
+import static seedu.address.storage.util.MarkdownConverter.toMarkdown;
 
 import java.util.HashSet;
 
@@ -22,51 +23,53 @@ public class MarkdownConverterTest {
     @Test
     public void entryInfoToMarkdown() {
         // All elements present
-        assertEquals(MarkdownConverter.toMarkdown(testInfo),
-                "###### entry title" + System.lineSeparator()
-                        + "entry subheader" + System.lineSeparator() + System.lineSeparator()
-                        + "entry duration");
+        assertEquals("###### entry title (_entry duration_)" + System.lineSeparator()
+                        + "entry subheader" + System.lineSeparator()
+                        + System.lineSeparator(),
+                toMarkdown(testInfo));
     }
 
     @Test
     public void entryDescriptionToMarkdown() {
         EntryDescription testDescription = new EntryDescription();
         // Empty list
-        assertEquals(MarkdownConverter.toMarkdown(testDescription),
-                "");
+        assertEquals("",
+                toMarkdown(testDescription));
 
         // One element
         testDescription.addBullet("first bullet");
-        assertEquals(MarkdownConverter.toMarkdown(testDescription),
-                "- first bullet");
+        assertEquals("- first bullet",
+                toMarkdown(testDescription));
 
         // More elements
         testDescription.addBullet("second bullet");
         testDescription.addBullet("third bullet");
-        assertEquals(MarkdownConverter.toMarkdown(testDescription),
-                "- first bullet" + System.lineSeparator()
+        assertEquals("- first bullet" + System.lineSeparator()
                         + "- second bullet" + System.lineSeparator()
-                        + "- third bullet");
+                        + "- third bullet",
+                toMarkdown(testDescription));
     }
 
     @Test
     public void entryToMarkdown() {
         // No description
         ResumeEntry testEntry = new ResumeEntry(new Category("testCategory"), testInfo, new HashSet<>());
-        assertEquals(MarkdownConverter.toMarkdown(testEntry),
-                "###### entry title" + System.lineSeparator()
-                        + "entry subheader" + System.lineSeparator() + System.lineSeparator()
-                        + "entry duration" + System.lineSeparator() + System.lineSeparator()
-                        + System.lineSeparator() + System.lineSeparator());
+        assertEquals(toMarkdown(testInfo)
+                        + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
+                toMarkdown(testEntry));
 
         // Add description
         testEntry.getDescription().addBullet("first bullet");
         testEntry.getDescription().addBullet("second bullet");
-        assertEquals(MarkdownConverter.toMarkdown(testEntry),
-                "###### entry title" + System.lineSeparator()
-                        + "entry subheader" + System.lineSeparator() + System.lineSeparator()
-                        + "entry duration" + System.lineSeparator() + System.lineSeparator()
-                        + "- first bullet" + System.lineSeparator()
-                        + "- second bullet" + System.lineSeparator() + System.lineSeparator());
+        assertEquals(toMarkdown(testInfo)
+                        + System.lineSeparator()
+                        + System.lineSeparator()
+                        + toMarkdown(testEntry.getDescription())
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
+                toMarkdown(testEntry));
     }
 }
