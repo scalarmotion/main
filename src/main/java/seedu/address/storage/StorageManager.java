@@ -12,9 +12,12 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
+import seedu.address.commons.events.storage.TemplateLoadedEvent;
+import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.template.Template;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -31,7 +34,7 @@ public class StorageManager extends ComponentManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.templateStorage = new TemplateStorage();
+        this.templateStorage = new TxtTemplateStorage();
     }
 
     // ================ UserPrefs methods ==============================
@@ -82,13 +85,24 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     // ================ Template methods ==============================
+
+    @Override
+    public Path getTemplateFilePath() {
+        return templateStorage.getTemplateFilePath();
+    }
+
+    @Override
+    public Optional<Template> loadTemplate() throws IOException {
+        return loadTemplate(templateStorage.getTemplateFilePath());
+    }
+
     /**
      * Loads a Template from a text file
      */
-    public void loadTemplate(String filePath) throws IOException {
+    @Override
+    public Optional<Template> loadTemplate(Path filePath) throws IOException {
         logger.fine("Attempting to load template from: " + filePath);
-        templateStorage.readTemplateFromFile(filePath);
-        //TODO: modify Model
+        return templateStorage.loadTemplate(filePath);
     }
 
     @Override
@@ -105,12 +119,22 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleTemplateLoadRequestedEvent(TemplateLoadRequestedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load requested, attempting to load"));
+        Optional<Template> t;
+        /*TODO
+        Should an Optional be used here? (Consistent with how XmlAddressBookStorage works)
+        If it's empty, does it represent that an
+        error has occurred during loadTemplate()? And if so, should that error be
+        propagated up and caught here instead, so it can be passed into the
+        ExceptionEvent instead of dealing with an empty optional with no
+        exception info?
+        */
         try {
-            loadTemplate(event.filepath);
+            t = loadTemplate(event.filepath);
+            t.ifPresent(
+                template -> raise(new TemplateLoadedEvent(template, event.filepath)));
+            //TODO make model listen for TemplateLoadedEvent
         } catch (IOException e) {
-            //TODO: create file not found event
-            //raise(new DataSavingExceptionEvent(e));
+            raise(new TemplateLoadingExceptionEvent(e, event.filepath));
         }
     }
-
 }

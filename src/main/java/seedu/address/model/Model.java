@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.nio.file.Path;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
@@ -70,7 +71,7 @@ public interface Model {
     /**
      * Loads a template from the specified filepath.
      */
-    void loadTemplate(String filepath);
+    void loadTemplate(Path filepath);
     /**
      * Returns true if the model has previous address book states to restore.
      */

@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.nio.file.Path;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -22,12 +24,12 @@ public class LoadTemplateCommand extends Command {
     //TODO: message_file_not_found
     public static final String MESSAGE_NOT_FOUND = "The filepath is invalid";
 
-    private final String filepath;
+    private final Path filepath;
 
     /**
      * Creates a LoadTemplateCommand to load the specified {@code Template}
      */
-    public LoadTemplateCommand(String filepath) {
+    public LoadTemplateCommand(Path filepath) {
         requireNonNull(filepath);
         this.filepath = filepath;
     }
@@ -40,13 +42,14 @@ public class LoadTemplateCommand extends Command {
         //    throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         //}
 
-        model.loadTemplate(filepath);
-        //TODO: check for success and return MESSAGE_NOT_FOUND
+        //TODO: check for failure and return MESSAGE_NOT_FOUND
         /*
         Problem: unlike other commands (e.g. add, delete), Model does not know
         if the load is successful. Since load raises an event, and the
         StorageManager listens for that event to attempt to load.
         */
+        model.loadTemplate(filepath);
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, filepath));
     }
 
@@ -56,5 +59,4 @@ public class LoadTemplateCommand extends Command {
             || (other instanceof LoadTemplateCommand // instanceof handles nulls
             && filepath.equals(((LoadTemplateCommand) other).filepath));
     }
-
 }

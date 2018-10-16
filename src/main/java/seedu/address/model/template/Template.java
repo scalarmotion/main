@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import seedu.address.model.entry.Taggable;
+import seedu.address.model.category.Category;
+import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,15 +45,19 @@ public class Template {
          */
         String[] parts = line.split(DELIMITER);
         String title = parts[0];
-        String cateName = parts[1];
-        String tags = parts[2];
+        String cateName = parts[1].replaceFirst("~", "");
+        String tags = parts.length == 3 ? parts[2] : "";
 
-        Predicate<Taggable> predicate = getPredicate(tags);
+        Predicate<ResumeEntry> tagPredicate = createTagPredicate(tags);
+        Predicate<ResumeEntry> catePredicate = createCategoryPredicate(cateName);
 
-        sections.add(new TemplateSection(title, cateName, predicate));
+        sections.add(new TemplateSection(title, catePredicate, tagPredicate));
     }
 
-    private Predicate<Taggable> getPredicate(String tags) {
+    /**
+     * Returns a predicate which checks if entry matches tags
+     */
+    private Predicate<ResumeEntry> createTagPredicate(String tags) {
         if (tags.equals("")) { //no filters
             return entry -> true;
         }
@@ -96,6 +101,10 @@ public class Template {
             }
             return fitsOneExpression;
         };
+    }
+
+    private Predicate<ResumeEntry> createCategoryPredicate(String category) {
+        return entry -> entry.getCategory().equals(new Category(category));
     }
 
     public ArrayList<TemplateSection> getSections() {

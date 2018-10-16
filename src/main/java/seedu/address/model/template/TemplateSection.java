@@ -2,32 +2,32 @@ package seedu.address.model.template;
 
 import java.util.function.Predicate;
 
-import seedu.address.model.category.Category;
-import seedu.address.model.entry.Taggable;
+import seedu.address.model.entry.ResumeEntry;
 
 /**
  * A section of the template, representing a category with tags.
  */
 public class TemplateSection {
     private String title;
-    private Category category;
-    private Predicate<Taggable> predicate;
+    private Predicate<ResumeEntry> catePredicate;
+    private Predicate<ResumeEntry> tagPredicate;
 
-    public TemplateSection(String title, String cateName, Predicate<Taggable> predicate) {
+    public TemplateSection(String title, Predicate<ResumeEntry> catePredicate,
+        Predicate<ResumeEntry> tagPredicate) {
         this.title = title;
-        this.category = new Category(cateName);
-        this.predicate = predicate;
+        this.catePredicate = catePredicate;
+        this.tagPredicate = tagPredicate;
     }
 
     public String getTitle() {
-        return this.title;
+        return title;
     }
 
-    public Category getCategory() {
-        return this.category;
+    public Predicate<ResumeEntry> getCategoryPredicate() {
+        return catePredicate;
     }
 
-    public Predicate<Taggable> getPredicate() {
-        return this.predicate;
+    public Predicate<ResumeEntry> getTagPredicate() {
+        return tagPredicate;
     }
 }

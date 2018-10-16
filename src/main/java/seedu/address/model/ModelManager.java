@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -119,7 +120,7 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Template ==================================================================================
 
     @Override
-    public void loadTemplate(String filepath) {
+    public void loadTemplate(Path filepath) {
         raise(new TemplateLoadRequestedEvent(filepath));
     }
 
