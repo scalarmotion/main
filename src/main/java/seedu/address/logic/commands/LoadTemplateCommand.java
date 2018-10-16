@@ -2,18 +2,11 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import com.google.common.eventbus.Subscribe;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
-import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
-import seedu.address.commons.events.storage.TemplateLoadedEvent;
-import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.template.Template;
 
 /**
  * Loads a template from file.
@@ -66,19 +59,4 @@ public class LoadTemplateCommand extends Command {
             || (other instanceof LoadTemplateCommand // instanceof handles nulls
             && filepath.equals(((LoadTemplateCommand) other).filepath));
     }
-
-    //    @Subscribe
-    //    public void handleTemplateLoadingExceptionEvent(TemplateLoadingExceptionEvent event) {
-    //        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load requested, attempting to load"));
-    //        Optional<Template> t;
-    //        try {
-    //            t = loadTemplate(event.filepath);
-    //            t.ifPresent(
-    //                template -> raise(new TemplateLoadedEvent(template, event.filepath)));
-    //        } catch (IOException e) {
-    //            //TODO: create file not found event
-    //            raise(new TemplateLoadingExceptionEvent(e, event.filepath));
-    //        }
-    //        TemplateLoadingExceptionEvent.toString();
-    //    }
 }

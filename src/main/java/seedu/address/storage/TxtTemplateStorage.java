@@ -69,7 +69,7 @@ public class TxtTemplateStorage implements TemplateStorage {
 
         while (s.hasNextLine()) {
             String curr = s.nextLine();
-            template.addSection(curr);  //TODO: should this be in template?
+            template.addSection(curr); //TODO: should this be in template?
         }
         return Optional.of(template);
     }

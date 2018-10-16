@@ -1,6 +1,7 @@
 package seedu.address.commons.events.storage;
 
 import java.nio.file.Path;
+
 import seedu.address.commons.events.BaseEvent;
 
 /**
@@ -18,7 +19,6 @@ public class TemplateLoadingExceptionEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "Exception while attempting to load " + filepath + ":\n" +
-            exception.toString();
+        return "Exception while attempting to load " + filepath + ":\n" + exception.toString();
     }
 }

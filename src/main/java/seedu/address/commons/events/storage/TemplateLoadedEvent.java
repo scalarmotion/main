@@ -1,6 +1,7 @@
 package seedu.address.commons.events.storage;
 
 import java.nio.file.Path;
+
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.template.Template;
 

@@ -6,7 +6,6 @@ import java.util.function.Predicate;
 
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.ResumeEntry;
-import seedu.address.model.entry.Taggable;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -46,7 +45,7 @@ public class Template {
          */
         String[] parts = line.split(DELIMITER);
         String title = parts[0];
-        String cateName = parts[1].replaceFirst("~","");
+        String cateName = parts[1].replaceFirst("~", "");
         String tags = parts.length == 3 ? parts[2] : "";
 
         Predicate<ResumeEntry> tagPredicate = createTagPredicate(tags);
@@ -55,6 +54,9 @@ public class Template {
         sections.add(new TemplateSection(title, catePredicate, tagPredicate));
     }
 
+    /**
+     * Returns a predicate which checks if entry matches tags
+     */
     private Predicate<ResumeEntry> createTagPredicate(String tags) {
         if (tags.equals("")) { //no filters
             return entry -> true;
