@@ -7,16 +7,19 @@ import java.nio.file.Path;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
+import com.google.common.eventbus.Subscribe;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
-
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
+import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.template.Template;
 import seedu.address.model.util.SampleDataUtil;
 
 /**
@@ -28,6 +31,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final Awareness awareness;
+    private Template loadedTemplate;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -124,6 +128,11 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TemplateLoadRequestedEvent(filepath));
     }
 
+    public Template getLoadedTemplate() {
+        //TODO - handle failed loading
+        return loadedTemplate;
+    }
+
     //=========== Undo/Redo =================================================================================
 
     @Override
@@ -175,6 +184,13 @@ public class ModelManager extends ComponentManager implements Model {
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
                 && filteredPersons.equals(other.filteredPersons);
+    }
+
+    //=========== Listener for template loading =============================================================
+    @Subscribe
+    public void handleTemplateLoadedEvent(TemplateLoadedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template loaded"));
+        loadedTemplate = event.getTemplate();
     }
 
 }

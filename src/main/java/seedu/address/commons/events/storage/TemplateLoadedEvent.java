@@ -18,7 +18,7 @@ public class TemplateLoadedEvent extends BaseEvent {
         this.filepath = filepath;
     }
 
-    public Template getTemplate(Template template) {
+    public Template getTemplate() {
         return template;
     }
 
