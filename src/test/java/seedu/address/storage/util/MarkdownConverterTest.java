@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.storage.util;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,6 +12,7 @@ import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
+import seedu.address.storage.util.MarkdownConverter;
 
 public class MarkdownConverterTest {
     @Rule

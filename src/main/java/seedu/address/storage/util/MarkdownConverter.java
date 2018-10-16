@@ -1,4 +1,4 @@
-package seedu.address.model;
+package seedu.address.storage.util;
 
 import net.steppschuh.markdowngenerator.list.UnorderedList;
 import net.steppschuh.markdowngenerator.text.Text;
