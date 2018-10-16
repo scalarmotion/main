@@ -95,4 +95,11 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Returns the name of an Event that possibly matches a given expression.
+     * This may not be part of the Model API in V1.4.
+     * I have added it here to ensure a user testable feature for V1.2 submission.
+     */
+    String getPossibleEventName(String expression);
 }

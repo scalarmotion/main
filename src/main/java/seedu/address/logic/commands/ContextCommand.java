@@ -17,7 +17,7 @@ public class ContextCommand extends Command {
                                                + "Expressions can be slang, partial phrases or full phrases.";
 
     /* TODO: Utilise Java String placeholders in the MESSAGE_SUCCESS */
-    public static final String MESSAGE_SUCCESS = "Created a resume entry.";
+    public static final String MESSAGE_SUCCESS = "Created a resume entry for %1s.";
 
     /**
      * A combination of slang, partial phrases or full phrases entered by the user.
@@ -33,8 +33,8 @@ public class ContextCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) {
-        // wip
-        return new CommandResult(MESSAGE_SUCCESS);
+        String possibleEventName = model.getPossibleEventName(expression);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, possibleEventName));
     }
 
     @Override

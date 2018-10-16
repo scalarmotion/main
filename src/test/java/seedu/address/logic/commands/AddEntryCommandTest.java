@@ -169,6 +169,11 @@ public class AddEntryCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public String getPossibleEventName(String expression) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
