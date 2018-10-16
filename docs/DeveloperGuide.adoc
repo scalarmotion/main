@@ -258,6 +258,76 @@ To use `CategoryManager` to filter out relevant entries, there are 3 main functi
 
 // end::tags[]
 
+// tag:: contextualAwareness[]
+=== Contextual Awareness
+
+==== Key Terms
+Here are some terms that are used often when discussing Contexual Awareness. +
+Please review their definitions in the Glossary before reading further. +
+
+* <<event, Events>>
+* <<slang, Slang>>
+* <<partial-phrase, Partial phrases>>
+* <<full-phrase, Full phrases>>
+* <<expression, Expression>>
+
+==== Overview
+Contextual Awareness enables ResuMaker to: +
+
+* Create pre-filled ResumeEntries for standard <<event, Events>>.
+* Understand slang and partial phrases in the user's input.
+
+The flowchart below illustrates the overall flow taken by an end-user when working with the Contextual Awareness feature. +
+
+image::AwarenessFlow.png[width="800"]
+
+The flowchart highlights the 4 separate steps involved in the Contextual Awareness feature:
+
+1. Providing feedback to the user, as he types in an `<expression>`.
+2. Guessing an Event name, based on the user provided `<expression>`.
+3. Matching the guessed Event name, with an actual Event, as defined in the user provided data.
+4. Creating a ResumeEntry for the matched Event.
+
+In this guide, we will discuss Steps 2, and 3.
+
+==== Guessing an Event name, based on user provided `<expression>`
+To guess the Event name, we parse the `slang`, `partial phrases` and `full phrases` in the `expression` to get a `possibleEventName`.
+This parsing is done by the `Awareness` class.
+
+As shown <<Design-Storage, earlier>>, an instance of the Awareness class is initialised from user provided XML data, upon startup.
+
+The following Figure shows the structure of the Awareness class.
+
+image::awarenessStructure.png[width="600"]
+
+Parsing the `slang`, `partial phrases` and `full phrases` is a 2-step process:
+
+First, use the `dictionary` (see Figure) to replace each `slang` with its corresponding `full phrase`. +
+After this step, the `expression` will only contain `partial phrases` and `full phrases`. +
+Now, replace each `partial phrase` with its corresponding `full phrase`.
+
+This gives us a string of `full phrases`, which is our `possibleEventName`.
+
+As an example, suppose our initial `expression` was: `ug research assist`.
+In this `expression`, we have:
+
+* A slang (`ug` - slang for `undegraduate`)
+* A partial phrase (`assist` - short for `assistant`)
+* A full phrase (`research`)
+
+After the first step, our expression will be `undergraduate research assist`. +
+After the second step, our expression will be `undergraduate research assistant` +
+Thus, our `possibleEventName` will be `undergraduate research assistant`.
+
+==== Matching the guessed Event Name, with an actual Event [Work In Progress]
+
+Work in Progress
+
+
+==== Design Choices
+
+Work in Progress
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
@@ -1090,7 +1160,7 @@ Windows, Linux, Unix, OS-X
 Contact, Education, Work Experience, Project, Skill or Award
 
 [[event]] Event::
-Work Experience, Project
+Work Experience, Project, or Award
 
 [[work-experience]] Work Experience::
 Any professional work (internship, freelance, job)
@@ -1124,6 +1194,21 @@ A single-word keyword starting with `~` (e.g. `~work`, `~project`)
 
 [[tag]] Tag::
 A single-word keyword starting with `#`
+
+[[slang]] Slang::
+A single word that is an alias for a <<full-phrase, full phrase>>. (e.g. `cs` is slang for `computer science`)
+
+[[partial-phrase]] Partial phrase::
+An incomplete word. (e.g. `comp`)
+
+[[full-phrase]] Full phrase::
+Single or multiple complete words. (e.g. `computer`, `computer science`)
+
+[[expression]] Expression::
+A combination of slang, partial phrases or full phrases.
+(e.g. 'computer sci ug research proj') +
+In Backus-Naur form, an Expression is defined: +
+`<expression> ::= <slang> | <partial-phrase> | <full-phrase> | <expression>`
 
 [appendix]
 == Product Survey
