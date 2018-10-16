@@ -20,7 +20,7 @@ public class LoadTemplateCommand extends Command {
         + "FILEPATH\n"
         + "Example: " + COMMAND_WORD + " "
         + "template1.txt";
-    public static final String MESSAGE_SUCCESS = "Template loaded from %1$s";
+    public static final String MESSAGE_SUCCESS = "Attempting to load template from %1$s...";
     //TODO: message_file_not_found
     public static final String MESSAGE_NOT_FOUND = "The filepath is invalid";
 
