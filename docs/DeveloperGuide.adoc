@@ -258,6 +258,38 @@ To use `CategoryManager` to filter out relevant entries, there are 3 main functi
 
 // end::tags[]
 
+// tag::template[]
+=== Templates
+
+A template specifies the format of the generated resume. It specifies the sections in the resume, and which entries should be included under each section based on a set of tags.
+
+==== Template object structure
+
+A `Template` object consists of a list of `TemplateSection`, which consists of:
+
+* The section heading
+* A `Predicate<ResumeEntry>` which checks that the entry is of the specified `Category`
+* A `Predicate<ResumeEntry>` which checks that the entry matches the specified tags
+
+==== Template file
+Templates are stored as text files, with each line in the following format:
+
+    [Category Title]:~[Category Tag]:[Tag]&[Tag] [Tag]...
+
+For example:
+
+    Work Experience:~work:java&recent python&recent datascience
+
+Means: include all entries categorized as `work`, as long as they are tagged with `java` AND `recent`, OR `python` AND `recent`, OR `datascience`.
+In other words, the list of tags can be treated as a sum of products form, where a `&` represents AND and space represents OR.
+
+If no tags are specified, all entries with the `[Category Tag]` will be included.
+
+Template files are written by the user and loaded into the application using the `loadtemplate` command.
+
+
+// end::template[]
+
 // tag:: contextualAwareness[]
 === Contextual Awareness
 
