@@ -15,6 +15,7 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EntryBookChangedEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.model.entry.ResumeEntry;
@@ -32,11 +33,13 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final Awareness awareness;
     private Template loadedTemplate;
+    private final VersionedEntryBook versionedEntryBook;
+    private final FilteredList<ResumeEntry> filteredEntries;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEntryBook entryBook, UserPrefs userPrefs) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -45,10 +48,12 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         awareness = SampleDataUtil.getSampleAwareness();
+        versionedEntryBook = new VersionedEntryBook(entryBook);
+        filteredEntries = new FilteredList<>(versionedEntryBook.getEntryList());
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new EntryBook(), new UserPrefs());
     }
 
     @Override
@@ -62,9 +67,19 @@ public class ModelManager extends ComponentManager implements Model {
         return versionedAddressBook;
     }
 
+    @Override
+    public ReadOnlyEntryBook getEntryBook() {
+        return versionedEntryBook;
+    }
+
+
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
+    }
+
+    private void indicateEntryBookChanged() {
+        raise (new EntryBookChangedEvent(versionedEntryBook));
     }
 
     @Override
@@ -76,12 +91,15 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     // to be modified
     public boolean hasEntry(ResumeEntry entry) {
-        return false;
+        requireNonNull(entry);
+        return versionedEntryBook.hasEntry(entry);
     }
 
     @Override
     public void addEntry(ResumeEntry entry) {
-        // TO Be implemented
+        versionedEntryBook.addEnty(entry);
+        updateFilteredEntryList(PREDICATE_SHOW_ALL_ENTRIES);
+        indicateEntryBookChanged();
     }
     @Override
     public void deletePerson(Person target) {
@@ -115,10 +133,25 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedEntryBook}
+     */
+    @Override
+    public ObservableList<ResumeEntry> getFilteredEntryList() {
+        return FXCollections.unmodifiableObservableList(filteredEntries);
+    }
+
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
+    }
+
+    @Override
+    public void updateFilteredEntryList(Predicate<ResumeEntry> predicate) {
+        requireNonNull(predicate);
+        filteredEntries.setPredicate(predicate);
     }
 
     //=========== Template ==================================================================================

@@ -13,13 +13,19 @@ import seedu.address.model.person.Person;
  */
 public interface Model {
     /** {@code Predicate} that always evaluate to true */
-    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
+    Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = person -> true;
+    Predicate<ResumeEntry> PREDICATE_SHOW_ALL_ENTRIES = entry -> true;
 
     /** Clears existing backing model and replaces with the provided new data. */
     void resetData(ReadOnlyAddressBook newData);
 
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
+
+    /**
+     * returns the entryBook
+     */
+    ReadOnlyEntryBook getEntryBook();
 
     /**
      * Returns true if a person with the same identity as {@code person} exists in the address book.
@@ -67,6 +73,16 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredPersonList(Predicate<Person> predicate);
+
+
+    /** Returns an unmodifiable view of the filtered person list */
+    ObservableList<ResumeEntry> getFilteredEntryList();
+    /**
+     * Updates the filter of the filtered person list to filter by the given {@code predicate}.
+     * @throws NullPointerException if {@code predicate} is null.
+     */
+    void updateFilteredEntryList(Predicate<ResumeEntry> predicate);
+
 
     /**
      * Loads a template from the specified filepath.
