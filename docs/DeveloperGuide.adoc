@@ -34,6 +34,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 
 
 === Setting up the project in your computer
+Follow these steps to set up the project in your computer for development:
 
 . Fork this repo, and clone the fork to your computer
 . Open IntelliJ (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
@@ -48,6 +49,7 @@ Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plu
 This will generate all resources required by the application and tests.
 
 === Verifying the setup
+To verify that you have setup the project correctly:
 
 . Run the `seedu.address.MainApp` and try a few commands
 . <<Testing,Run the tests>> to ensure they all pass.
@@ -123,12 +125,12 @@ The `.pptx` files used to create diagrams in this document can be found in the l
 
 The rest of the App consists of four components.
 
-* <<Design-Ui,*`UI`*>>: The UI of the App.
-* <<Design-Logic,*`Logic`*>>: The command executor.
+* <<Design-Ui,*`UI`*>>: Displays the App's User Interface.
+* <<Design-Logic,*`Logic`*>>: Executes Commands.
 * <<Design-Model,*`Model`*>>: Holds the data of the App in-memory.
 * <<Design-Storage,*`Storage`*>>: Reads data from, and writes data to, the hard disk.
 
-Each of the four components
+Each of these four components:
 
 * Defines its _API_ in an `interface` with the same name as the Component.
 * Exposes its functionality using a `{Component Name}Manager` class.
@@ -147,7 +149,7 @@ The _Sequence Diagram_ below shows how the components interact for the scenario 
 image::SDforDeletePerson.png[width="800"]
 
 [NOTE]
-Note how the `Model` simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
+Note how the `Model` component simply raises a `AddressBookChangedEvent` when the Address Book data are changed, instead of asking the `Storage` to save the updates to the hard disk.
 
 The diagram below shows how the `EventsCenter` reacts to that event, which eventually results in the updates being saved to the hard disk and the status bar of the UI being updated to reflect the 'Last Updated' time.
 
