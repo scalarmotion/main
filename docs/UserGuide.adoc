@@ -249,7 +249,7 @@ Format: `fetch-awards` or `fetch-awards INDEX`
 The latter format adds the specified award as a resume Entry.
 
 [[tags]]
-=== Tag related functions: `tag`
+=== Managing Tags: `tag`
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
 
 ==== Viewing currently active tags: `tag status`
