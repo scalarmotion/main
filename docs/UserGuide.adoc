@@ -377,4 +377,6 @@ e.g. `tag ls ~work #java`
 e.g. `tag rm 10 ~work #python`
 * *Tag Retag*: `tag tg INDEX TAG [MORE_TAGS]` +
 e.g. `tag rt 10 ~project #web`
+* *Load Template*: `loadtemplate FILEPATH` +
+e.g. `loadtemplate google.txt`
 * *Generate Resume* : `make FILENAME`
