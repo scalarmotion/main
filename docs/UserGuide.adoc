@@ -33,11 +33,13 @@ With ResuMaker, let your skills document themselves.
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `resumaker.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Address Book.
+.  Copy the file to the folder you want to use as the home folder for your Entry Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
+Below is a sample user interface
+
 image::Ui.png[width="790"]
-+
+
 .  Type the command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try out the following examples:
@@ -55,107 +57,162 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION #TAGNAME t/TITLE, [s/SUBHEADER]`, `SECTION`, `TAGNAME`, `TITLE`  are parameters which can be used as `addEntry t/The Source Enterprise`.
-* Items in square brackets are optional e.g `t/TITLE [s/SUBHEADER]` can be used as `t/The Source Enterprise` or as `t/The Source Enterprise s/Java programmer`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[t/TAG]...` can be used as `{nbsp}` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
-* Parameters can be in any order e.g. if the command specifies `t/TITLE s/SUBHEADER`, `s/SUBHEADER T/TITLE` is also acceptable.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION, [t/TITLE], [s/SUBHEADER], [d/DURATION], [#TAGNAME]...`, `SECTION`, `TAGNAME` and `TITLE`  are parameters which can be used as `addEntry ~work #INTERNSHIP t/The Source Enterprise s/Software Engineering Intern d/Jan 2012 - June 2012`.
+* Items in square brackets are optional e.g `~SECTION [t/TITLE] [s/SUBHEADER]` can be used as `~EDUCATION t/The Source Enterprise` or as `~work t/The Source Enterprise s/Java programmer` or `~work`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[#TAG]...` can be used as `{nbsp}` (i.e. 0 times), `#JAVA`, `#Software Engineering`, `#AI` etc.
+* Parameters can be in any order e.g. if the command specifies `[t/TITLE] [s/SUBHEADER]`, `[s/SUBHEADER] [t/TITLE]` is also acceptable.
 ====
 
 === Viewing help : `help`
 
+Views a list of all commands available.
 Format: `help`
+
 
 === Adding an entry: `addEntry`
 
-Adds a person to the address book +
-Format: `addEntry ~SECTION [#TAG]... t/TITLE [s/SUBHEADER] d/DURATION`
+Adds an entry to ResuMaker. +
+Format: `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]...`
 
 [TIP]
-An entry can have any number of tags (including 0)
-An entry contains description, which can be added using addDescription as a separate command
+An entry need not have associated title, subheader and duration.
+An entry can have any number of tags (including 0).
+An entry contains description, which can be added using addDescription as a separate command.
+All parameter input from the user must be alphanumeric and can be separated by space, with the exception of `DURATION` which allows special character `-`.
 
 Examples:
 
-* `addEntry ~experience #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
+* `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
 * `addEntry ~awards #java`
-
-=== Adding a bullet point: `addBullet`
-
-Adds a bullet point under the description of an entry in the ResuMaker +
-Format: `addBullet CONTENTTOADD`
-
-Examples:
-
-* `addBullet implement scalable application for data visualization using java`
-
-=== Editing a bullet point: `editBullet`
-
-edits a bullet point under the description of an entry in the ResuMaker +
-Format: `editBullet INDEX EDITTEDCONTENT`
-
-Examples:
-
-* `editBullet 0  implement scalable application for data visualization using java`
 
 
 === Listing entries : `listEntry`
-
-list particular entries in the ResuMaker. Both section and tags are optional - running with no arguments will display all entries. +
+lists filtered entries in the ResuMaker according to their sections and tags.
 Format: `listEntry [~SECTION] [#TAG]...`
 
+****
+* Both section and tags are optional - running with no arguments will display all entries
+* Note that the description of each entry will be hidden +
+****
 
 Examples:
 
-* `listEntry ~education java`
+* `listEntry` +
+listing all entries.
+* `listEntry ~education #java` +
+listing all entries under education category and tagged as java.
 
-=== Viewing a particular entry : `viewEntry`
 
-views a particular entry in the ResuMaker.+
-Format: `vieWEntry INDEX`
+=== Adding a bullet point to an entry: `addBullet`
+
+Adds a bullet point to the end of the description of an entry at index ENTRYINDEX in ResuMaker. +
+Format: `addBullet ENTRYINDEX CONTENTTOADD`
+
+Example:
+
+* `listEntry` +
+`addBullet 1 attain Best Financial Hack Award` +
+adds a bullet point at the end of the description of 1st entry.
+
+
+=== Viewing a particular entry : `expandEntry`
+
+expands detailed description of an entry in the ResuMaker at a specified index +
+Format: `expandEntry INDEX`
+
+****
+* `INDEX` refers to the index of the displayed entry list from executing `listEntry`
+* Detailed description will be displayed as an indexed list of all bulleted description in that entry
+****
 
 Examples:
 
-* `viewEntry 2`
+* `expandEntry 2`
+* `expandEntry 0`
+
 
 === Editing an entry : `editEntry`
 
-Edits an existing entry in the ResuMaker. +
-Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [t/TAG]...`
+Edits non-decription fields of an existing entry in the ResuMaker. +
+Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 
 ****
 * Edits the entry at the specified `INDEX`. The index refers to the index number shown in the displayed entry list. The index *must be a positive integer* 1, 2, 3, ...
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* When editing tags, the existing tags of the person will be removed i.e adding of tags is not cumulative.
-* You can remove all the person's tags by typing `t/` without specifying any tags after it.
+* When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
+* You can remove all the entry's tags by typing `#` without specifying any tags after it.
+* This command does not allow
 ****
 
-Examples:
+Example:
 
-* `editEntry 1 t/ R company t/ C++` +
-edits the entry at index 1 by replacing its title as R company and replace all its tags by C++
+* `editEntry 1 t/R company  #JAVA` +
+edits the entry at index 1 by replacing its title as R company and replace all its tags by JAVA.
 
+
+=== Editing a bullet point: `editBullet`
+
+edits a bulleted description of an entry in ResuMaker. INDEX refers to the index of a particular bulleted description. +
+Format: `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT`
+
+****
+* Before executing this command, the user needs to execute `expandEntry`
+* `ENTRYINDEX` refers to the index number shown in the displayed entry list
+* `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
+* Both parameters *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+
+* `expandEntry` +
+`editBullet 0 0 implement scalable application for data visualization using java` +
+edits the entry at index 0 by replacing its bulleted description at index 0 by "implement scalable application for data visualization using java".
 
 
 === Deleting an entry: `deleteEntry`
 
-Finds persons whose names contain any of the given keywords. +
+deletes an entry at specified index. +
 Format: `deleteEntry INDEX`
 
 ****
-* Deletes the person at the specified `INDEX`.
-* The index refers to the index number shown in the displayed person list.
-* The index *must be a positive integer* 1, 2, 3, ...
+* The `INDEX` refers to the index number shown in the displayed entry list.
+* The `INDEX` *must be a positive integer* 1, 2, 3, ...
 ****
+
 
 Examples:
 
-* `list` +
-`delete 2` +
-Deletes the 2nd entry in the address book.
-* `list ~education` +
-`delete 1` +
-Deletes the 1st entry displayed under education section
+* `listEntry` +
+`deleteEntry 2` +
+Deletes the 2nd entry in ResuMaker.
+* `listEntry ~education` +
+`deleteEntry 1` +
+Deletes the 1st entry displayed under education section.
+
+
+=== Deleting a bullet: `deleteBullet`
+
+deletes a bullet at specified index of a particular entry. +
+Format: `deleteBullet ENTRYINDEX BULLETINDEX`
+
+
+****
+* Before executing this command, the user needs to execute `expandEntry`
+* `ENTRYINDEX` refers to the index number shown in the displayed entry list
+* `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
+* Both parameters *must be a positive integer* 1, 2, 3, ...
+****
+
+
+Examples:
+
+* `expandEntry` +
+`deleteBullet 2 1` +
+Deletes the 1st bullet of the 2nd entry in ResuMaker.
+* `listEntry ~education` +
+`deleteBullet 1 1` +
+Deletes the 1st bullet of the 1st entry displayed under education section of ResuMaker.
 
 
 
@@ -264,7 +321,7 @@ Generates a file named sep.md, containing a Resume which lists entries as design
 
 === Clearing all entries : `clear`
 
-Clears all entries from the address book. +
+Clears all entries from the entry book. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -274,7 +331,7 @@ Format: `exit`
 
 === Saving the data
 
-Address book data are saved in the hard disk automatically after any command that changes the data. +
+Entry book data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -286,21 +343,30 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Address Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Entry Book folder.
 
 == Command Summary
-
-* *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
-e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
-* *Clear* : `clear`
-* *Delete* : `delete INDEX` +
-e.g. `delete 3`
-* *Edit* : `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]...` +
-e.g. `edit 2 n/James Lee e/jameslee@example.com`
-* *Find* : `find KEYWORD [MORE_KEYWORDS]` +
-e.g. `find James Jake`
-* *List* : `list`
 * *Help* : `help`
+* *Add Entry* `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
+e.g. `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
+* *Add Bullet* `addBullet INDEX CONTENTTOADD` +
+e.g. `addBullet 0 attain Best Financial Hack Award`
+* *List Entry* : `listEntry [~SECTION] [#TAG]…` +
+e.g. `listEntry ~education java`
+* *Expand Entry* : `expandEntry INDEX` +
+e.g. `expandEntry 2`
+* *Edit Entry* : `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]…` +
+e.g. `editEntry 1 t/R company #JAVA`
+* *Edit Bullet* : `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT` +
+e.g. `editBullet 0 0 implement scalable application for data visualization using java`
+* *Delete Entry* : `eleteEntry INDEX` +
+e.g. `deleteEntry 2`
+* *Delete Bullet* : `deleteBullet ENTRYINDEX BULLETINDEX` +
+e.g. `deleteBullet 2 2`
+* *Add Nus Entry* : `nus EVENT_NAME` +
+e.g. `nus hack n roll`
+* *View Soc Awards* : `fetch-awards` or `fetch-awards INDEX`
+* *Clear* : `clear`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
