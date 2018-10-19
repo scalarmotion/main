@@ -290,6 +290,42 @@ Template files are written by the user and loaded into the application using the
 
 // end::template[]
 
+
+// tag::entryManagement[]
+=== Entry Management
+This section describes the implementation of features related to managing entries in ResuMaker, and explains the underlying classes and supporting data structures.
+
+==== Construct Entry Related Classes
+
+Below is the class diagram of classes under the package `seedu.address.model.entry`, which lays the foundation for the implementation of <<entryManagement, Entry Management>>
+
+image::classDiagramForEntry.png[width="800"]
+
+* Current Implementation
+.. As shown in the diagram, all data of an added entry in ResuMaker is encapsulated as a class `ResumeEntry`, which is composed of four other classes: namely one `Category`, one `EntryInfo`, one EntryDescription and multiple instances of `Tag`.
+.. ResuMaker extends a `Taggable` interface which allows manipulation of tags associated with itself.
+
+
+* Design Consideration
+.. `Taggable` Interface +
+Provides an additional abstraction layer for any class that needS to access methods that `ResumeEntry` overrides to implement `Taggable`. This enforces Interface Segregation Principle in which none related classes have limited knowledge about `ResumeEntry`.
+
+.. Encapsulation of `EntryInfo` +
+... Instead of lumping `title`, `subtitle` and `duration` in `ResumeEntry`, encapsulating the three into `EntryInfo` provides another layer of abstraction.
+... Not all entries have EntryInfo, a <<minorEntry, minor entry>> does not contain title, subtitle or duration. `EntryInfo` helps to differentiate <<minorEntry, minor entry>> from <<majorEntry, major entry>> using `isMinorEntry()`.
+
+.. Encapsulation Using `EntryDescription` +
+... As opposed to representing an entry description as a `String` field in `ResumeEntry`, encapsulating it in `EntryDescription` provides another layer of abstraction.
+... `EntryDescription` contains `List<String>` that allows for easy modification of a specific segment of the desciption of a particular entry, i.e. allows users to edit a particular line of description of a particular entry.
+
+
+==== Edit Bullet Description (work in progress)
+
+
+//end::entryManagement[]
+
+
+
 // tag:: resume[]
 === Resume Generation
 
@@ -1265,6 +1301,18 @@ A combination of slang, partial phrases or full phrases.
 (e.g. 'computer sci ug research proj') +
 In Backus-Naur form, an Expression is defined: +
 `<expression> ::= <slang> | <partial-phrase> | <full-phrase> | <expression>`
+
+[[entryManagement]] Entry Management::
+A set of features related to managing entries. Namely:
+`addEntry`, `deleteEntry`, `addBullet`, `deleteBullet`.
+
+[[majorEntry]] major entry::
+An entry that contains information such as title, subtitle and duration. It is usually used for education, professional experience, projects, etc.
+For example, to add a particular major entry, execute `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`.
+
+[[minorEntry]] minor entry::
+An entry that does not contain entry information such as title, subtitle and duration. It is usually created for content like awards or certification. For example, to add a particular minor entry, one can execute `addEntry ~awards #java`
+
 
 [appendix]
 == Product Survey
