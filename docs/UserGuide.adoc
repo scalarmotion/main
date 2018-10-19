@@ -30,17 +30,19 @@ Interested? Jump to the <<Quick Start>> to get started. +
 With ResuMaker, let your skills document themselves.
 
 == Quick Start
+To get started with using ResuMaker:
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `resumaker.jar` link:{repoURL}/releases[here].
 .  Copy the file to the folder you want to use as the home folder for your Entry Book.
 .  Double-click the file to start the app. The GUI should appear in a few seconds.
 +
-Below is a sample user interface
+Here is a sample of what the user interface should look like:
 
 image::Ui.png[width="790"]
 
-.  Type the command in the command box and press kbd:[Enter] to execute it. +
+[start=5]
+.  Type your command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try out the following examples:
 
@@ -53,6 +55,7 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 [[Features]]
 == Features
+Here are the features available in ResuMaker:
 
 ====
 *Command Format*
@@ -346,6 +349,8 @@ _{explain how the user can enable/disable data encryption}_
 *A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Entry Book folder.
 
 == Command Summary
+For reference, here is a brief summary of the commands available and their syntax:
+
 * *Help* : `help`
 * *Add Entry* `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
 e.g. `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
