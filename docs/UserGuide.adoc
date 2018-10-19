@@ -60,9 +60,9 @@ Here are the features available in ResuMaker:
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION, [t/TITLE], [s/SUBHEADER], [d/DURATION], [#TAGNAME]...`, `SECTION`, `TAGNAME` and `TITLE`  are parameters which can be used as `addEntry ~work #INTERNSHIP t/The Source Enterprise s/Software Engineering Intern d/Jan 2012 - June 2012`.
-* Items in square brackets are optional e.g `~SECTION [t/TITLE] [s/SUBHEADER]` can be used as `~EDUCATION t/The Source Enterprise` or as `~work t/The Source Enterprise s/Java programmer` or `~work`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[#TAG]...` can be used as `{nbsp}` (i.e. 0 times), `#JAVA`, `#Software Engineering`, `#AI` etc.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION, [t/TITLE], [s/SUBHEADER], [d/DURATION], [#TAGNAME]...`, `SECTION`, `TITLE` , `SUBHEADER`, `DURATION` and `TAGNAME` and  are parameters which can be used as `addEntry ~work #INTERNSHIP t/The Source Enterprise s/Software Engineering Intern d/Jan 2012 - June 2012`.
+* Items in square brackets are optional e.g `~SECTION [t/TITLE] [s/SUBHEADER] [d/DURATION] [#TAG]...` can be used as `~work t/The Source Enterprise s/Java programmer d/ Jan 2012 - Dec 2014 #JAVA` or `~awards`.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[#TAG]...` can be used as `{nbsp}` (i.e. 0 times), `#JAVA`, `#JAVA #Software Engineering`, `#JAVA #Software Engineering #AI` etc.
 * Parameters can be in any order e.g. if the command specifies `[t/TITLE] [s/SUBHEADER]`, `[s/SUBHEADER] [t/TITLE]` is also acceptable.
 ====
 
@@ -80,7 +80,7 @@ Format: `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]..
 [TIP]
 An entry need not have associated title, subheader and duration.
 An entry can have any number of tags (including 0).
-An entry contains description, which can be added using addDescription as a separate command.
+An entry contains description, which can be added using addBullet as a separate command.
 All parameter input from the user must be alphanumeric and can be separated by space, with the exception of `DURATION` which allows special character `-`.
 
 Examples:
@@ -145,7 +145,7 @@ Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
 * You can remove all the entry's tags by typing `#` without specifying any tags after it.
-* This command does not allow
+* This command does not allow editing description of the entry, to do so, execute `editBullet`.
 ****
 
 Example:
@@ -156,7 +156,7 @@ edits the entry at index 1 by replacing its title as R company and replace all i
 
 === Editing a bullet point: `editBullet`
 
-edits a bulleted description of an entry in ResuMaker. INDEX refers to the index of a particular bulleted description. +
+edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
 Format: `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT`
 
 ****
@@ -210,10 +210,12 @@ Format: `deleteBullet ENTRYINDEX BULLETINDEX`
 
 Examples:
 
-* `expandEntry` +
+* `listEntry` +
+`expandEntry` +
 `deleteBullet 2 1` +
 Deletes the 1st bullet of the 2nd entry in ResuMaker.
 * `listEntry ~education` +
+`expandEntry` +
 `deleteBullet 1 1` +
 Deletes the 1st bullet of the 1st entry displayed under education section of ResuMaker.
 
@@ -364,7 +366,7 @@ e.g. `expandEntry 2`
 e.g. `editEntry 1 t/R company #JAVA`
 * *Edit Bullet* : `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT` +
 e.g. `editBullet 0 0 implement scalable application for data visualization using java`
-* *Delete Entry* : `eleteEntry INDEX` +
+* *Delete Entry* : `deleteEntry INDEX` +
 e.g. `deleteEntry 2`
 * *Delete Bullet* : `deleteBullet ENTRYINDEX BULLETINDEX` +
 e.g. `deleteBullet 2 2`
