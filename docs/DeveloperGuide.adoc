@@ -290,6 +290,30 @@ Template files are written by the user and loaded into the application using the
 
 // end::template[]
 
+// tag:: resume[]
+=== Resume Generation
+
+==== The Resume Object
+
+The `Resume` object contains a list of `ResumeSections`,
+each comprising a title and various `ResumeEntries` associated with it
+(as stipulated by the Template used to generate the Resume). +
+This Resume object can then be converted to a String using another class.
+While we have chosen to implement conversion into Markdown,
+it is possible to extend this functionality by implementing your own Converter class
+to convert the object into another format, such as HTML.
+
+==== Markdown Conversion
+
+To transform this abstract representation of the Resume into concrete text,
+a `MarkdownConverter` utility class is first used to progressively convert each level of the Resume
+(from the titles, information and descriptions of each individual ResumeEntry,
+to a ResumeSection of ResumeEntries and finally to the full Resume)
+into a String containing its formatted Markdown representation.
+A file with the name stipulated by the user is then created and the String is written to it.
+
+// end:: resume[]
+
 // tag:: contextualAwareness[]
 === Contextual Awareness
 

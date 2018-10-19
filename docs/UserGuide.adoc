@@ -252,14 +252,14 @@ Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and 
 
 === Generating Resume : `make`
 
-Generates a Resume in Markdown format, using the _template_ currently loaded in the application.
+Generates a Resume file in Markdown format with the given name, using the _template_ currently loaded in the application.
 
 
 
 Examples:
 
-* `make` +
-Generates a Resume based on the default format using saved entries.
+* `make sep.md` +
+Generates a file named sep.md, containing a Resume which lists entries as designated by the currently loaded template.
 
 
 === Clearing all entries : `clear`
@@ -311,4 +311,4 @@ e.g. `tag ls ~work #java`
 e.g. `tag rm 10 ~work #python`
 * *Tag Retag*: `tag tg INDEX TAG [MORE_TAGS]` +
 e.g. `tag rt 10 ~project #web`
-* *Generate Resume* : `make`
+* *Generate Resume* : `make FILENAME`
