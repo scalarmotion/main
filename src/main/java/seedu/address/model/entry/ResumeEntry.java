@@ -35,9 +35,9 @@ public class ResumeEntry implements Taggable {
     }
 
     /**
-     * @return checks if the entry is a minor entry := any entry without title, subHeader and duration.
+     * @return true iff the entry is a minor entry := any entry without title, subHeader and duration.
      */
-    public boolean isMonorEntry() {
+    public boolean isMinorEntry() {
         return entryInfo.isEmpty();
     }
 
