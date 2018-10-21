@@ -3,14 +3,13 @@ package seedu.address.logic.commands;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_CATEGORY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DURATION;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_SECTION_TYPE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_SUBHEADER;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAGS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TITLE;
 
 import java.util.ArrayList;
@@ -63,10 +62,10 @@ public class CommandTestUtil {
     public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
     public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
 
-    public static final String TAG_DESC_JAVA = " " + PREFIX_TAGS + VALID_TAG_JAVA;
-    public static final String TAG_DESC_SE = " " + PREFIX_TAGS + VALID_TAG_SE;
+    public static final String TAG_DESC_JAVA = " " + PREFIX_TAG + VALID_TAG_JAVA;
+    public static final String TAG_DESC_SE = " " + PREFIX_TAG + VALID_TAG_SE;
 
-    public static final String CAT_DESC_WORK = " " + PREFIX_SECTION_TYPE + VALID_CAT_EDUCATION;
+    public static final String CAT_DESC_WORK = " " + PREFIX_CATEGORY + VALID_CAT_EDUCATION;
     public static final String TITLE_DESC_NUS = " " + PREFIX_TITLE + VALID_TITLE_SOURCE;
     public static final String SUBTITLE_DESC = " " + PREFIX_SUBHEADER + VALID_SUBTITLE_COMPUTING;
     public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION_1;
