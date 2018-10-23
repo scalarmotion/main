@@ -297,7 +297,15 @@ Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, addi
 Lists all the commands that you have entered in reverse chronological order. +
 Format: `history`
 
-=== Loading template : `loadtemplate`
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+=== Using templates to specify resume formats
+Templates are stored as text files and parsed and loaded into the application using the `loadtemplate` command.
+
+==== Loading template : `loadtemplate`
 
 Loads a template from a text file into the application. +
 Format: `loadtemplate FILEPATH`
@@ -307,10 +315,38 @@ Examples:
 * `loadtemplate google.txt` +
 Loads the template specified in `google.txt`
 
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
+==== Writing template files
+//TODO: how do we have parallel structure for this?
+Templates are written by the user as text files, consisting of lines of the following format:
+-----
+[Category Heading]:[~Category Tag]:[Tag Groups]
+-----
+
+Each line specifies a category, starting with the title to be displayed, its corresponding category tag, and tags used to filter entries.
+
+An entry is included if it is tagged with that category, and fulfils any of the groups of tags, separated by a space.
+Each group contains tags separated by an ampersand (&),
+and an entry must contain all tags in a group to fulfil the group.
+
+For example, the following template file:
+[literal]
+--
+Work Experience:~work:
+Education:~education:uni training&cs
+Projects:~projects:software&java&recent
+--
+Will result in the resume being generated as follows:
+[sidebar]
+--
+*Work Experience* +
+(all work entries regardless of tags)
+
+*Education* +
+(education entries tagged with `uni`, or both `training` and `cs`)
+
+*Projects* +
+(project entries tagged with `software`, `java` and `recent`)
+--
 
 === Generating Resume : `make`
 
