@@ -7,8 +7,11 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
+
+import seedu.address.model.entry.ResumeEntry;
 
 /**
  * This class represents all the Awareness information held by the application.
@@ -26,6 +29,9 @@ public class Awareness {
 
     /** The tree set contains all full phrases. */
     private final TreeSet<String> allFullPhrases;
+
+    /** Maps an Event name to a Resume Entry, if any */
+    private TreeMap<String, ResumeEntry> nameToEntryMapppings;
 
     public Awareness(HashMap<String, String> dictionary, TreeSet<String> allFullPhrases) {
         requireAllNonNull(dictionary, allFullPhrases);
@@ -83,8 +89,41 @@ public class Awareness {
                        .orElse(partialPhrase);
     }
 
+    /**
+     * Returns true iff the given string can be considered a valid slang in this application.
+     * To be a valid slang, the given string must obey the rules below:
+     *   - Must NOT be whitespace.
+     *   - Must NOT be an empty string.
+     *   - Must NOT be already present in the HashMap contained within the Awareness object.
+     *   - Must NOT be more than ONE WORD
+     *
+     * @param slang the string to be validated
+     * @return true iff the given string can be considered a valid slang in this application.
+     */
+    public boolean isValidSlang(String slang) {
+        requireNonNull(slang);
+        return !isEmptyString(slang) && !isOnlyWhitespace(slang)
+                 && !dictionary.containsKey(slang.trim()) && slang.split(SPACE).length == 1;
+    }
+
     private String[] tokenizeExpression(String expression) {
         return expression.split(SPACE);
+    }
+
+
+    /**
+     * Returns true iff {@code s} contains only whitespace
+     */
+    public static boolean isOnlyWhitespace(String s) {
+        requireNonNull(s);
+        return isEmptyString(s.trim());
+    }
+    /**
+     * Returns true iff {@code s} is an empty string
+     */
+    public static boolean isEmptyString(String s) {
+        requireNonNull(s);
+        return s.equals("");
     }
 
 }
