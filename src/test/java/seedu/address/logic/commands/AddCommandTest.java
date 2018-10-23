@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -23,6 +24,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.resume.Resume;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -183,6 +185,21 @@ public class AddCommandTest {
 
         @Override
         public void commitAddressBook() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveLastResume(Path filepath) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void generateResume() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Resume> getLastResume() {
             throw new AssertionError("This method should not be called.");
         }
 

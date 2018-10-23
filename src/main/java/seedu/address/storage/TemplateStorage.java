@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.Optional;
 
 import seedu.address.model.template.Template;
 
@@ -13,7 +12,7 @@ public interface TemplateStorage {
 
     Path getTemplateFilePath();
 
-    Optional<Template> loadTemplate() throws IOException;
+    Template loadTemplate() throws IOException;
 
     /**
      * Similar to {@link #loadTemplate()}
@@ -21,6 +20,6 @@ public interface TemplateStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws IOException if the file is not found.
      */
-    Optional<Template> loadTemplate(Path filePath)
+    Template loadTemplate(Path filePath)
         throws IOException;
 }

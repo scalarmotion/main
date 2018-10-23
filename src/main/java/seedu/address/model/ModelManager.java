@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -18,8 +19,11 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.EntryBookChangedEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
+import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
+import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -32,7 +36,8 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Person> filteredPersons;
     private final Awareness awareness;
-    private Template loadedTemplate;
+    private Optional<Template> loadedTemplate;
+    private Resume lastGeneratedResume;
     private final VersionedEntryBook versionedEntryBook;
     private final FilteredList<ResumeEntry> filteredEntries;
 
@@ -47,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
+        loadedTemplate = Optional.empty();
         awareness = SampleDataUtil.getSampleAwareness();
         versionedEntryBook = new VersionedEntryBook(entryBook);
         filteredEntries = new FilteredList<>(versionedEntryBook.getEntryList());
@@ -161,9 +167,9 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TemplateLoadRequestedEvent(filepath));
     }
 
-    public Template getLoadedTemplate() {
-        //TODO - handle failed loading
+    public Optional<Template> getLoadedTemplate() {
         return loadedTemplate;
+        //will be up to the Generation part to raise NewResultAvailableEvent to say no template loaded
     }
 
     //=========== Undo/Redo =================================================================================
@@ -219,11 +225,32 @@ public class ModelManager extends ComponentManager implements Model {
                 && filteredPersons.equals(other.filteredPersons);
     }
 
+    //=========== Resume generation =======================================================================
+    public void generateResume() {
+        lastGeneratedResume = new Resume(this);
+    }
+
+    public Optional<Resume> getLastResume() {
+        return Optional.ofNullable(lastGeneratedResume);
+    }
+
+    public void saveLastResume(Path filepath) {
+        // TODO: link with MarkdownResumeStorage when done
+    }
+
     //=========== Listener for template loading =============================================================
     @Subscribe
     public void handleTemplateLoadedEvent(TemplateLoadedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template loaded"));
-        loadedTemplate = event.getTemplate();
+        logger.info(LogsCenter.getEventHandlingLogMessage(event,
+                "Template loaded from " + event.filepath.toString() + " to Model"));
+        loadedTemplate = Optional.of(event.getTemplate());
     }
 
+    @Subscribe
+    public void handleTemplateLoadingExceptionEvent(TemplateLoadingExceptionEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Exception when attempting to load template from "
+                + event.filepath.toString()));
+        loadedTemplate = Optional.empty();
+        raise(new NewResultAvailableEvent("Failed to load template"));
+    }
 }

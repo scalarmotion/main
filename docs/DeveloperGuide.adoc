@@ -16,6 +16,14 @@ endif::[]
 
 By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
+== Introduction
+Welcome to the Developer Guide for ResuMaker - a fast and flexible resume generator!
+This Guide contains essential information for those seeking to maintain, or enhance ResuMaker.
+
+Developers new to ResuMaker can refer to <<setting-up, Setting Up>> to get started. +
+Experienced developers can find advanced details in <<Design-Architecture, Section 2>> and <<Implementation, Section 3>>.
+
+[[setting-up]]
 == Setting up
 
 === Prerequisites
@@ -237,6 +245,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+[[Implementation]]
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
@@ -244,7 +253,7 @@ This section describes some noteworthy details on how certain features are imple
 // tag::tags[]
 === Tags and Categories
 
-Tags and categories are single-word keywords tied to individual entries. Each `Entry` can classified under one `Category`, but can be associated with multiple `Tag`.
+Tags and categories are single-word keywords tied to individual entries. Each `ResumeEntry` can be classified under one `Category`, but can be associated with multiple `Tag`.
 
 ==== Categories
 Category related functions are mainly contained in the `seedu.address.model.category` package, which includes the `Category` class and its relevant `CategoryManager`. `CategoryManager` is used by the `ModelManager` (`seedu.address.model.ModelManager`) to filter the list of entries by categories.
@@ -252,11 +261,16 @@ Category related functions are mainly contained in the `seedu.address.model.cate
 Filtering can be done by passing the relevant `Predicate<Entry>` into `CategoryManager` through `CategoryManger.setFilter()`. The relevant filtered list can be obtained by subsequently calling `CategoryManager.getList()`.
 
 ===== CategoryManager
-To use `CategoryManager` to filter out relevant entries, there are 3 main functions to keep in mind:
+To use `CategoryManager` to filter out relevant entries, there are 2 main functions to keep in mind:
 
-* `setFilter(Predicate<Entry>)`: sets the filtering criteria for the list of entries
-* `setList(List<Entry>)`: sets the source list of entries to filter
-* `getList()`: returns `unmodifiableObservableList<Entry>` of relevant entries
+* `setFilter(Predicate<ResumeEntry>)`: sets the filtering criteria for the list of entries
+* `getList()`: returns `unmodifiableObservableList<ResumeEntry>` of relevant entries
+
+If there comes a need to set a new source list for the `CategoryManager`, create a new instance with the corresponding `List<ResumeEntry>`.
+
+===== Predicates
+Availble predicates (`Predicate<ResumeEntry>`) for use:
+- `ContainsCategoryPredicate(String categoryName)`
 
 // end::tags[]
 

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Optional;
@@ -92,7 +94,8 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<Template> loadTemplate() throws IOException {
+    public Template loadTemplate() throws IOException {
+
         return loadTemplate(templateStorage.getTemplateFilePath());
     }
 
@@ -100,7 +103,9 @@ public class StorageManager extends ComponentManager implements Storage {
      * Loads a Template from a text file
      */
     @Override
-    public Optional<Template> loadTemplate(Path filePath) throws IOException {
+    public Template loadTemplate(Path filePath) throws IOException {
+        requireNonNull(filePath);
+
         logger.fine("Attempting to load template from: " + filePath);
         return templateStorage.loadTemplate(filePath);
     }
@@ -118,21 +123,20 @@ public class StorageManager extends ComponentManager implements Storage {
 
     @Subscribe
     public void handleTemplateLoadRequestedEvent(TemplateLoadRequestedEvent event) {
-        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load requested, attempting to load"));
-        Optional<Template> t;
-        /*TODO
-        Should an Optional be used here? (Consistent with how XmlAddressBookStorage works)
-        If it's empty, does it represent that an
-        error has occurred during loadTemplate()? And if so, should that error be
-        propagated up and caught here instead, so it can be passed into the
-        ExceptionEvent instead of dealing with an empty optional with no
-        exception info?
-        */
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load from "
+                + event.filepath.toString() + " requested, attempting to load"));
+        /*
+         * loadTemplate directly returns a Template rather than Optional<Template>, so that
+         * in case loading throws an exception, it will be propagated here, and can be caught to raise
+         * a TemplateLoadingExceptionEvent (rather than having an Optional which gives no information).
+         * Although existing code e.g. for retrieving AddressBook uses Optional, in those cases, Optional is
+         * checked in MainApp, which will simply initialize with the default AddressBook. In this case of Templates,
+         * exceptions should be passed to an event.
+         */
+        Template t;
         try {
             t = loadTemplate(event.filepath);
-            t.ifPresent(
-                template -> raise(new TemplateLoadedEvent(template, event.filepath)));
-            //TODO make model listen for TemplateLoadedEvent
+            raise(new TemplateLoadedEvent(t, event.filepath));
         } catch (IOException e) {
             raise(new TemplateLoadingExceptionEvent(e, event.filepath));
         }

@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -63,6 +64,27 @@ public class AwarenessTest {
         assertEquals("undergraduate research programme", awareness.getPossibleEventName("ug research prog"));
         assertEquals("postgraduate machine learning research opportunities",
                 awareness.getPossibleEventName("pg ml research opp"));
+
+    }
+
+    @Test
+    public void isValidSlang_negativeMatches() {
+        Awareness awareness = SampleDataUtil.getSampleAwareness();
+
+        // Should not be able to add slang that has already been added
+        assertFalse(awareness.isValidSlang("cs"));
+
+        // Should not be able to add slang that is more than one word
+        assertFalse(awareness.isValidSlang("fyp gp ml"));
+
+        // Should not be able to add slang that is an empty string
+        assertFalse(awareness.isValidSlang(""));
+
+        // Should not be able to add slang that is only whitespace
+        assertFalse(awareness.isValidSlang("    "));
+
+        // Should not be able to add slang that is mixture of whitespace and existing slang
+        assertFalse(awareness.isValidSlang("     cs  "));
 
     }
 
