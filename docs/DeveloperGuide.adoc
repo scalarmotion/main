@@ -16,6 +16,14 @@ endif::[]
 
 By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
+== Introduction
+Welcome to the Developer Guide for ResuMaker - a fast and flexible resume generator!
+This Guide contains essential information for those seeking to maintain, or enhance ResuMaker.
+
+Developers new to ResuMaker can refer to <<setting-up, Setting Up>> to get started. +
+Experienced developers can find advanced details in <<Design-Architecture, Section 2>> and <<Implementation, Section 3>>.
+
+[[setting-up]]
 == Setting up
 
 === Prerequisites
@@ -237,6 +245,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+[[Implementation]]
 == Implementation
 
 This section describes some noteworthy details on how certain features are implemented.
