@@ -4,9 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Optional;
 import java.util.Scanner;
 import java.util.logging.Logger;
 
@@ -35,7 +33,7 @@ public class TxtTemplateStorage implements TemplateStorage {
     }
 
     //@Override
-    public Optional<Template> loadTemplate() throws IOException {
+    public Template loadTemplate() throws IOException {
         return loadTemplate(filePath);
     }
 
@@ -45,23 +43,10 @@ public class TxtTemplateStorage implements TemplateStorage {
      * @param filePath location of the data. Cannot be null.
      * @throws IOException if the file is not found.
      */
-    public Optional<Template> loadTemplate(Path filePath)
+    public Template loadTemplate(Path filePath)
         throws IOException {
-        /*TODO:
-        should it return a Optional<Template> or just Template?
-        XmlAddrBkStorage returns Optional to Main, and Main creates a default
-        AddrBk if Optional is empty.
 
-        TxtTemplateStorage returns <VALUE> to StorageManager's
-        HandleTemplateLoadRequested() which was triggered by a TemplateLoadRequestedEvent
-        HandleTemp... then raises a TemplateLoadedEvent or TemplateLoadingExceptionEvent
-        */
         requireNonNull(filePath);
-
-        if (!Files.exists(filePath)) {
-            logger.info("Template file " + filePath + " not found");
-            return Optional.empty();
-        }
 
         File file = filePath.toFile();
         Scanner s = new Scanner(file);
@@ -71,7 +56,7 @@ public class TxtTemplateStorage implements TemplateStorage {
             String curr = s.nextLine();
             template.addSection(curr); //TODO: should this be in template?
         }
-        return Optional.of(template);
+        return template;
     }
 }
 
