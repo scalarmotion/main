@@ -18,10 +18,11 @@ By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
 == Introduction
 
-Do you find the need to maintain multiple versions of your resume? +
+Do you find the need to maintain multiple versions of your resume?
+
 Perhaps you find youself reorganising your resumes before making a job application?
 
-If so - welcome to ResuMaker: a *fast and flexible resume generator aimed at computer science students*
+If so - welcome to ResuMaker: a *fast and flexible resume generator aimed at computer science students*.
 
 Unlike most resume generation webapps, ResuMaker tailors your resume to fit the specific requirements of a job. +
 It can also pick up contextual awareness about your world - with out-of-the-box support for the National University of Singapore's School of Computing. +
@@ -34,12 +35,14 @@ To get started with using ResuMaker:
 
 .  Ensure you have Java version `9` or later installed in your Computer.
 .  Download the latest `resumaker.jar` link:{repoURL}/releases[here].
-.  Copy the file to the folder you want to use as the home folder for your Entry Book.
-.  Double-click the file to start the app. The GUI should appear in a few seconds.
+.  Copy the file to the folder you want to use as the home folder for ResuMaker.
+.  Double-click the file to start the app. The graphical user interface should appear in a few seconds.
 +
-Here is a sample of what the user interface should look like:
+
 
 image::Ui.png[width="790"]
+
+_ Fig1. A typical user's screen, immediately after application startup. _
 
 [start=5]
 .  Type your command in the command box and press kbd:[Enter] to execute it. +
@@ -68,7 +71,7 @@ Here are the features available in ResuMaker:
 
 === Viewing help : `help`
 
-Views a list of all commands available.
+Displays a list of all commands available. +
 Format: `help`
 
 
@@ -89,8 +92,8 @@ Examples:
 * `addEntry ~awards #java`
 
 
-=== Listing entries : `listEntry`
-lists filtered entries in the ResuMaker according to their sections and tags.
+=== Listing entries : `listEntry` +
+Lists the entries in ResuMaker, filtered according to their sections and tags.
 Format: `listEntry [~SECTION] [#TAG]...`
 
 ****
@@ -118,10 +121,10 @@ Example:
 adds a bullet point at the end of the description of 1st entry.
 
 
-=== Viewing a particular entry : `expandEntry`
+=== Viewing a particular entry : `selectEntry`
 
-expands detailed description of an entry in the ResuMaker at a specified index +
-Format: `expandEntry INDEX`
+Displays detailed description of the entry in ResuMaker at the specified index on the panel display. +
+Format: `selectEntry INDEX`
 
 ****
 * `INDEX` refers to the index of the displayed entry list from executing `listEntry`
@@ -130,13 +133,13 @@ Format: `expandEntry INDEX`
 
 Examples:
 
-* `expandEntry 2`
-* `expandEntry 0`
+* `selectEntry 2`
+* `selectEntry 0`
 
 
 === Editing an entry : `editEntry`
 
-Edits non-decription fields of an existing entry in the ResuMaker. +
+Edits non-description fields of an existing entry in ResuMaker, i.e title, sub-header, duration, and tags of an entry. +
 Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 
 ****
@@ -145,7 +148,7 @@ Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 * Existing values will be updated to the input values.
 * When editing tags, the existing tags of the entry will be removed i.e adding of tags is not cumulative.
 * You can remove all the entry's tags by typing `#` without specifying any tags after it.
-* This command does not allow editing description of the entry, to do so, execute `editBullet`.
+* This command does not allow editing description of the entry; to do so, use the `editBullet` command.
 ****
 
 Example:
@@ -156,26 +159,27 @@ edits the entry at index 1 by replacing its title as R company and replace all i
 
 === Editing a bullet point: `editBullet`
 
-edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
-Format: `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT`
+Edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
+Format: `editBullet ENTRYINDEX BULLETINDEX EDITEDCONTENT`
 
 ****
-* Before executing this command, the user needs to execute `expandEntry`
+* Before executing this command, the user needs to execute `selectEntry`
 * `ENTRYINDEX` refers to the index number shown in the displayed entry list
 * `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
+*  `EDITEDCONTENT` refers to new content that the user wants to replace the old one with
 * Both parameters *must be a positive integer* 1, 2, 3, ...
 ****
 
 Example:
 
-* `expandEntry` +
-`editBullet 0 0 implement scalable application for data visualization using java` +
-edits the entry at index 0 by replacing its bulleted description at index 0 by "implement scalable application for data visualization using java".
+* `selectEntry` +
+`editBullet 1 1 implement scalable application for data visualization using java` +
+edits the entry at index 1 by replacing its bullet description at index 1 by "implement scalable application for data visualization using java".
 
 
 === Deleting an entry: `deleteEntry`
 
-deletes an entry at specified index. +
+Deletes the entry at the specified index. +
 Format: `deleteEntry INDEX`
 
 ****
@@ -196,12 +200,12 @@ Deletes the 1st entry displayed under education section.
 
 === Deleting a bullet: `deleteBullet`
 
-deletes a bullet at specified index of a particular entry. +
+Deletes the bullet of a particular entry at the specified index.  +
 Format: `deleteBullet ENTRYINDEX BULLETINDEX`
 
 
 ****
-* Before executing this command, the user needs to execute `expandEntry`
+* Before executing this command, the user needs to execute `selectEntry`
 * `ENTRYINDEX` refers to the index number shown in the displayed entry list
 * `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
 * Both parameters *must be a positive integer* 1, 2, 3, ...
@@ -211,18 +215,18 @@ Format: `deleteBullet ENTRYINDEX BULLETINDEX`
 Examples:
 
 * `listEntry` +
-`expandEntry` +
+`selectEntry` +
 `deleteBullet 2 1` +
 Deletes the 1st bullet of the 2nd entry in ResuMaker.
 * `listEntry ~education` +
-`expandEntry` +
+`selectEntry` +
 `deleteBullet 1 1` +
 Deletes the 1st bullet of the 1st entry displayed under education section of ResuMaker.
 
 
 
 === Creating a SoC / NUS Event (Project / Work Experience / Skill): `nus`
-Auto-populates a resume Entry based on a matching SoC / NUS Event.
+Auto-populates a resume Entry based on a matching SoC / NUS Event. +
 Format: `nus EVENT_NAME`
 
 [TIP]
@@ -243,7 +247,7 @@ Slang and acronyms must be correctly configured in application data. ResuMaker s
 
 === Viewing SoC awards: `fetch-awards`
 
-Lists all awards at SoC in a numbered list.
+Lists all awards at SoC in a numbered list. +
 Format: `fetch-awards` or `fetch-awards INDEX`
 
 The latter format adds the specified award as a resume Entry.
@@ -254,14 +258,14 @@ These are functions to help you manage your tags; namely to view and edit the re
 
 ==== Viewing currently active tags: `tag status`
 
-Lists all tags currently active, and will be generated in the resume.
+Lists all the tags currently active, and which will be included in the generated resume. +
 Format: `tag status` lists all the corresponding tags and categories that will appear in the resume.
 
 ==== Listing entries under specific tags: `tag list` or `tag ls`
 
 List all entries under specific tags (space separated).
 
-By default, if a tag is not given, all the tags will be displayed.
+By default, if a tag is not given, all the tags will be displayed. +
 Format: `tag ls` list all the tags and the relevant entries for each tag.
 
 Format: `tag ls ~work ~projects #java` list all the `~work` and `~project` entries tagged with `#java`
@@ -362,7 +366,7 @@ Generates a file named sep.md, containing a Resume which lists entries as design
 
 === Clearing all entries : `clear`
 
-Clears all entries from the entry book. +
+Clears all entries from ResuMaker. +
 Format: `clear`
 
 === Exiting the program : `exit`
@@ -372,7 +376,7 @@ Format: `exit`
 
 === Saving the data
 
-Entry book data are saved in the hard disk automatically after any command that changes the data. +
+ResuMaker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
 
 // tag::dataencryption[]
@@ -384,42 +388,42 @@ _{explain how the user can enable/disable data encryption}_
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
-*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous Entry Book folder.
+*A*: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous ResuMaker.
 
 == Command Summary
 For reference, here is a brief summary of the commands available and their syntax:
 
-* *Help* : `help`
-* *Add Entry* `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
-e.g. `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
 * *Add Bullet* `addBullet INDEX CONTENTTOADD` +
 e.g. `addBullet 0 attain Best Financial Hack Award`
-* *List Entry* : `listEntry [~SECTION] [#TAG]…` +
-e.g. `listEntry ~education java`
-* *Expand Entry* : `expandEntry INDEX` +
-e.g. `expandEntry 2`
-* *Edit Entry* : `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]…` +
-e.g. `editEntry 1 t/R company #JAVA`
-* *Edit Bullet* : `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT` +
-e.g. `editBullet 0 0 implement scalable application for data visualization using java`
-* *Delete Entry* : `deleteEntry INDEX` +
-e.g. `deleteEntry 2`
-* *Delete Bullet* : `deleteBullet ENTRYINDEX BULLETINDEX` +
-e.g. `deleteBullet 2 2`
+* *Add Entry* `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
+e.g. `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
 * *Add Nus Entry* : `nus EVENT_NAME` +
 e.g. `nus hack n roll`
-* *View Soc Awards* : `fetch-awards` or `fetch-awards INDEX`
 * *Clear* : `clear`
+* *Delete Bullet* : `deleteBullet ENTRYINDEX BULLETINDEX` +
+e.g. `deleteBullet 2 2`
+* *Delete Entry* : `deleteEntry INDEX` +
+e.g. `deleteEntry 2`
+* *Edit Bullet* : `editBullet ENTRYINDEX BULLETINDEX EDITTEDCONTENT` +
+e.g. `editBullet 0 0 implement scalable application for data visualization using java`
+* *Edit Entry* : `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]…` +
+e.g. `editEntry 1 t/R company #JAVA`
+* *Expand Entry* : `selectEntry INDEX` +
+e.g. `selectEntry 2`
+* *Generate Resume* : `make FILENAME`
+* *Help* : `help`
+* *History* : `history`
+* *List Entry* : `listEntry [~SECTION] [#TAG]…` +
+e.g. `listEntry ~education java`
+* *Load Template*: `loadtemplate FILEPATH` +
+e.g. `loadtemplate google.txt`
 * *Select* : `select INDEX` +
 e.g.`select 2`
-* *History* : `history`
-* *Tag Status*: `tag status`
 * *Tag List*: `tag ls TAG [MORE_TAGS]` +
 e.g. `tag ls ~work #java`
 * *Tag Remove*: `tag rm INDEX TAG [MORE_TAGS]` +
 e.g. `tag rm 10 ~work #python`
 * *Tag Retag*: `tag tg INDEX TAG [MORE_TAGS]` +
 e.g. `tag rt 10 ~project #web`
-* *Load Template*: `loadtemplate FILEPATH` +
-e.g. `loadtemplate google.txt`
-* *Generate Resume* : `make FILENAME`
+* *Tag Status*: `tag status`
+* *View Soc Awards* : `fetch-awards` or `fetch-awards INDEX`
