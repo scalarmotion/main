@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -20,6 +21,7 @@ import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -33,6 +35,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Person> filteredPersons;
     private final Awareness awareness;
     private Template loadedTemplate;
+    private Resume lastGeneratedResume;
     private final VersionedEntryBook versionedEntryBook;
     private final FilteredList<ResumeEntry> filteredEntries;
 
@@ -224,6 +227,19 @@ public class ModelManager extends ComponentManager implements Model {
     public void handleTemplateLoadedEvent(TemplateLoadedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template loaded"));
         loadedTemplate = event.getTemplate();
+    }
+
+    //=========== Resume generation =======================================================================
+    public void generateResume() {
+        lastGeneratedResume = new Resume(this);
+    }
+
+    public Optional<Resume> getLastResume() {
+        return Optional.ofNullable(lastGeneratedResume);
+    }
+
+    public void saveLastResume(Path filepath) {
+        // TODO: link with MarkdownResumeStorage when done
     }
 
 }

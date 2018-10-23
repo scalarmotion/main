@@ -1,12 +1,14 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.Optional;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.resume.Resume;
 
 /**
  * The API of the Model component.
@@ -112,6 +114,21 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    /**
+     * Generates a resume using the current EntryBook and Template.
+     */
+    void generateResume();
+
+    /**
+     * Fetches the last Resume generated (if any).
+     */
+    Optional<Resume> getLastResume();
+
+    /**
+     * Saves the last Resume generated to the specified filepath.
+     */
+    void saveLastResume(Path filepath);
 
     /**
      * Returns the name of an Event that possibly matches a given expression.

@@ -14,18 +14,14 @@ import seedu.address.model.template.TemplateSection;
  * as well as ResumeSections comprising ResumeEntries as specified by the Template.
  */
 public class Resume {
-    // Attributes
-    public final String name;
-
     // Data
     private final Model model;
     private final Template template;
     //private final ResumeHeader resumeHeader;
     private final List<ResumeSection> resumeSectionList;
 
-    public Resume(String name, Model model) {
-        requireAllNonNull(name, model);
-        this.name = name;
+    public Resume(Model model) {
+        requireAllNonNull(model);
         this.model = model;
 
         // TODO: Use the actual template loaded in the model
@@ -85,7 +81,6 @@ public class Resume {
 
         // state check
         Resume other = (Resume) obj;
-        return model.equals(other.model)
-                && name.equals(other.name);
+        return model.equals(other.model);
     }
 }

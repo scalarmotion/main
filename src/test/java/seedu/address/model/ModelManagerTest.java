@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
@@ -17,6 +18,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.person.NameContainsKeywordsPredicate;
+import seedu.address.model.resume.Resume;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EntryBookBuilder;
 
@@ -65,6 +67,15 @@ public class ModelManagerTest {
     public void getFilteredEntryList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);
         modelManager.getFilteredEntryList().remove(0);
+    }
+
+    @Test
+    public void getAndGenerateResume() {
+        Model testResumeModel = new ModelManager();
+        assertFalse(testResumeModel.getLastResume().isPresent());
+        testResumeModel.generateResume();
+        Resume actual = testResumeModel.getLastResume().orElseThrow(AssertionError::new);
+        assertEquals(actual, new Resume(testResumeModel));
     }
 
     @Test

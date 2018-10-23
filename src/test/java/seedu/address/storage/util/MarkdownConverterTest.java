@@ -175,7 +175,7 @@ public class MarkdownConverterTest {
             testSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
         }
         assertEquals(toMarkdown(testSectionList),
-                toMarkdown(new Resume("test resume", new ModelManager())));
+                toMarkdown(new Resume(new ModelManager())));
 
         // TODO: implement test for resume with actual filtered entries
     }
