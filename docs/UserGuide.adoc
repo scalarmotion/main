@@ -253,12 +253,13 @@ Format: `fetch-awards` or `fetch-awards INDEX`
 The latter format adds the specified award as a resume Entry.
 
 [[tags]]
-=== Managing tag related functions
+=== Managing Tags
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
 
 ==== Viewing currently active tags: `tag status`
 
-Lists all the tags currently active, and which will be included in the generated resume. +
+Lists all the tags currently active, and which will be included in the generated resume. This will effectively list out all the tags active in the current loaded template.
+
 Format: `tag status` lists all the corresponding tags and categories that will appear in the resume.
 
 ==== Listing entries under specific tags: `tag list` or `tag ls`
@@ -266,6 +267,7 @@ Format: `tag status` lists all the corresponding tags and categories that will a
 List all entries under specific tags (space separated).
 
 By default, if a tag is not given, all the tags will be displayed. +
+
 Format: `tag ls` list all the tags and the relevant entries for each tag.
 
 Format: `tag ls ~work ~projects #java` list all the `~work` and `~project` entries tagged with `#java`
