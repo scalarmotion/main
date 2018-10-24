@@ -116,6 +116,11 @@ public interface Model {
     void commitAddressBook();
 
     /**
+     * Saves the current entry book state for undo/redo.
+     */
+    void commitEntryBook();
+
+    /**
      * Generates a resume using the current EntryBook and Template.
      */
     void generateResume();

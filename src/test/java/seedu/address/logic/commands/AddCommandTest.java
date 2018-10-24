@@ -189,6 +189,9 @@ public class AddCommandTest {
         }
 
         @Override
+        public void commitEntryBook() {
+            throw new AssertionError("This method should not be called.");
+        }
         public void saveLastResume(Path filepath) {
             throw new AssertionError("This method should not be called.");
         }
@@ -249,6 +252,11 @@ public class AddCommandTest {
         @Override
         public void commitAddressBook() {
             // called by {@code AddCommand#execute()}
+        }
+
+        @Override
+        public void commitEntryBook() {
+            // called by {@code AddEntryCommand#execute()}
         }
 
         @Override

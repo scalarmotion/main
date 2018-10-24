@@ -201,6 +201,11 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook.commit();
     }
 
+    @Override
+    public void commitEntryBook() {
+        versionedEntryBook.commit();
+    }
+
     //=========== Awareness accessors =======================================================================
     @Override
     public String getPossibleEventName(String expression) {
