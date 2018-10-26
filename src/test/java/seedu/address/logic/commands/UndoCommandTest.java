@@ -13,6 +13,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.EntryBuilder;
 
 public class UndoCommandTest {
 
@@ -43,5 +44,12 @@ public class UndoCommandTest {
 
         // no undoable states in model
         assertCommandFailure(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_FAILURE);
+    }
+
+    @Test
+    public void addEntryAndCommit() {
+        // add an entry to the model, to be completed when undo command is done
+        CommandTestUtil.addEntry(model, new EntryBuilder().build());
+
     }
 }

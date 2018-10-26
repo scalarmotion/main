@@ -15,12 +15,12 @@ import seedu.address.model.Model;
 import seedu.address.model.entry.ResumeEntry;
 
 /**
- * Adds an entry to the ResuMaker.
+ * Adds an entry to ResuMaker.
  */
 public class AddEntryCommand extends Command {
     public static final String COMMAND_WORD = "addEntry";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an entry to the resuMaker "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an entry to ResuMaker "
             + "Parameters: "
             + PREFIX_CATEGORY + "SECTION TYPE "
             + "[" + PREFIX_TAG + "TAG]..."
@@ -34,8 +34,8 @@ public class AddEntryCommand extends Command {
             + PREFIX_SUBHEADER + "Java Programmer intern "
             + PREFIX_DURATION + "May 2010 - Aug 2010 ";
 
-    public static final String MESSAGE_SUCCESS = "New ResumeEntry added for ResuMaker: %1$s";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This entry already exists in the resuMaker";
+    public static final String MESSAGE_SUCCESS = "New entry added: %1$s";
+    public static final String MESSAGE_DUPLICATE_ENTRY = "This entry already exists";
 
     private final ResumeEntry toAdd;
 
@@ -50,13 +50,12 @@ public class AddEntryCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        // TODO: interaction with model to be completed at later stage
-        /*if (model.hasEntry(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
+        if (model.hasEntry(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_ENTRY);
         }
 
-        model.addPerson(toAdd);
-        model.commitAddressBook(); */
+        model.addEntry(toAdd);
+        model.commitEntryBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

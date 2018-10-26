@@ -21,6 +21,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
@@ -160,6 +161,14 @@ public class CommandTestUtil {
         Person firstPerson = model.getFilteredPersonList().get(0);
         model.deletePerson(firstPerson);
         model.commitAddressBook();
+    }
+
+    /**
+     * adds an entry to a given model and commit the newly added entry.
+     */
+    public static void addEntry(Model model, ResumeEntry entry) {
+        model.addEntry(entry);
+        model.commitEntryBook();
     }
 
 }
