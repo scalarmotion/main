@@ -65,4 +65,20 @@ public class StringUtil {
             return false;
         }
     }
+
+    /**
+     * Returns true iff {@code s} is an empty string.
+     */
+    public static boolean isEmptyString(String s) {
+        requireNonNull(s);
+        return s.equals("");
+    }
+
+    /**
+     * Returns true iff {@code s} is only whitespace.
+     */
+    public static boolean isOnlyWhiteSpace(String s) {
+        requireNonNull(s);
+        return isEmptyString(s.trim());
+    }
 }
