@@ -25,7 +25,6 @@ import seedu.address.testutil.EntryBookBuilder;
 public class ModelManagerTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
     private ModelManager modelManager = new ModelManager();
 
     @Test
@@ -70,6 +69,11 @@ public class ModelManagerTest {
     }
 
     @Test
+    public void getFullEntryList_returnsEmptyList() {
+        assertTrue(modelManager.getFullEntryList().size() == 0);
+    }
+
+    @Test
     public void getAndGenerateResume() {
         Model testResumeModel = new ModelManager();
         assertFalse(testResumeModel.getLastResume().isPresent());
@@ -111,8 +115,6 @@ public class ModelManagerTest {
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
         modelManager.updateFilteredEntryList(PREDICATE_SHOW_ALL_ENTRIES);
-
-
 
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();

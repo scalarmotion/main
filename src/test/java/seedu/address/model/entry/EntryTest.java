@@ -72,12 +72,12 @@ public class EntryTest {
 
         // test toString() of a majorEntry
         assertTrue(WORK_FACEBOOK.toString()
-                .equals(" Category: work Title: Facebook SubHeader: software engineering intern"
-                        + " Duration: 2010 - 2013 Tags: [java]"));
+                .equals(" Category: ~work Title: Facebook SubHeader: software engineering intern"
+                        + " Duration: 2010 - 2013 Tags: #java"));
 
         // test toString of a minorEntry which does not contain entryInfo
         assertTrue(TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DESC.toString()
-                .equals(" Category: Awards Title:  SubHeader:  Duration:  Tags: "));
+                .equals(" Category: ~awards Title:  SubHeader:  Duration:  Tags: "));
     }
 
 

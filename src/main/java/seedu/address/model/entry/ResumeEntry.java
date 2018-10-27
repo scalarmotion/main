@@ -109,7 +109,7 @@ public class ResumeEntry implements Taggable {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Category: ")
-                .append(category.cateName)
+                .append(category)
                 .append(entryInfo)
                 .append(" Tags: ");
         getTags().forEach(builder::append);

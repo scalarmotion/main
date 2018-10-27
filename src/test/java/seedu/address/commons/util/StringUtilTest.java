@@ -17,6 +17,12 @@ public class StringUtilTest {
     @Rule
     public ExpectedException thrown = ExpectedException.none();
 
+    @Test
+    public void isOnlyWhitespace() {
+        assertTrue(StringUtil.isOnlyWhiteSpace(" "));
+        assertFalse(StringUtil.isOnlyWhiteSpace("test"));
+    }
+
     //---------------- Tests for isUnsignedPositiveInteger --------------------------------------
 
     @Test

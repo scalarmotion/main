@@ -1,6 +1,5 @@
 package seedu.address.model.category;
 
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
@@ -23,47 +22,27 @@ public class CategoryManagerTest {
     private CategoryManager categoryManager = new CategoryManager();
 
     @Test
-    public void getList_modifyList_throwsUnsupportedOperationException() {
-        thrown.expect(UnsupportedOperationException.class);
-        categoryManager.getList().remove(0);
-    }
+    public void mkPredicate_working() {
+        ResumeEntry[] entries = { NUS_EDUCATION, WORK_FACEBOOK };
+        categoryManager.setList(Arrays.asList(entries));
 
-    @Test
-    public void equals() {
-        ResumeEntry[] raw = { NUS_EDUCATION, WORK_FACEBOOK };
-        List<ResumeEntry> list = Arrays.asList(raw);
-
-        ResumeEntry[] raw2 = { NUS_EDUCATION };
-        List<ResumeEntry> list2 = Arrays.asList(raw2);
-
-        // same values -> returns true
-        categoryManager = new CategoryManager(list);
-        CategoryManager categoryManagerCopy = new CategoryManager(list);
-        assertTrue(categoryManager.equals(categoryManagerCopy));
-
-        // same object -> returns true
-        assertTrue(categoryManager.equals(categoryManager));
-
-        // null -> returns false
-        assertFalse(categoryManager.equals(null));
-
-        // different types -> returns false
-        assertFalse(categoryManager.equals(5));
-
-        // different addressBook -> returns false
-        assertFalse(categoryManager.equals(new CategoryManager(list2)));
-
-        // filtering actually works
-        categoryManager.setFilter(new ContainsCategoryPredicate("work"));
+        // single category
+        categoryManager.setPredicate(categoryManager.mkPredicate("work"));
         assertTrue(categoryManager.getList().size() == 1);
 
-        // different filteredList -> returns false
-        assertFalse(categoryManager.equals(new CategoryManager(list)));
+        // multiple category, only get first one
+        String[] categories = {"nothing", "work"};
+        List<String> categoriesList = Arrays.asList(categories);
 
-        // resets modelManager to initial state for upcoming tests
-        categoryManager.setFilter(PREDICATE_SHOW_ALL_ENTRIES);
+        categoryManager.setPredicate(categoryManager.mkPredicate(categoriesList));
+        assertTrue(categoryManager.getList().size() == 0);
 
-        // similarly filtered -> returns true
-        assertTrue(categoryManager.equals(new CategoryManager(list)));
+        // add on to multiple tags
+        categoryManager.setPredicate(categoryManager.mkPredicate(PREDICATE_SHOW_ALL_ENTRIES, Arrays.asList("work")));
+        assertTrue(categoryManager.getList().size() == 1);
+
+        // add on to existing predicate
+        categoryManager.setPredicate(categoryManager.mkPredicate((ResumeEntry entry) -> false, "work"));
+        assertTrue(categoryManager.getList().size() == 0);
     }
 }
