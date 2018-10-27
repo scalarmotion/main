@@ -29,6 +29,31 @@ public class TagManagerTest {
     }
 
     @Test
+    public void mkPredicate_working() {
+        ResumeEntry[] entries = { NUS_EDUCATION, WORK_FACEBOOK };
+        tagManager.setList(Arrays.asList(entries));
+
+        // single tag
+        tagManager.setPredicate(tagManager.mkPredicate("java"));
+        assertTrue(tagManager.getList().size() == 1);
+
+        // multiple tag
+        String[] tags = {"java", "machinelearning"};
+        List<String> tagList = Arrays.asList(tags);
+
+        tagManager.setPredicate(tagManager.mkPredicate(tagList));
+        assertTrue(tagManager.getList().size() == 2);
+
+        // add on to multiple tags
+        tagManager.setPredicate(tagManager.mkPredicate(PREDICATE_SHOW_ALL_ENTRIES, tagList));
+        assertTrue(tagManager.getList().size() == 2);
+
+        // add on to existing predicate
+        tagManager.setPredicate(tagManager.mkPredicate((ResumeEntry entry) -> false, "java"));
+        assertTrue(tagManager.getList().size() == 0);
+    }
+
+    @Test
     public void equals() {
         ResumeEntry[] originalEntries = { NUS_EDUCATION, WORK_FACEBOOK };
         List<ResumeEntry> originalList = Arrays.asList(originalEntries);
@@ -40,6 +65,10 @@ public class TagManagerTest {
         tagManager = new TagManager(originalList);
         TagManager tagManagerCopy = new TagManager(originalList);
         assertTrue(tagManager.equals(tagManagerCopy));
+
+        // set list, returns list is equals
+        tagManager.setList(originalList);
+        assertTrue(tagManager.getList().equals(originalList));
 
         // same object -> returns true
         assertTrue(tagManager.equals(tagManager));
@@ -54,14 +83,14 @@ public class TagManagerTest {
         assertFalse(tagManager.equals(new TagManager(alternativeList)));
 
         // filteredList actually works
-        tagManager.setFilter(new ContainsTagsPredicate("java"));
+        tagManager.setPredicate(new ContainsTagsPredicate("java"));
         assertTrue(tagManager.getList().size() == 1);
 
         // different filteredList -> returns false
         assertFalse(tagManager.equals(new TagManager(originalList)));
 
         // resets modelManager to initial state for upcoming tests
-        tagManager.setFilter(PREDICATE_SHOW_ALL_ENTRIES);
+        tagManager.setPredicate(PREDICATE_SHOW_ALL_ENTRIES);
 
         // similarly filtered -> returns true
         assertTrue(tagManager.equals(new TagManager(originalList)));
