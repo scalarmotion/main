@@ -140,4 +140,10 @@ public interface Model {
      * I have added it here to ensure a user testable feature for V1.2 submission.
      */
     String getPossibleEventName(String expression);
+
+    /**
+     * Returns a pre-filled ResumeEntry (in an Optional) for the given possibleEventName, or an empty Optional
+     * if no matching ResumeEntry is found.
+     */
+    Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName);
 }

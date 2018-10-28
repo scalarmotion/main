@@ -31,7 +31,7 @@ public class Awareness {
     private final TreeSet<String> allFullPhrases;
 
     /** Maps an Event name to a Resume Entry, if any */
-    private TreeMap<String, ResumeEntry> nameToEntryMapppings;
+    private TreeMap<String, ResumeEntry> nameToEntryMapppings = new TreeMap<String, ResumeEntry>();
 
     public Awareness(HashMap<String, String> dictionary, TreeSet<String> allFullPhrases) {
         requireAllNonNull(dictionary, allFullPhrases);
@@ -108,6 +108,14 @@ public class Awareness {
 
     private String[] tokenizeExpression(String expression) {
         return expression.split(SPACE);
+    }
+
+    /**
+     * Returns an Optional containing a ResumeEntry that matches the given possible event name.
+     * Returns an empty Optional if no matching ResumeEntry is found.
+     */
+    public Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName) {
+        return Optional.ofNullable(nameToEntryMapppings.get(possibleEventName));
     }
 
 

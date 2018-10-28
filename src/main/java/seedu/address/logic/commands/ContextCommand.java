@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
@@ -12,12 +13,16 @@ public class ContextCommand extends Command {
 
     public static final String COMMAND_WORD = "nus";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a pre-filled ResumeEntry to ResuMaker's data."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a pre-filled resume entry."
                                                + "Parameters: EXPRESSION [MORE EXPRESSIONS]...\n"
                                                + "Expressions can be slang, partial phrases or full phrases.";
 
-    /* TODO: Utilise Java String placeholders in the MESSAGE_SUCCESS */
     public static final String MESSAGE_SUCCESS = "Created a resume entry for %1s.";
+
+    public static final String MESSAGE_NO_RESUME_ENTRY = "There is no pre-filled resume entry: %1s.";
+
+    public static final String MESSAGE_SUGGESTION = "Please update the XML data so that your slang is recognised,"
+                                                    + "or provide a more specific search expression.";
 
     /**
      * A combination of slang, partial phrases or full phrases entered by the user.
@@ -32,9 +37,16 @@ public class ContextCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(Model model, CommandHistory history) {
+    public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         String possibleEventName = model.getPossibleEventName(expression);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, possibleEventName));
+
+        Command addEntryCommand = model.getContextualResumeEntry(possibleEventName)
+                                       .map(AddEntryCommand::new)
+                                       .orElseThrow(() -> new CommandException(String.format(MESSAGE_NO_RESUME_ENTRY,
+                                               possibleEventName)));
+
+        return addEntryCommand.execute(model, history);
+
     }
 
     @Override
