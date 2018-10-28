@@ -69,8 +69,17 @@ public class ModelManagerTest {
     }
 
     @Test
-    public void getFullEntryList_returnsEmptyList() {
-        assertTrue(modelManager.getFullEntryList().size() == 0);
+    public void getFilteredEntryList_filtered_predicateWorks() {
+        modelManager = new ModelManager();
+
+        modelManager.addEntry(NUS_EDUCATION);
+        modelManager.addEntry(WORK_FACEBOOK);
+
+        // mkPredicate works for single category and tag
+        assertTrue(modelManager.getFilteredEntryList("work", Arrays.asList("java")).size() == 1);
+
+        // mkPredicate works for single category and tag, cannot find
+        assertTrue(modelManager.getFilteredEntryList("education", Arrays.asList("java")).size() == 0);
     }
 
     @Test

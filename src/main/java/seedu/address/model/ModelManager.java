@@ -22,9 +22,11 @@ import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.model.category.CategoryManager;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
+import seedu.address.model.tag.TagManager;
 import seedu.address.model.template.Template;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -42,6 +44,10 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedEntryBook versionedEntryBook;
     private final FilteredList<ResumeEntry> filteredEntries;
 
+    // Tag and Category managers
+    private final TagManager tagManager;
+    private final CategoryManager categoryManager;
+
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -57,6 +63,9 @@ public class ModelManager extends ComponentManager implements Model {
         awareness = SampleDataUtil.getSampleAwareness();
         versionedEntryBook = new VersionedEntryBook(entryBook);
         filteredEntries = new FilteredList<>(versionedEntryBook.getEntryList());
+
+        tagManager = new TagManager();
+        categoryManager = new CategoryManager();
     }
 
     public ModelManager() {
@@ -140,29 +149,44 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredPersons);
     }
 
-    /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
-     * {@code versionedEntryBook}
-     */
-    @Override
-    public ObservableList<ResumeEntry> getFilteredEntryList() {
-        return FXCollections.unmodifiableObservableList(filteredEntries);
-    }
-
     @Override
     public void updateFilteredPersonList(Predicate<Person> predicate) {
         requireNonNull(predicate);
         filteredPersons.setPredicate(predicate);
     }
 
+    /**
+     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * {@code versionedEntryBook}, if arguments given, will filter full list instead.
+     */
+    @Override
+    public ObservableList<ResumeEntry> getFilteredEntryList() {
+        return FXCollections.unmodifiableObservableList(filteredEntries);
+    }
+
+    public ObservableList<ResumeEntry> getFilteredEntryList(Predicate<ResumeEntry> predicate) {
+        FilteredList<ResumeEntry> entries = getFullEntryList();
+        entries.setPredicate(predicate);
+
+        return FXCollections.unmodifiableObservableList(entries);
+    }
+
+    public ObservableList<ResumeEntry> getFilteredEntryList(String category, List<String> tags) {
+        return getFilteredEntryList(mkPredicate(category, tags));
+    }
+
+    private FilteredList<ResumeEntry> getFullEntryList() {
+        return new FilteredList(versionedEntryBook.getEntryList());
+    }
+
+    private Predicate<ResumeEntry> mkPredicate(String category, List<String> tags) {
+        return tagManager.mkPredicate(categoryManager.mkPredicate(category), tags);
+    }
+
     @Override
     public void updateFilteredEntryList(Predicate<ResumeEntry> predicate) {
         requireNonNull(predicate);
         filteredEntries.setPredicate(predicate);
-    }
-
-    public List<ResumeEntry> getFullEntryList() {
-        return versionedEntryBook.getEntryList();
     }
 
     //=========== Template ==================================================================================
