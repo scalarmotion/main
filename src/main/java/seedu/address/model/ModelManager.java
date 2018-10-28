@@ -242,6 +242,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName) {
+        return awareness.getContextualResumeEntry(possibleEventName);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         // short circuit if same object
         if (obj == this) {

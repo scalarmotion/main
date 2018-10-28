@@ -211,6 +211,11 @@ public class AddEntryCommandTest {
         public String getPossibleEventName(String expression) {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName) {
+            throw new AssertionError("This method should not be called.");
+        }
     }
 
     /**
