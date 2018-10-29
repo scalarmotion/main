@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
+import seedu.address.model.template.Template;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandTest {
@@ -203,6 +204,11 @@ public class AddCommandTest {
 
         @Override
         public Optional<Resume> getLastResume() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Optional<Template> getLoadedTemplate() {
             throw new AssertionError("This method should not be called.");
         }
 

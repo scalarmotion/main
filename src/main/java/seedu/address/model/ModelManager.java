@@ -196,6 +196,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TemplateLoadRequestedEvent(filepath));
     }
 
+    @Override
     public Optional<Template> getLoadedTemplate() {
         return loadedTemplate;
         //will be up to the Generation part to raise NewResultAvailableEvent to say no template loaded

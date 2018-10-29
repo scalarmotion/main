@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
+import seedu.address.model.template.Template;
 
 /**
  * The API of the Model component.
@@ -89,6 +90,11 @@ public interface Model {
      * Loads a template from the specified filepath.
      */
     void loadTemplate(Path filepath);
+
+    /**
+     * Returns the currently loaded template.
+     */
+    Optional<Template> getLoadedTemplate();
     /**
      * Returns true if the model has previous address book states to restore.
      */
