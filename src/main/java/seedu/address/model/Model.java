@@ -68,6 +68,14 @@ public interface Model {
      */
     void updatePerson(Person target, Person editedPerson);
 
+    /**
+     * Replaces the given entry {@code target} with {@code editedEntry}.
+     * {@code target} must exist in the entry book.
+     * The Entry identity of {@code editedEntry} must not be the same as another existing entry in the address book.
+     */
+    void updateEntry(ResumeEntry target, ResumeEntry editedEntry);
+
+
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<Person> getFilteredPersonList();
 
@@ -84,7 +92,6 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredEntryList(Predicate<ResumeEntry> predicate);
-
 
     /**
      * Loads a template from the specified filepath.

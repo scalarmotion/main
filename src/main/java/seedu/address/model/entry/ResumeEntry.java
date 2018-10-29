@@ -18,10 +18,10 @@ public class ResumeEntry implements Taggable {
     private Category category;
     private EntryInfo entryInfo; // contains either title,subheader and duration of the entry, or none at all
     private Set<Tag> tags = new HashSet<>();
-    private EntryDescription description = new EntryDescription();
+    private EntryDescription description;
 
     /**
-     * Constructs a {@code ResumeEntry}.
+     * Constructs a {@code ResumeEntry} with empty description
      *  @param category A valid category name.
      * @param entryInfo A valid entryInfo.
      * @param tags A set of tags, can be empty.
@@ -32,7 +32,25 @@ public class ResumeEntry implements Taggable {
         this.category = category;
         this.tags.addAll(tags);
         this.entryInfo = entryInfo;
+        this.description = new EntryDescription();
     }
+
+    /**
+     * Constructs a {@code ResumeEntry} with empty description
+     *  @param category A valid category name.
+     * @param entryInfo A valid entryInfo.
+     * @param tags A set of tags, can be empty.
+     *
+     */
+    public ResumeEntry(Category category, EntryInfo entryInfo, Set<Tag> tags, EntryDescription description) {
+        requireAllNonNull(category, tags, entryInfo);
+        this.category = category;
+        this.tags.addAll(tags);
+        this.entryInfo = entryInfo;
+        this.description = description;
+    }
+
+
 
     /**
      * @return true iff the entry is a minor entry := any entry without title, subHeader and duration.
@@ -59,6 +77,24 @@ public class ResumeEntry implements Taggable {
 
     public EntryDescription getDescription() {
         return description;
+    }
+
+    /**
+     * @return duplicated ResumeEntry
+     */
+    public ResumeEntry duplicate() {
+        return new ResumeEntry(category, entryInfo, tags, description);
+    }
+
+    /**
+     *
+     * @param bullet bullet description to add
+     * @return another instance of ResumeEntry with added bullet
+     */
+    public ResumeEntry getEntryWithAddedBullet(String bullet) {
+        ResumeEntry editedEntry = duplicate();
+        editedEntry.getDescription().addBullet(bullet);
+        return duplicate();
     }
 
     /**

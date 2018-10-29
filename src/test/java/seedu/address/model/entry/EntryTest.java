@@ -80,5 +80,17 @@ public class EntryTest {
                 .equals(" Category: ~awards Title:  SubHeader:  Duration:  Tags: "));
     }
 
+    @Test
+    public void duplicateMethod() {
+        assertTrue(WORK_FACEBOOK.duplicate().isSameEntry(WORK_FACEBOOK));
+    }
+
+    @Test
+    public void testEntryWithAddedBullet() {
+        ResumeEntry entry = new EntryBuilder().addBulletToDescription("this is a line of description").build();
+        assertTrue(entry.getEntryWithAddedBullet("this is a line of description")
+                .isSameEntry(entry));
+    }
+
 
 }
