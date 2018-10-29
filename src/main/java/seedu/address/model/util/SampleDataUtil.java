@@ -23,6 +23,32 @@ import seedu.address.model.tag.Tag;
  */
 public class SampleDataUtil {
 
+    public static final ResumeEntry MA1101R_TA = new EntryBuilder()
+                                                 .withCategory("work")
+                                                 .withTitle("Teaching Assistant for MA1101R")
+                                                 .withDuration("")
+                                                 .withSubHeader("Tutored an undergraduate linear algebra module")
+                                                 .withTags("teaching", "math")
+                                                 .build();
+
+    public static final ResumeEntry COMP_CLUB_EXCO = new EntryBuilder()
+                                                     .withCategory("nonacademics")
+                                                     .withTitle("Computing Club Executive Committee Member")
+                                                     .withDuration("")
+                                                     .withSubHeader("")
+                                                     .withTags("leadership", "management", "entrepreneurship")
+                                                     .build();
+
+
+    public static final ResumeEntry NUS_CS2103T = new EntryBuilder()
+                                                  .withCategory("education")
+                                                  .withTitle("CS2103T - Software Engineering")
+                                                  .withDuration("")
+                                                  .withSubHeader("Worked on morphing a large legacy codebase into a "
+                                                                 + "new product")
+                                                  .withTags("software_engineering", "java")
+                                                  .build();
+
     private static final String SPACE = " ";
 
     public static Person[] getSamplePersons() {
@@ -96,6 +122,8 @@ public class SampleDataUtil {
         addSlangToFullPhraseMappings(dictionary, allFullPhrases, "financial technology",
                 new String[] {"fintech"});
 
+        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "executive committee", new String[] {"exco"});
+
         addFullPhrase(allFullPhrases, "opportunities");
 
         addFullPhrase(allFullPhrases, "hackathon");
@@ -131,10 +159,17 @@ public class SampleDataUtil {
               .forEach(eachSlang -> dictionary.put(eachSlang, fullPhrase));
     }
 
-    private static void makeEventToEntryMappings(TreeMap<String, ResumeEntry> eventToEntryMappings,
-                                            String eventName, ResumeEntry resumeEntry) {
+    /**
+     * Returns a set of sample mappings between EventNames and pre-filled ResumeEntries
+     */
+    public static TreeMap<String, ResumeEntry> makeNameToEntryMappings() {
 
-        eventToEntryMappings.put(eventName, resumeEntry);
+        TreeMap<String, ResumeEntry> nameToEntryMappings = new TreeMap<String, ResumeEntry>();
+        nameToEntryMappings.put("teaching assistant ma1101r", MA1101R_TA);
+        nameToEntryMappings.put("computing club executive committee", COMP_CLUB_EXCO);
+        nameToEntryMappings.put("cs2103t", NUS_CS2103T);
+
+        return nameToEntryMappings;
     }
 
 }
