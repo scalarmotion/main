@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.EntryBook;
 import seedu.address.model.entry.ResumeEntry;
+import seedu.address.model.util.EntryBuilder;
 
 /**
  * class containing default entries.

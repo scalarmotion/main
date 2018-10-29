@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 import seedu.address.testutil.TypicalEntrys;
 
 public class EntryTest {
@@ -78,6 +78,18 @@ public class EntryTest {
         // test toString of a minorEntry which does not contain entryInfo
         assertTrue(TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DESC.toString()
                 .equals(" Category: ~awards Title:  SubHeader:  Duration:  Tags: "));
+    }
+
+    @Test
+    public void duplicateMethod() {
+        assertTrue(WORK_FACEBOOK.duplicate().isSameEntry(WORK_FACEBOOK));
+    }
+
+    @Test
+    public void testEntryWithAddedBullet() {
+        ResumeEntry entry = new EntryBuilder().addBulletToDescription("this is a line of description").build();
+        assertTrue(entry.getEntryWithAddedBullet("this is a line of description")
+                .isSameEntry(entry));
     }
 
 

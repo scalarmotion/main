@@ -5,7 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 
 public class ContainsCategoryPredicateTest {
 

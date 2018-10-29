@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import guitests.guihandles.EntryCardHandle;
 import seedu.address.model.entry.ResumeEntry;
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 
 public class EntryCardTest extends GuiUnitTest {
     @Test

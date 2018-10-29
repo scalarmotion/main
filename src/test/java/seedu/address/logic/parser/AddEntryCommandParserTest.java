@@ -25,7 +25,7 @@ import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.tag.Tag;
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 
 public class AddEntryCommandParserTest {
 

@@ -138,6 +138,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void updateEntry(ResumeEntry target, ResumeEntry editedEntry) {
+        requireAllNonNull(target, editedEntry);
+
+        versionedEntryBook.updateEntry(target, editedEntry);
+        indicateAddressBookChanged();
+    }
     //=========== Filtered Person List Accessors =============================================================
 
     /**
@@ -196,6 +203,7 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new TemplateLoadRequestedEvent(filepath));
     }
 
+    @Override
     public Optional<Template> getLoadedTemplate() {
         return loadedTemplate;
         //will be up to the Generation part to raise NewResultAvailableEvent to say no template loaded

@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 
 /**
  * a class to test EntryInfo
