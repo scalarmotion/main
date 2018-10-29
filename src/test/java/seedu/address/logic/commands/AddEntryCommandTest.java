@@ -27,7 +27,7 @@ import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddEntryCommandTest {

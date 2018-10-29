@@ -25,8 +25,8 @@ import javafx.collections.ObservableList;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.entry.exceptions.DuplicateEntryException;
 import seedu.address.model.person.Person;
+import seedu.address.model.util.EntryBuilder;
 import seedu.address.testutil.EntryBookBuilder;
-import seedu.address.testutil.EntryBuilder;
 import seedu.address.testutil.PersonBuilder;
 
 public class EntryBookTest {

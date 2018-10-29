@@ -9,7 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.testutil.EntryBuilder;
+import seedu.address.model.util.EntryBuilder;
 import seedu.address.testutil.TypicalEntrys;
 
 public class EntryTest {
