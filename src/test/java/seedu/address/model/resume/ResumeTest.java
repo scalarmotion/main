@@ -12,12 +12,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class ResumeTest {
     @Rule
@@ -25,7 +25,7 @@ public class ResumeTest {
 
     @Test
     public void constructorTest() {
-        Model testModel = new ModelManager();
+        Model testModel = new TypicalResumeModel();
         Resume resume = new Resume(testModel);
 
         // default template, no entries
@@ -61,7 +61,7 @@ public class ResumeTest {
 
 
         // Resume testing
-        Resume testResumeOne = new Resume(new ModelManager());
+        Resume testResumeOne = new Resume(new TypicalResumeModel());
 
         // Same object check
         assertEquals(testResumeOne, testResumeOne);
@@ -70,7 +70,7 @@ public class ResumeTest {
         assertNotEquals(testResumeOne, new ArrayList<>());
 
         // Same state
-        Resume testResumeTwo = new Resume(new ModelManager());
+        Resume testResumeTwo = new Resume(new TypicalResumeModel());
         assertEquals(testResumeOne, testResumeTwo);
 
         // Different state

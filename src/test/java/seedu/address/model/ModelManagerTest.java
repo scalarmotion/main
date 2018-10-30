@@ -22,6 +22,7 @@ import seedu.address.model.person.NameContainsKeywordsPredicate;
 import seedu.address.model.resume.Resume;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.EntryBookBuilder;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class ModelManagerTest {
     @Rule
@@ -109,7 +110,7 @@ public class ModelManagerTest {
 
     @Test
     public void getAndGenerateResume() {
-        Model testResumeModel = new ModelManager();
+        Model testResumeModel = new TypicalResumeModel();
         assertFalse(testResumeModel.getLastResume().isPresent());
         testResumeModel.generateResume();
         Resume actual = testResumeModel.getLastResume().orElseThrow(AssertionError::new);

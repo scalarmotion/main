@@ -18,6 +18,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.EntryBookChangedEvent;
+import seedu.address.commons.events.model.ResumeSaveEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
@@ -298,7 +299,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public void saveLastResume(Path filepath) {
-        // TODO: link with MarkdownResumeStorage when done
+        raise(new ResumeSaveEvent(lastGeneratedResume, filepath));
     }
 
     //=========== Listener for template loading =============================================================

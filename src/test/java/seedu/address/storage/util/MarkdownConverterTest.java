@@ -11,7 +11,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import seedu.address.model.ModelManager;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
@@ -20,6 +19,7 @@ import seedu.address.model.resume.Resume;
 import seedu.address.model.resume.ResumeSection;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class MarkdownConverterTest {
     @Rule
@@ -30,7 +30,8 @@ public class MarkdownConverterTest {
     @Test
     public void entryInfoToMarkdown() {
         // All elements present
-        assertEquals("###### entry title (_entry duration_)" + System.lineSeparator()
+        assertEquals("##### entry title (_entry duration_)" + System.lineSeparator()
+                        + System.lineSeparator()
                         + "entry subheader" + System.lineSeparator()
                         + System.lineSeparator(),
                 toMarkdown(testInfo));
@@ -83,7 +84,9 @@ public class MarkdownConverterTest {
     @Test
     public void resumeSectionToMarkdown() {
         // No entries
-        assertEquals("##### test section" + System.lineSeparator(),
+        assertEquals("test section" + System.lineSeparator()
+                        + "------------" + System.lineSeparator()
+                        + System.lineSeparator(),
                 MarkdownConverter.toMarkdown(new ResumeSection("test section", new ArrayList<>())));
 
         // Some entries with no description
@@ -94,7 +97,9 @@ public class MarkdownConverterTest {
         testEntryList.add(testEntryOne);
         testEntryList.add(testEntryTwo);
         ResumeSection testSection = new ResumeSection("test section", testEntryList);
-        assertEquals("##### test section" + System.lineSeparator()
+        assertEquals("test section" + System.lineSeparator()
+                        + "------------" + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testEntryOne)
                         + toMarkdown(testEntryTwo),
                 toMarkdown(testSection));
@@ -103,7 +108,9 @@ public class MarkdownConverterTest {
         testEntryOne.getDescription().addBullet("first bullet");
         testEntryTwo.getDescription().addBullet("second bullet");
         testEntryTwo.getDescription().addBullet("third bullet");
-        assertEquals("##### test section" + System.lineSeparator()
+        assertEquals("test section" + System.lineSeparator()
+                        + "------------" + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testEntryOne)
                         + toMarkdown(testEntryTwo),
                 toMarkdown(testSection));
@@ -113,7 +120,9 @@ public class MarkdownConverterTest {
     public void resumeSectionListToMarkdown() {
         // No sections
         assertEquals(System.lineSeparator()
-                        + "---" + System.lineSeparator(),
+                        + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
                 toMarkdown(new ArrayList<>()));
 
         // Some empty sections
@@ -124,10 +133,16 @@ public class MarkdownConverterTest {
         testSectionList.add(testSectionTwo);
         assertEquals(System.lineSeparator()
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionOne)
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionTwo)
-                        + "---" + System.lineSeparator(),
+                        + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
                 toMarkdown(testSectionList));
 
         // Mixed empty sections and sections with assorted content
@@ -156,14 +171,24 @@ public class MarkdownConverterTest {
 
         assertEquals(System.lineSeparator()
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionOne)
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionTwo)
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionEmptyEntry)
                         + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator()
                         + toMarkdown(testSectionMixedEntries)
-                        + "---" + System.lineSeparator(),
+                        + "---" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
                 toMarkdown(testSectionList));
     }
 
@@ -175,7 +200,7 @@ public class MarkdownConverterTest {
             testSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
         }
         assertEquals(toMarkdown(testSectionList),
-                toMarkdown(new Resume(new ModelManager())));
+                toMarkdown(new Resume(new TypicalResumeModel())));
 
         // TODO: implement test for resume with actual filtered entries
     }
