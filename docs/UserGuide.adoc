@@ -28,7 +28,7 @@ Unlike most resume generation webapps, ResuMaker tailors your resume to fit the 
 It can also pick up contextual awareness about your world - with out-of-the-box support for the National University of Singapore's School of Computing. +
 Interested? Jump to the <<Quick Start>> to get started. +
 
-With ResuMaker, let your skills document themselves.
+With ResuMaker, __let your skills document themselves.__
 
 == Quick Start
 To get started with using ResuMaker:
@@ -42,16 +42,16 @@ To get started with using ResuMaker:
 
 image::Ui.png[width="790"]
 
-_ Fig1. A typical user's screen, immediately after application startup. _
+_Fig1. A typical user's screen, immediately after application startup._
 
 [start=5]
 .  Type your command in the command box and press kbd:[Enter] to execute it. +
 e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Try out the following examples:
 
-* *`listEntry* ~work #java`: Lists all the Work related Entries tagged with `java`
-* **`addEntry`**`~work` `#java t/The Source Enterprise s/Data Science Intern d/ May 2010 - Aug 2010`: Adds a new Entry classified under Work Experiences, with the given title, subheader and duration
-* **`deleteEntry`**`3` : deletes the 3rd Entry shown in the current Entry list
+* `addEntry `~work` `#java t/The Source Enterprise s/Data Science Intern d/ May 2010 - Dec 2010` Adds a new entry, classified under `work`, with the given title, subheader and duration.
+* `addEntry` `~project` `#java #entrepreneurship t/InnovFest Unbound Hackathon s/Best Fintech Hack d/ Jan 2011 - Feb 2011`
+* `tag ls` `#java`
 * *`exit`* : exits the app
 
 .  Refer to <<Features>> for the full details of all commands.
@@ -92,7 +92,7 @@ Examples:
 * `addEntry ~awards #java`
 
 
-=== Listing entries : `listEntry` +
+=== Listing entries : `listEntry` [Coming in v1.4] +
 Lists the entries in ResuMaker, filtered according to their sections and tags.
 Format: `listEntry [~SECTION] [#TAG]...`
 
@@ -137,7 +137,7 @@ Examples:
 * `selectEntry 0`
 
 
-=== Editing an entry : `editEntry`
+=== Editing an entry : `editEntry` [Coming in v1.4]
 
 Edits non-description fields of an existing entry in ResuMaker, i.e title, sub-header, duration, and tags of an entry. +
 Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
@@ -157,7 +157,7 @@ Example:
 edits the entry at index 1 by replacing its title as R company and replace all its tags by JAVA.
 
 
-=== Editing a bullet point: `editBullet`
+=== Editing a bullet point: `editBullet` [Coming in v1.4]
 
 Edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
 Format: `editBullet ENTRYINDEX BULLETINDEX EDITEDCONTENT`
@@ -177,7 +177,7 @@ Example:
 edits the entry at index 1 by replacing its bullet description at index 1 by "implement scalable application for data visualization using java".
 
 
-=== Deleting an entry: `deleteEntry`
+=== Deleting an entry: `deleteEntry` [Coming in v1.4]
 
 Deletes the entry at the specified index. +
 Format: `deleteEntry INDEX`
@@ -198,7 +198,7 @@ Deletes the 2nd entry in ResuMaker.
 Deletes the 1st entry displayed under education section.
 
 
-=== Deleting a bullet: `deleteBullet`
+=== Deleting a bullet: `deleteBullet` [Coming in v1.4]
 
 Deletes the bullet of a particular entry at the specified index.  +
 Format: `deleteBullet ENTRYINDEX BULLETINDEX`
@@ -225,38 +225,36 @@ Deletes the 1st bullet of the 1st entry displayed under education section of Res
 
 
 
-=== Creating a SoC / NUS Event (Project / Work Experience / Skill): `nus`
-Auto-populates a resume Entry based on a matching SoC / NUS Event. +
+=== Creating a Contextual Event (Project / Work Experience / Skill): `nus`
+There are times when we just don't want to manually enter every piece of required information into a computer programme.
+After all, shouldn't some things __just be common knowledge?__
+
+With ResuMaker, you can auto-populate resume Entries if ResuMaker already knows about them!
+We call such Entries __Contextual Events__.
+
 Format: `nus EVENT_NAME`
 
 [TIP]
-The `EVENT_NAME` can be an Event's full name (Mathematics and Computer Science Double Degree Programme), its acronym (math - cs ddp), or even a
-partially matching phrase (math - comp sci double deg prog)
+The `EVENT_NAME` can be a combination of an  Event's **full name** (Mathematics and Computer Science Double Degree Programme), **acronyms** (math - cs ddp), or even
+**partially matching phrases** (math - comp sci double deg prog)
 
 Examples:
 
-* `nus orb` +
-Creates a Project Entry for `Orbital`
-* `nus hack n roll` +
-Creates a Project Entry for `Hack n Roll`
-* `nus ta cs2040` +
-Creates a Work Experience entry for `Teaching Assistant CS2040`
+* `nus cs2103t` +
+Creates a Project Entry for `CS2103T` - A rigorous software engineering module at NUS.
+* `nus ta ma1101r` OR `nus teaching asst ma1101r` +
+Creates a Work Experience Entry for `Teaching Assistant MA1101R`
+* `nus `computing cl exco` +
+Creates a Nonacademics Entry for an Executive Commitee position in the Computing Club.
 
 [NOTE]
-Slang and acronyms must be correctly configured in application data. ResuMaker ships with correct data for commonly used slang and acronyms.
-
-=== Viewing SoC awards: `fetch-awards`
-
-Lists all awards at SoC in a numbered list. +
-Format: `fetch-awards` or `fetch-awards INDEX`
-
-The latter format adds the specified award as a resume Entry.
+Slang and acronyms must be correctly configured in application data. In future releases, ResuMaker will ship with NUS / SOC specific slang and acronyms.
 
 [[tags]]
 === Managing Tags
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
 
-==== Viewing currently active tags: `tag status`
+==== Viewing currently active tags: `tag status` [Coming in v1.4]
 
 Lists all the tags currently active, and which will be included in the generated resume. This will effectively list out all the tags active in the current loaded template.
 
@@ -274,7 +272,7 @@ Format: `tag ls ~work ~projects #java` list all the `~work` and `~project` entri
 
 Entries displayed will be accompanied with their relevant entry id.
 
-==== Add particular tag to entry: `tag add`
+==== Add particular tag to entry: `tag add` [Coming in v1.4]
 
 Add tags (space separated) to particular entry (identified by index).
 
@@ -282,7 +280,7 @@ Duplicated tags will be ignored
 
 Format: `tag add 10 ~work #java` add tag `#java` and category `~work` to entry 10.
 
-==== Remove particular tag from entry: `tag remove` or `tag rm`
+==== Remove particular tag from entry: `tag remove` or `tag rm` [Coming in v1.4]
 
 Remove tags (space separated) from a particular entry (identified by index).
 
@@ -292,7 +290,7 @@ Format: `tag rm 1 ~work #java` remove category `~work` and tag `#java` from entr
 
 Format: `tag rm 10` remove all tags and categories from entry 10.
 
-==== Retagging a particular entry: `tag retag` or `tag rt`
+==== Retagging a particular entry: `tag retag` or `tag rt` [Coming in v1.4]
 
 Remove all current tags and replace it with current tags (space separated).
 
@@ -366,7 +364,7 @@ Examples:
 Generates a file named sep.md, containing a Resume which lists entries as designated by the currently loaded template.
 
 
-=== Clearing all entries : `clear`
+=== Clearing all entries : `clear` [Coming in v1.4]
 
 Clears all entries from ResuMaker. +
 Format: `clear`
@@ -376,7 +374,7 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
-=== Saving the data
+=== Saving the data [Coming in v1.4]
 
 ResuMaker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
@@ -428,4 +426,3 @@ e.g. `tag rm 10 ~work #python`
 * *Tag Retag*: `tag tg INDEX TAG [MORE_TAGS]` +
 e.g. `tag rt 10 ~project #web`
 * *Tag Status*: `tag status`
-* *View Soc Awards* : `fetch-awards` or `fetch-awards INDEX`
