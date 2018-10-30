@@ -3,7 +3,7 @@ package seedu.address.ui;
 import static org.junit.Assert.assertEquals;
 import static seedu.address.testutil.EventsUtil.postNow;
 import static seedu.address.testutil.TypicalEntrys.getTypicalEntries;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_ENTRY;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardDisplaysEntry;
 import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 
@@ -16,14 +16,15 @@ import guitests.guihandles.EntryCardHandle;
 import guitests.guihandles.EntryListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToEntryListRequestEvent;
 import seedu.address.model.entry.ResumeEntry;
 
 public class EntryListPanelTest extends GuiUnitTest {
     private static final ObservableList<ResumeEntry> TYPICAL_ENTRIES =
             FXCollections.observableList(getTypicalEntries());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_PERSON);
+    private static final JumpToEntryListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToEntryListRequestEvent(INDEX_SECOND_ENTRY);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
@@ -46,12 +47,12 @@ public class EntryListPanelTest extends GuiUnitTest {
     }
 
     @Test
-    public void handleJumpToListRequestEvent() {
+    public void handleJumpToEntryListRequestEvent() {
         initUi(TYPICAL_ENTRIES);
         postNow(JUMP_TO_SECOND_EVENT);
         guiRobot.pauseForHuman();
 
-        EntryCardHandle expectedEntry = entryListPanelHandle.getEntryCardHandle(INDEX_SECOND_PERSON.getZeroBased());
+        EntryCardHandle expectedEntry = entryListPanelHandle.getEntryCardHandle(INDEX_SECOND_ENTRY.getZeroBased());
         EntryCardHandle selectedEntry = entryListPanelHandle.getHandleToSelectedCard();
         assertCardEquals(expectedEntry, selectedEntry);
     }

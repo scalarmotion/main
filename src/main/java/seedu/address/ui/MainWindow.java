@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private ExpandedEntryPanel expandedEntryPanel;
 
     private EntryListPanel entryListPanel;
 
@@ -60,6 +61,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane expandedEntryPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -136,6 +140,9 @@ public class MainWindow extends UiPart<Stage> {
 
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+
+        expandedEntryPanel = new ExpandedEntryPanel();
+        expandedEntryPanelPlaceholder.getChildren().add(expandedEntryPanel.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getEntryBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());

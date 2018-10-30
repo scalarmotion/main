@@ -21,7 +21,7 @@ public class EntryBuilder {
     private Category category;
     private EntryInfo entryInfo; // contains title,subheader and duration of the entry
     private Set<Tag> tags = new HashSet<>();
-    private EntryDescription description = new EntryDescription();
+    private EntryDescription description = new EntryDescription(); // empty description by default
 
 
     public EntryBuilder() {
@@ -98,7 +98,7 @@ public class EntryBuilder {
 
 
     public ResumeEntry build() {
-        return new ResumeEntry(category, entryInfo, tags);
+        return new ResumeEntry(category, entryInfo, tags, description);
     }
 
     /**

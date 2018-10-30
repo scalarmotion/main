@@ -11,7 +11,8 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToEntryListRequestEvent;
+import seedu.address.commons.events.ui.UpdateExpandedEntryRequestEvent;
 import seedu.address.model.entry.ResumeEntry;
 
 /**
@@ -33,20 +34,19 @@ public class EntryListPanel extends UiPart<Region> {
     private void setConnections(ObservableList<ResumeEntry> entryList) {
         entryListView.setItems(entryList);
         entryListView.setCellFactory(listView -> new EntryListViewCell());
-        //setEventHandlerForSelectionChangeEvent(); // to be completed when implementing select command
+        setEventHandlerForSelectionChangeEvent();
     }
 
-    /*
-    // to be completed when implementing select command
+
     private void setEventHandlerForSelectionChangeEvent() {
         entryListView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in entry list panel changed to : '" + newValue + "'");
-                        raise(new EntryPanelSelectionChangedEvent(newValue));
+                        raise(new UpdateExpandedEntryRequestEvent(newValue));
                     }
                 });
-    } */
+    }
 
     /**
      * Scrolls to the {@code EntryCard} at the {@code index} and selects it.
@@ -59,7 +59,7 @@ public class EntryListPanel extends UiPart<Region> {
     }
 
     @Subscribe
-    private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
+    private void handleJumpToEntryListRequestEvent(JumpToEntryListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         scrollTo(event.targetIndex);
     }

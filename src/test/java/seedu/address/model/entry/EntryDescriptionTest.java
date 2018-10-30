@@ -1,6 +1,7 @@
 package seedu.address.model.entry;
 
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalEntryDescription.getTypicalEntryDescription;
 
 import org.junit.Test;
 
@@ -10,10 +11,9 @@ import org.junit.Test;
 public class EntryDescriptionTest {
 
     /**
-     *
      * @return a default instance of EntryDescription
      */
-    public EntryDescription createDefualt() {
+    public EntryDescription createDefault() {
         EntryDescription description = new EntryDescription();
         description.addBullet("this is a line of description");
         description.addBullet("this is another line of description");
@@ -21,11 +21,18 @@ public class EntryDescriptionTest {
     }
 
     @Test
-    public void toStringAndEquals() {
-        EntryDescription description = createDefualt();
-        assertTrue(createDefualt().equals(createDefualt()));
-        System.out.println(description);
-        assertTrue(createDefualt().toString()
-                .equals("this is a line of description\nthis is another line of description\n"));
+    public void equals() {
+        EntryDescription description = createDefault();
+        // same bullets
+        assertTrue(createDefault().equals(createDefault()));
+    }
+
+    @Test
+    public void toStringTest() {
+        EntryDescription description = getTypicalEntryDescription();
+        //System.out.println(description);
+
+        assertTrue(createDefault().toString()
+                .equals("1. this is a line of description\n2. this is another line of description\n"));
     }
 }
