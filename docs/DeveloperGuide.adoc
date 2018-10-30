@@ -459,7 +459,32 @@ Work in Progress
 
 ==== Design Choices
 
-Work in Progress
+===== ContextCommand
+The ContextCommand is constructed by passing it a CommandSupplier.
+This construction is done by ContextCommandParser.
+When it is time to `execute` the ContextCommand, the CommandSupplier supplies the relevant command.
+
+Pros:
+
+* ContextCommand can be decoupled from specific commands like AddCommand.
+* ContextCommand can be _extended_ to perform any type of Command, by passing the relevant CommandSupplier.
+
+Alternatives:
+
+* Create different types of ContextCommands for different purpose: i.e. ContextAddCommand, ContextFindCommand, etc
+
+The alternative may be equally valid.
+
+===== Awareness class
+The Awareness class is constructed by passing it a Dictionary containing slang - full phrase mappings.
+
+Alternatives:
+
+* Create the Dictionary instance within the constructor of Awareness, rather than accepting it.
+
+Pros:
+
+* Increased testability as the dependancy (Dictionary object) _can be controlled_ since it is passed into the constructor.
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
