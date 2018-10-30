@@ -23,6 +23,8 @@ import seedu.address.logic.commands.LoadTemplateCommand;
 import seedu.address.logic.commands.MakeCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectEntryCommand;
+import seedu.address.logic.commands.TagCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -52,20 +54,39 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        case AddCommand.COMMAND_WORD:
-            return new AddCommandParser().parse(arguments);
-
         case AddEntryCommand.COMMAND_WORD:
             return new AddEntryCommandParser().parse(arguments);
 
         case AddBulletCommand.COMMAND_WORD:
             return new AddBulletCommandParser().parse(arguments);
 
+        case ContextCommand.COMMAND_WORD:
+            return new ContextCommandParser().parse(arguments);
+
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
+
+        case LoadTemplateCommand.COMMAND_WORD:
+            return new LoadTemplateCommandParser().parse(arguments);
+
+        case MakeCommand.COMMAND_WORD:
+            return new MakeCommandParser().parse(arguments);
+
+        case TagCommand.COMMAND_WORD:
+            return new TagCommandParser().parse(arguments);
+
+        // ---  TODO: remove legacy commands, put new commands above this line
+        case AddCommand.COMMAND_WORD:
+            return new AddCommandParser().parse(arguments);
+
         case EditCommand.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
         case SelectCommand.COMMAND_WORD:
             return new SelectCommandParser().parse(arguments);
+
+        case SelectEntryCommand.COMMAND_WORD:
+            return new SelectEntryCommandParser().parse(arguments);
 
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
@@ -76,23 +97,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ContextCommand.COMMAND_WORD:
-            return new ContextCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
         case HistoryCommand.COMMAND_WORD:
             return new HistoryCommand();
-
-        case LoadTemplateCommand.COMMAND_WORD:
-            return new LoadTemplateCommandParser().parse(arguments);
-
-        case MakeCommand.COMMAND_WORD:
-            return new MakeCommandParser().parse(arguments);
-
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
 
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();

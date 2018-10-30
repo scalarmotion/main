@@ -11,6 +11,7 @@ import static seedu.address.testutil.TypicalPersons.ALICE;
 import static seedu.address.testutil.TypicalPersons.BENSON;
 
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.junit.Rule;
@@ -80,6 +81,30 @@ public class ModelManagerTest {
 
         // mkPredicate works for single category and tag, cannot find
         assertTrue(modelManager.getFilteredEntryList("education", Arrays.asList("java")).size() == 0);
+    }
+
+    @Test
+    public void mkPredicate_filtered_predicateWorks() {
+        modelManager = new ModelManager();
+
+        modelManager.addEntry(NUS_EDUCATION);
+        modelManager.addEntry(WORK_FACEBOOK);
+
+        // mkPredicate works for single category and tag
+        modelManager.updateFilteredEntryList(modelManager.mkPredicate("work", Arrays.asList("java")));
+        assertTrue(modelManager.getFilteredEntryList().size() == 1);
+
+        // mkPredicate works for single category and tag, cannot find
+        modelManager.updateFilteredEntryList(modelManager.mkPredicate("work", Arrays.asList("nus")));
+        assertTrue(modelManager.getFilteredEntryList().size() == 0);
+
+        // mkPredicate works for tag only
+        modelManager.updateFilteredEntryList(modelManager.mkPredicate("", Arrays.asList("machinelearning")));
+        assertTrue(modelManager.getFilteredEntryList().size() == 1);
+
+        // mkPredicate works for category only
+        modelManager.updateFilteredEntryList(modelManager.mkPredicate("work", new ArrayList<String>()));
+        assertTrue(modelManager.getFilteredEntryList().size() == 1);
     }
 
     @Test

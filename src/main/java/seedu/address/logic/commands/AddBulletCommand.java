@@ -5,8 +5,11 @@ import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
 
 import java.util.List;
 
+import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
+import seedu.address.commons.events.ui.JumpToEntryListRequestEvent;
+import seedu.address.commons.events.ui.UpdateExpandedEntryRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -58,6 +61,8 @@ public class AddBulletCommand extends Command {
         model.updateEntry(entryToEdit, editedEntry);
         model.updateFilteredEntryList(PREDICATE_SHOW_ALL_ENTRIES);
         model.commitAddressBook();
+        EventsCenter.getInstance().post(new JumpToEntryListRequestEvent(index));
+        EventsCenter.getInstance().post(new UpdateExpandedEntryRequestEvent(editedEntry));
         return new CommandResult(String.format(MESSAGE_ADDBULLET_SUCCESS, bullet));
     }
 

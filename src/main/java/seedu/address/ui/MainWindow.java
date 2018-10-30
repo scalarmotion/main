@@ -36,6 +36,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private PersonListPanel personListPanel;
+    private ExpandedEntryPanel expandedEntryPanel;
 
     private EntryListPanel entryListPanel;
 
@@ -45,6 +46,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane browserPlaceholder;
+
+    @FXML
+    private StackPane templatePanelPlaceholder;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -60,6 +64,9 @@ public class MainWindow extends UiPart<Stage> {
 
     @FXML
     private StackPane resultDisplayPlaceholder;
+
+    @FXML
+    private StackPane expandedEntryPanelPlaceholder;
 
     @FXML
     private StackPane statusbarPlaceholder;
@@ -137,6 +144,12 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        TemplatePanel templatePanel = new TemplatePanel();
+        templatePanelPlaceholder.getChildren().add(templatePanel.getRoot());
+
+        expandedEntryPanel = new ExpandedEntryPanel();
+        expandedEntryPanelPlaceholder.getChildren().add(expandedEntryPanel.getRoot());
+
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getEntryBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
@@ -206,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
     }*/
 
     void releaseResources() {
-        browserPanel.freeResources();
+        //browserPanel.freeResources();
     }
 
     @Subscribe

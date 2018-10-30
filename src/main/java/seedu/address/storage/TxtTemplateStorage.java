@@ -50,7 +50,7 @@ public class TxtTemplateStorage implements TemplateStorage {
 
         File file = filePath.toFile();
         Scanner s = new Scanner(file);
-        Template template = new Template();
+        Template template = new Template(filePath.toString());
 
         while (s.hasNextLine()) {
             String curr = s.nextLine();

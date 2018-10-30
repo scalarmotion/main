@@ -14,7 +14,7 @@
 <fx:root type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
          minWidth="450" minHeight="600" onCloseRequest="#handleExit">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/resume.png" />
   </icons>
   <scene>
     <Scene>
@@ -46,9 +46,9 @@
           </padding>
         </StackPane>
 
-        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.4" VBox.vgrow="ALWAYS">
+        <SplitPane id="splitPane" fx:id="splitPane" dividerPositions="0.0, 0.3, 0.3, 0.6" VBox.vgrow="ALWAYS">
 
-          <VBox fx:id="personList" maxWidth="1">
+          <VBox fx:id="personList" minWidth="1" maxWidth="1">
             <StackPane fx:id="personListPanelPlaceholder"/>
           </VBox>
 
@@ -59,11 +59,17 @@
             <StackPane fx:id="entryListPanelPlaceholder" VBox.vgrow="ALWAYS"/>
           </VBox>
 
-          <StackPane fx:id="browserPlaceholder" prefWidth="340" >
-            <padding>
-              <Insets top="10" right="10" bottom="10" left="10" />
-            </padding>
-          </StackPane>
+          <StackPane fx:id="browserPlaceholder" minWidth="1" maxWidth="1" />
+
+            <VBox fx:id="boxForExpandedEntryAndConfigTemplate" minWidth="340" prefWidth="340" SplitPane.resizableWithParent="false">
+            <StackPane fx:id="expandedEntryPanelPlaceholder" VBox.vgrow="ALWAYS"/>
+          </VBox>
+
+            <StackPane fx:id="templatePanelPlaceholder" minWidth="600" prefWidth="600">
+                <padding>
+                    <Insets top="5" right="5" bottom="5" left="5" />
+                </padding>
+            </StackPane>
         </SplitPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />

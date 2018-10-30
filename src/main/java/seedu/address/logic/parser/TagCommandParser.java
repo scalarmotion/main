@@ -7,18 +7,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.logic.commands.TagCommand;
+import seedu.address.logic.commands.TagListCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * Sub parser for tag related functions
  */
 public class TagCommandParser implements Parser<TagCommand> {
+    public static final String MESSAGE_USAGE = TagCommand.MESSAGE_USAGE
+        + "- " + TagCommand.COMMAND_WORD + " " + TagListCommand.COMMAND_WORD + " help";
 
     /**
      * Used for initial separation of command word and args.
      */
     private static final Pattern BASIC_COMMAND_FORMAT = Pattern.compile("(?<commandWord>\\S+)(?<arguments>.*)");
-    private static final String MESSAGE_USAGE = TagCommand.MESSAGE_USAGE; // TODO: add usage of specific cmds
 
     /**
      * Parses user input into tag related commands.
@@ -36,8 +38,9 @@ public class TagCommandParser implements Parser<TagCommand> {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
-        // case AddCommand.COMMAND_WORD:
-        //     return new AddCommandParser().parse(arguments);
+        case TagListCommand.COMMAND_WORD:
+        case TagListCommand.COMMAND_WORD2:
+            return new TagListCommandParser().parse(arguments);
 
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);

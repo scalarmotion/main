@@ -10,6 +10,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.util.SampleDataUtil;
 
 public class ContextCommandTest {
 
@@ -35,10 +36,46 @@ public class ContextCommandTest {
 
         Model model = new ModelManager();
 
-        // currently there are no pre-filled ResumeEntries loaded via sample data, or via Storage.
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(ContextCommand.MESSAGE_NO_RESUME_ENTRY, "double degree programme"));
         String result = new ContextCommand("ddp").execute(model, commandHistory).feedbackToUser;
+
+    }
+
+    @Test
+    public void execute_matchingResumeEntry_successfulAdd() throws Exception {
+        Model model = new ModelManager();
+
+        String taResult = new ContextCommand("ta ma1101r").execute(model, commandHistory).feedbackToUser;
+        assertEquals(taResult, String.format(AddEntryCommand.MESSAGE_SUCCESS, SampleDataUtil.MA1101R_TA));
+
+        String cs2103tResult = new ContextCommand("cs2103t").execute(model, commandHistory).feedbackToUser;
+        assertEquals(cs2103tResult, String.format(AddEntryCommand.MESSAGE_SUCCESS, SampleDataUtil.NUS_CS2103T));
+    }
+
+    @Test
+    public void execute_twiceSameExpression_duplicateEntry() throws Exception {
+        Model model = new ModelManager();
+
+        String taResult = new ContextCommand("ta ma1101r").execute(model, commandHistory).feedbackToUser;
+        assertEquals(taResult, String.format(AddEntryCommand.MESSAGE_SUCCESS, SampleDataUtil.MA1101R_TA));
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddEntryCommand.MESSAGE_DUPLICATE_ENTRY);
+        new ContextCommand("ta ma1101r").execute(model, commandHistory);
+
+    }
+
+    @Test
+    public void execute_differentExpression_duplicateEntry() throws Exception {
+        Model model = new ModelManager();
+
+        String taResult = new ContextCommand("ta ma1101r").execute(model, commandHistory).feedbackToUser;
+        assertEquals(taResult, String.format(AddEntryCommand.MESSAGE_SUCCESS, SampleDataUtil.MA1101R_TA));
+
+        thrown.expect(CommandException.class);
+        thrown.expectMessage(AddEntryCommand.MESSAGE_DUPLICATE_ENTRY);
+        new ContextCommand("teach asst ma1101r").execute(model, commandHistory);
 
     }
 

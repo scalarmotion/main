@@ -1,5 +1,7 @@
 package seedu.address.testutil;
 
+import static seedu.address.testutil.TypicalEntryDescription.getTypicalEntryDescription;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -32,6 +34,14 @@ public class TypicalEntrys {
     public static final ResumeEntry AWARD_WITH_NO_ENTRYINFO_NO_DESC = new EntryBuilder()
             .withCategory("awards").buildMinorEntry();
 
+    // Entries with description
+    public static final ResumeEntry WORK_FACEBOOK_WITH_DESC = new EntryBuilder().withCategory("work")
+            .withTitle("Facebook").withDuration("2010 - 2013")
+            .withSubHeader("software engineering intern")
+            .withTags("java")
+            .withDescription(getTypicalEntryDescription())
+            .build();
+
     private TypicalEntrys() {} // prevents instantiation
 
     /**
@@ -47,7 +57,10 @@ public class TypicalEntrys {
     }
 
     public static List<ResumeEntry> getTypicalEntries() {
-        return new ArrayList<>(Arrays.asList(NUS_EDUCATION_WITH_SPACED_TAG,
-                AWARD_WITH_NO_ENTRYINFO_NO_DESC, NUS_EDUCATION));
+        return new ArrayList<>(Arrays.asList(
+                    WORK_FACEBOOK,
+                    NUS_EDUCATION_WITH_SPACED_TAG,
+                    AWARD_WITH_NO_ENTRYINFO_NO_DESC,
+                    NUS_EDUCATION));
     }
 }

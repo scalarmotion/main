@@ -12,6 +12,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.entry.ResumeEntry;
+import seedu.address.model.util.SampleDataUtil;
 
 /**
  * This class represents all the Awareness information held by the application.
@@ -31,13 +32,14 @@ public class Awareness {
     private final TreeSet<String> allFullPhrases;
 
     /** Maps an Event name to a Resume Entry, if any */
-    private TreeMap<String, ResumeEntry> nameToEntryMapppings = new TreeMap<String, ResumeEntry>();
+    private TreeMap<String, ResumeEntry> nameToEntryMappings = SampleDataUtil.makeNameToEntryMappings();
 
     public Awareness(HashMap<String, String> dictionary, TreeSet<String> allFullPhrases) {
         requireAllNonNull(dictionary, allFullPhrases);
 
         this.dictionary = dictionary;
         this.allFullPhrases = allFullPhrases;
+
     }
 
     /**
@@ -115,7 +117,7 @@ public class Awareness {
      * Returns an empty Optional if no matching ResumeEntry is found.
      */
     public Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName) {
-        return Optional.ofNullable(nameToEntryMapppings.get(possibleEventName));
+        return Optional.ofNullable(nameToEntryMappings.get(possibleEventName));
     }
 
 

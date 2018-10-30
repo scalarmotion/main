@@ -31,8 +31,14 @@ public class EntryDescription {
 
     @Override
     public String toString() {
+        int index = 1;
         final StringBuilder builder = new StringBuilder();
-        descriptionList.forEach(s -> builder.append(s).append("\n"));
+
+        for (String bullet: descriptionList) {
+            builder.append(index).append(". ").append(bullet).append("\n");
+            index++;
+        }
+
         return builder.toString();
     }
 }

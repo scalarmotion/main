@@ -8,6 +8,7 @@ import static org.junit.Assert.assertTrue;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -155,6 +156,16 @@ public class AddCommandTest {
         }
 
         @Override
+        public ObservableList<ResumeEntry> getFilteredEntryList(Predicate<ResumeEntry> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<ResumeEntry> getFilteredEntryList(String category, List<String> tags) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updateFilteredPersonList(Predicate<Person> predicate) {
             throw new AssertionError("This method should not be called.");
         }
@@ -219,6 +230,11 @@ public class AddCommandTest {
 
         @Override
         public String getPossibleEventName(String expression) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Predicate<ResumeEntry> mkPredicate(String category, List<String> tags) {
             throw new AssertionError("This method should not be called.");
         }
 

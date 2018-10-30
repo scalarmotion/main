@@ -8,6 +8,7 @@ import net.steppschuh.markdowngenerator.text.TextBuilder;
 import net.steppschuh.markdowngenerator.text.emphasis.ItalicText;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 
+import seedu.address.commons.exceptions.MarkdownProcessingException;
 import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
@@ -25,6 +26,19 @@ public final class MarkdownConverter {
      * public constructor, which ensures that this class cannot be instantiated.
      */
     private MarkdownConverter() {
+    }
+
+    /**
+     * @param object is a generic object which will be converted to
+     * @return a String containing its Markdown representation by
+     * another overloaded version of this method.
+     */
+    public static String toMarkdown(Object object) throws MarkdownProcessingException {
+        if (object instanceof Resume) {
+            return toMarkdown((Resume) object);
+        } else {
+            throw(new MarkdownProcessingException(object.toString() + " cannot be converted to Markdown."));
+        }
     }
 
     /**
