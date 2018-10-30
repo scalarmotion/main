@@ -12,6 +12,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.ResumeSaveEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
@@ -19,6 +20,7 @@ import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
 
 /**
@@ -30,6 +32,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private TemplateStorage templateStorage;
+    private ResumeStorage resumeStorage;
 
 
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
@@ -37,6 +40,7 @@ public class StorageManager extends ComponentManager implements Storage {
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.templateStorage = new TxtTemplateStorage();
+        this.resumeStorage = new MarkdownResumeStorage();
     }
 
     // ================ UserPrefs methods ==============================
@@ -139,6 +143,39 @@ public class StorageManager extends ComponentManager implements Storage {
             raise(new TemplateLoadedEvent(t, event.filepath));
         } catch (IOException e) {
             raise(new TemplateLoadingExceptionEvent(e, event.filepath));
+        }
+    }
+
+    // ================ Resume methods ==============================
+
+    @Override
+    public Path getResumeFilePath() {
+        return resumeStorage.getResumeFilePath();
+    }
+
+    @Override
+    public void saveResume(Resume resume) throws IOException {
+        saveResume(resume, resumeStorage.getResumeFilePath());
+    }
+
+    @Override
+    public void saveResume(Resume resume, Path filePath) throws IOException {
+        requireNonNull(filePath);
+        requireNonNull(resume);
+        logger.fine("Attempting to write to data file: " + filePath);
+        resumeStorage.saveResume(resume, filePath);
+    }
+
+
+    @Subscribe
+    public void handleResumeSaveEvent(ResumeSaveEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Save resume to "
+                + event.filepath.toString() + " requested, attempting to save"));
+
+        try {
+            saveResume(event.data, event.filepath);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
         }
     }
 }
