@@ -19,16 +19,18 @@ public class Template {
     private static final String OR_DELIMITER = " ";
 
     private ArrayList<TemplateSection> sections;
+    private String stringRepresentation = "";
 
-    public Template() {
+    public Template(String filepath) {
         sections = new ArrayList<TemplateSection>();
+        stringRepresentation = filepath + "\n\n";
     }
 
     /**
      * Returns a default template with no filters
      */
     public static Template getDefaultTemplate() {
-        Template t = new Template();
+        Template t = new Template("default template");
         t.addSection("Work Experience" + DELIMITER + "~work" + DELIMITER);
         t.addSection("Education" + DELIMITER + "~education" + DELIMITER);
         t.addSection("Projects" + DELIMITER + "~projects" + DELIMITER);
@@ -52,6 +54,8 @@ public class Template {
         Predicate<ResumeEntry> catePredicate = createCategoryPredicate(cateName);
 
         sections.add(new TemplateSection(title, catePredicate, tagPredicate));
+
+        stringRepresentation += String.format("%s: ~%s\n%s\n", title, cateName, tags == "" ? "" : tags + "\n");
     }
 
     /**
@@ -109,5 +113,10 @@ public class Template {
 
     public ArrayList<TemplateSection> getSections() {
         return new ArrayList<TemplateSection>(sections);
+    }
+
+    @Override
+    public String toString() {
+        return stringRepresentation;
     }
 }

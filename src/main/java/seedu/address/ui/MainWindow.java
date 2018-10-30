@@ -48,6 +48,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane browserPlaceholder;
 
     @FXML
+    private StackPane templatePanelPlaceholder;
+
+    @FXML
     private StackPane commandBoxPlaceholder;
 
     @FXML
@@ -141,6 +144,9 @@ public class MainWindow extends UiPart<Stage> {
         ResultDisplay resultDisplay = new ResultDisplay();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
 
+        TemplatePanel templatePanel = new TemplatePanel();
+        templatePanelPlaceholder.getChildren().add(templatePanel.getRoot());
+
         expandedEntryPanel = new ExpandedEntryPanel();
         expandedEntryPanelPlaceholder.getChildren().add(expandedEntryPanel.getRoot());
 
@@ -213,7 +219,7 @@ public class MainWindow extends UiPart<Stage> {
     }*/
 
     void releaseResources() {
-        browserPanel.freeResources();
+        //browserPanel.freeResources();
     }
 
     @Subscribe
