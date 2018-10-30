@@ -39,6 +39,13 @@
           </padding>
         </StackPane>
 
+        <StackPane VBox.vgrow="NEVER" fx:id="contextbarPlaceholder" styleClass="pane-with-border"
+                   minHeight="60" prefHeight="60" maxHeight="60">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </StackPane>
+
         <StackPane VBox.vgrow="NEVER" fx:id="resultDisplayPlaceholder" styleClass="pane-with-border"
                    minHeight="100" prefHeight="100" maxHeight="100">
           <padding>
