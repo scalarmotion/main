@@ -3,8 +3,6 @@ package seedu.address.commons.events.model;
 import java.nio.file.Path;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.resume.Resume;
 
 /** Indicates that a resume is being saved. */
