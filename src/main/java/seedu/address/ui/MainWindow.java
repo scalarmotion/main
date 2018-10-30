@@ -66,6 +66,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane resultDisplayPlaceholder;
 
     @FXML
+    private StackPane contextbarPlaceholder;
+
+    @FXML
     private StackPane expandedEntryPanelPlaceholder;
 
     @FXML
@@ -152,6 +155,9 @@ public class MainWindow extends UiPart<Stage> {
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(prefs.getEntryBookFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+
+        ContextBar contextBar = new ContextBar();
+        contextbarPlaceholder.getChildren().add(contextBar.getRoot());
 
         CommandBox commandBox = new CommandBox(logic);
         commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
