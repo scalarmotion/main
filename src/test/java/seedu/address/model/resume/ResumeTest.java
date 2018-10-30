@@ -18,6 +18,7 @@ import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class ResumeTest {
     @Rule
@@ -61,7 +62,7 @@ public class ResumeTest {
 
 
         // Resume testing
-        Resume testResumeOne = new Resume(new ModelManager());
+        Resume testResumeOne = new Resume(new TypicalResumeModel());
 
         // Same object check
         assertEquals(testResumeOne, testResumeOne);
@@ -70,7 +71,7 @@ public class ResumeTest {
         assertNotEquals(testResumeOne, new ArrayList<>());
 
         // Same state
-        Resume testResumeTwo = new Resume(new ModelManager());
+        Resume testResumeTwo = new Resume(new TypicalResumeModel());
         assertEquals(testResumeOne, testResumeTwo);
 
         // Different state
