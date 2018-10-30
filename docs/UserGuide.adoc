@@ -323,16 +323,32 @@ Loads the template specified in `google.txt`
 //TODO: how do we have parallel structure for this?
 Templates are written by the user as text files, consisting of lines of the following format:
 -----
-[Category Heading]:[~Category Tag]:[Tag Groups]
+[Category Heading]:~[Category Tag]:[Tag Groups]
 -----
 
 Each line specifies a category, starting with the title to be displayed, its corresponding category tag, and tags used to filter entries.
+Each `Tag Group` contains one `Tag`, or several separated by ampersands (&). Tag groups are separated by spaces.
+For example, the following formats would all be valid as `[Tag Groups]`:
+----
+* [Tag] [Tag] [Tag]
+* [Tag]&[Tag]
+* [Tag] [Tag]&[Tag]&[Tag]
+* (no tags)
+----
+An entry is included if it is tagged with that category, and fulfills any of the groups of tags.
+It must contain all tags in a group to fulfil the group.
 
-An entry is included if it is tagged with that category, and fulfils any of the groups of tags, separated by a space.
-Each group contains tags separated by an ampersand (&),
-and an entry must contain all tags in a group to fulfil the group.
+For example, the following category,
 
-For example, the following template file:
+    Work Experience:~work:java&recent python&recent&significant datascience
+
+means to include any entry categorized as `work`, as long as it fulfills any of the following:
+
+* tagged with `java` and `recent`
+* tagged with `python` and `recent` and `significant`
+* tagged with `datascience`
+
+As an example, the following template file:
 [literal]
 --
 Work Experience:~work:
