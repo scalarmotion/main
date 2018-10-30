@@ -26,7 +26,7 @@ public class ResumeTest {
 
     @Test
     public void constructorTest() {
-        Model testModel = new ModelManager();
+        Model testModel = new TypicalResumeModel();
         Resume resume = new Resume(testModel);
 
         // default template, no entries
