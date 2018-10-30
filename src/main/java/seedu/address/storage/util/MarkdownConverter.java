@@ -68,11 +68,12 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(List<ResumeSection> sectionList) {
-        TextBuilder sectionListBuilder = new TextBuilder().rule();
+        TextBuilder sectionListBuilder = new TextBuilder().rule().newLines(2);
         for (ResumeSection section : sectionList) {
             sectionListBuilder = sectionListBuilder
                     .append(toMarkdown(section))
-                    .rule();
+                    .rule()
+                    .newLines(2);
         }
         return sectionListBuilder.toString();
     }
@@ -82,7 +83,7 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(ResumeSection section) {
-        TextBuilder sectionBuilder = new TextBuilder().append(new Heading(section.title, 5)).newLine();
+        TextBuilder sectionBuilder = new TextBuilder().append(new Heading(section.title, 2)).newLines(2);
         for (ResumeEntry entry : section.getEntryList()) {
             sectionBuilder = sectionBuilder.append(toMarkdown(entry));
         }
@@ -108,11 +109,11 @@ public final class MarkdownConverter {
      */
     public static String toMarkdown(EntryInfo info) {
         return new TextBuilder()
-                .append(new Heading(info.getTitle(), 6))
+                .append(new Heading(info.getTitle(), 5))
                 .append(new Text(" ("))
                 .append(new ItalicText(info.getDuration()))
                 .append(new Text(")"))
-                .newLine()
+                .newLines(2)
                 .append(new Text(info.getSubHeader()))
                 .newLines(2)
                 .toString();
