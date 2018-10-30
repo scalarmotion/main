@@ -12,7 +12,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
