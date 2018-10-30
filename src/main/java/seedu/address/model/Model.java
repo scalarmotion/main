@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -60,7 +61,6 @@ public interface Model {
      */
     void addEntry(ResumeEntry entry);
 
-
     /**
      * Replaces the given person {@code target} with {@code editedPerson}.
      * {@code target} must exist in the address book.
@@ -87,6 +87,14 @@ public interface Model {
 
     /** Returns an unmodifiable view of the filtered person list */
     ObservableList<ResumeEntry> getFilteredEntryList();
+
+    /** If args given, filtered from full list */
+    ObservableList<ResumeEntry> getFilteredEntryList(Predicate<ResumeEntry> predicate);
+    ObservableList<ResumeEntry> getFilteredEntryList(String category, List<String> tags);
+
+    /** Returns predicate based on category and tags given */
+    Predicate<ResumeEntry> mkPredicate(String category, List<String> tags);
+
     /**
      * Updates the filter of the filtered person list to filter by the given {@code predicate}.
      * @throws NullPointerException if {@code predicate} is null.

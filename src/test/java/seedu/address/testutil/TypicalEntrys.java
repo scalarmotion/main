@@ -57,7 +57,10 @@ public class TypicalEntrys {
     }
 
     public static List<ResumeEntry> getTypicalEntries() {
-        return new ArrayList<>(Arrays.asList(NUS_EDUCATION_WITH_SPACED_TAG,
-                AWARD_WITH_NO_ENTRYINFO_NO_DESC, NUS_EDUCATION));
+        return new ArrayList<>(Arrays.asList(
+                    WORK_FACEBOOK,
+                    NUS_EDUCATION_WITH_SPACED_TAG,
+                    AWARD_WITH_NO_ENTRYINFO_NO_DESC,
+                    NUS_EDUCATION));
     }
 }

@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.testutil.TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DESC;
 import static seedu.address.testutil.TypicalEntrys.NUS_EDUCATION;
 import static seedu.address.testutil.TypicalEntrys.NUS_EDUCATION_WITH_SPACED_TAG;
+import static seedu.address.testutil.TypicalEntrys.WORK_FACEBOOK;
 import static seedu.address.testutil.TypicalEntrys.getTypicalEntryBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -107,7 +108,7 @@ public class EntryBookTest {
         EntryBook newData = getTypicalEntryBook();
         assertEquals(getTypicalEntryBook(), new EntryBook(newData));
         // test toString method
-        assertEquals("3 entries", newData.toString());
+        assertEquals("4 entries", newData.toString());
         //test hashcode
         assertEquals(getTypicalEntryBook().hashCode(), newData.hashCode());
     }
@@ -119,6 +120,7 @@ public class EntryBookTest {
         typicalEntryBook.updateEntry(AWARD_WITH_NO_ENTRYINFO_NO_DESC, NUS_EDUCATION_WITH_SPACED_TAG);
 
         EntryBook editedEntryBook = new EntryBookBuilder()
+                .withEntry(WORK_FACEBOOK)
                 .withEntry(NUS_EDUCATION_WITH_SPACED_TAG)
                 .withEntry(NUS_EDUCATION)
                 .build();

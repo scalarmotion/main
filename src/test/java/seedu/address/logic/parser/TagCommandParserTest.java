@@ -1,40 +1,31 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
-import org.junit.Rule;
+import java.util.Arrays;
+
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
-import seedu.address.logic.commands.TagCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.commands.TagListCommand;
 
 public class TagCommandParserTest {
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
 
-    private final TagCommandParser parser = new TagCommandParser();
-
-    // TODO: parse sub cmds
-    // @Test
-    // public void parseCommand_add() throws Exception {
-    //     Person person = new PersonBuilder().build();
-    //     AddCommand command = (AddCommand) parser.parseCommand(PersonUtil.getAddCommand(person));
-    //     assertEquals(new AddCommand(person), command);
-    // }
+    private TagCommandParser parser = new TagCommandParser();
 
     @Test
-    public void parseCommand_unrecognisedInput_throwsParseException() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommand.MESSAGE_USAGE));
-        parser.parse("");
+    public void parse_help_throwsParseException() {
+        assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommandParser.MESSAGE_USAGE));
     }
 
     @Test
-    public void parseCommand_unknownCommand_throwsParseException() throws Exception {
-        thrown.expect(ParseException.class);
-        thrown.expectMessage(MESSAGE_UNKNOWN_COMMAND);
-        parser.parse("unknownCommand");
+    public void parse_tagList_returnsTagListCommand() {
+        // no leading and trailing whitespaces
+        TagListCommand expectedTagListCommand =
+                new TagListCommand("work", Arrays.asList("java"));
+        assertParseSuccess(parser, "list ~work #java", expectedTagListCommand);
+        assertParseSuccess(parser, "ls ~work #java", expectedTagListCommand);
     }
+
 }

@@ -171,6 +171,7 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(filteredEntries);
     }
 
+    @Override
     public ObservableList<ResumeEntry> getFilteredEntryList(Predicate<ResumeEntry> predicate) {
         FilteredList<ResumeEntry> entries = getFullEntryList();
         entries.setPredicate(predicate);
@@ -178,16 +179,24 @@ public class ModelManager extends ComponentManager implements Model {
         return FXCollections.unmodifiableObservableList(entries);
     }
 
+    @Override
     public ObservableList<ResumeEntry> getFilteredEntryList(String category, List<String> tags) {
         return getFilteredEntryList(mkPredicate(category, tags));
     }
 
-    private FilteredList<ResumeEntry> getFullEntryList() {
-        return new FilteredList(versionedEntryBook.getEntryList());
+    @Override
+    public Predicate<ResumeEntry> mkPredicate(String category, List<String> tags) {
+        Predicate<ResumeEntry> predicate = category.length() > 0
+            ? categoryManager.mkPredicate(category)
+            : PREDICATE_SHOW_ALL_ENTRIES;
+
+        return tags.size() > 0
+            ? tagManager.mkPredicate(predicate, tags)
+            : predicate;
     }
 
-    private Predicate<ResumeEntry> mkPredicate(String category, List<String> tags) {
-        return tagManager.mkPredicate(categoryManager.mkPredicate(category), tags);
+    private FilteredList<ResumeEntry> getFullEntryList() {
+        return new FilteredList(versionedEntryBook.getEntryList());
     }
 
     @Override
