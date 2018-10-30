@@ -32,7 +32,12 @@ public class AddBulletCommandTest {
 
     @Test
     public void execute_allFieldsSpecifiedUnfilteredList_success() {
-        ResumeEntry editedEntry = new EntryBuilder().build();
+        ResumeEntry editedEntry = new EntryBuilder().withCategory("work")
+                .withTitle("Facebook").withDuration("2010 - 2013")
+                .withSubHeader("software engineering intern")
+                .withTags("java")
+                .addBulletToDescription(DESC_BULLET_FINANCIAL_HACK)
+                .build();
         AddBulletCommand addBulletCommand = new AddBulletCommand(INDEX_FIRST_PERSON, DESC_BULLET_FINANCIAL_HACK);
 
         String expectedMessage = String.format(AddBulletCommand.MESSAGE_ADDBULLET_SUCCESS, DESC_BULLET_FINANCIAL_HACK);
@@ -40,7 +45,7 @@ public class AddBulletCommandTest {
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
                 new EntryBook(model.getEntryBook()), new UserPrefs());
         expectedModel.updateEntry(model.getFilteredEntryList().get(0), editedEntry);
-        expectedModel.commitAddressBook();
+        expectedModel.commitEntryBook();
 
         assertCommandSuccess(addBulletCommand, model, commandHistory, expectedMessage, expectedModel);
     }

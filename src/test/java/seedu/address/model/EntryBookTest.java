@@ -116,16 +116,15 @@ public class EntryBookTest {
     @Test
     public void removeAndAddEntryTest() {
         EntryBook typicalEntryBook = getTypicalEntryBook();
-        typicalEntryBook.removeEntry(NUS_EDUCATION_WITH_SPACED_TAG);
-        typicalEntryBook.updateEntry(AWARD_WITH_NO_ENTRYINFO_NO_DESC, NUS_EDUCATION_WITH_SPACED_TAG);
+        typicalEntryBook.removeEntry(WORK_FACEBOOK);
+        typicalEntryBook.updateEntry(NUS_EDUCATION_WITH_SPACED_TAG, WORK_FACEBOOK);
 
         EntryBook editedEntryBook = new EntryBookBuilder()
                 .withEntry(WORK_FACEBOOK)
-                .withEntry(NUS_EDUCATION_WITH_SPACED_TAG)
+                .withEntry(AWARD_WITH_NO_ENTRYINFO_NO_DESC)
                 .withEntry(NUS_EDUCATION)
                 .build();
         assertEquals(editedEntryBook, typicalEntryBook);
-
     }
 
 

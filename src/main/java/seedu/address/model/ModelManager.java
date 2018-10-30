@@ -278,7 +278,14 @@ public class ModelManager extends ComponentManager implements Model {
         // state check
         ModelManager other = (ModelManager) obj;
         return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredPersons.equals(other.filteredPersons);
+                && filteredPersons.equals(other.filteredPersons)
+                && versionedEntryBook.equals(other.versionedEntryBook)
+                && filteredEntries.equals(other.filteredEntries)
+                && categoryManager.equals(other.categoryManager)
+                && tagManager.equals(other.tagManager)
+                && loadedTemplate.equals(other.loadedTemplate)/*
+                && awareness.equals(other.awareness)
+                && lastGeneratedResume.equals(other.lastGeneratedResume)*/;
     }
 
     //=========== Resume generation =======================================================================
