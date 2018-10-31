@@ -132,6 +132,8 @@ public class SampleDataUtil {
 
         addFullPhrase(allFullPhrases, "programme");
 
+        addFullPhrase(allFullPhrases, "club");
+
         // wip add sample Event Name - ResumeEntry mappings
         return new Awareness(dictionary, allFullPhrases);
 

@@ -15,7 +15,8 @@ We are, https://github.com/CS2103-AY1819S1-W17-1[CS2103-W-17-1], a team based in
 image::anubh-v.png[width="150", align="left"]
 {empty}[https://github.com/anubh-v[github]] [<<anubhav#, portfolio>>]
 
-Role: Contextual Awareness, User Interface
+Role: Contextual Awareness
+Responsibility: User Interface, project deliverables, documentation
 
 '''
 
@@ -23,7 +24,8 @@ Role: Contextual Awareness, User Interface
 image::jhengy.png[width="150", align="left"]
 {empty}[https://github.com/jhengy[github]] [<<hengyuan#, portfolio>>]
 
-Role: Data Management, Logic
+Role: Data Management
+Responsibility: Logic, system testing, code quality
 
 '''
 
@@ -31,7 +33,8 @@ Role: Data Management, Logic
 image::marvintxd.png[width="150", align="left"]
 {empty}[http://github.com/marvintxd[github]] [<<marvin#, portfolio>>]
 
-Role: Resume Template Management, Storage
+Role: Resume Template Management
+Responsibility: Storage, documentation, code quality
 
 '''
 
@@ -39,7 +42,8 @@ Role: Resume Template Management, Storage
 image::ongspxm.png[width="150", align="left"]
 {empty}[http://github.com/ongspxm[github]] [<<shupeng#, portfolio>>]
 
-Role: Data Filtering, Commons
+Role: Data Filtering
+Responsibility: Commons, integration, git expert
 
 '''
 
@@ -47,6 +51,7 @@ Role: Data Filtering, Commons
 image::scalarmotion.png[width="150", align="left"]
 {empty}[http://github.com/scalarmotion[github]] [<<wangfan#, portfolio>>]
 
-Role: Resume Generation, Model
+Role: Resume Generation
+Responsibility: Model, integration, testing, markdown expert
 
 '''

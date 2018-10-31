@@ -4,8 +4,10 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import seedu.address.model.Model;
+import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
 
@@ -24,8 +26,7 @@ public class Resume {
         requireAllNonNull(model);
         this.model = model;
 
-        // TODO: Use the actual template loaded in the model
-        template = Template.getDefaultTemplate();
+        template = model.getLoadedTemplate().get();
         requireAllNonNull(template);
 
         // TODO: Implement personal info
@@ -34,7 +35,6 @@ public class Resume {
 
         resumeSectionList = new ArrayList<>();
         populateSectionList();
-        requireAllNonNull(resumeSectionList);
     }
 
     /**
@@ -53,10 +53,10 @@ public class Resume {
      * @return the ResumeSection containing the entries specified.
      */
     private ResumeSection fetchSectionEntries(TemplateSection templateSection) {
-        // TODO: implement ModelManager.getFiltered()
-        return new ResumeSection(templateSection.getTitle(), new ArrayList<>());
-        //return new ResumeSection(templateSection.getTitle(),
-        //        model.getFiltered(templateSection.getCategory(), templateSection.getPredicate()));
+        Predicate<ResumeEntry> sectionPredicate = templateSection.getCategoryPredicate()
+                .and(templateSection.getTagPredicate());
+        return new ResumeSection(templateSection.getTitle(),
+                model.getFilteredEntryList(sectionPredicate));
     }
 
     /*public ResumeHeader getHeader() {

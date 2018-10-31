@@ -19,6 +19,10 @@ public class MarkdownResumeStorage implements ResumeStorage {
 
     private Path filePath;
 
+    public MarkdownResumeStorage() {
+
+    }
+
     public MarkdownResumeStorage(Path filePath) {
         this.filePath = filePath;
     }
