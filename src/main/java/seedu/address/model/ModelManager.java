@@ -23,6 +23,7 @@ import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.events.ui.NewResultAvailableEvent;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.category.CategoryManager;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
