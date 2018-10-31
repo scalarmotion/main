@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.nio.file.Path;
 
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.Awareness;
+import seedu.address.model.awareness.Awareness;
 
 /**
  * A class used to access Awareness data stored as XML on the disk.

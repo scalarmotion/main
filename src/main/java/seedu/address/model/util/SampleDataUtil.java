@@ -8,7 +8,7 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
-import seedu.address.model.Awareness;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Address;

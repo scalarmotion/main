@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.XmlUtil;
-import seedu.address.model.Awareness;
+import seedu.address.model.awareness.Awareness;
 
 /**
  * This class is used to de-serialize XML data into an in-memory Awareness object.

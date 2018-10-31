@@ -7,6 +7,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.util.SampleDataUtil;
 
 public class AwarenessTest {
