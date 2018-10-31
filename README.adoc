@@ -31,7 +31,7 @@ endif::[]
 
 * Some parts of this application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
-* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
+* Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5], https://github.com/Steppschuh/Java-Markdown-Generator[Java Markdown Generator]
 * Adapted from: https://github.com/se-edu/addressbook-level4[An excellent Address Book application] created by the https://se-edu.github.io/[SE-EDU] initiative
 * Application icon created by https://icons8.com/[Icons8]: https://icons8.com/icon/20471/client-base/[Link to icon]
 
