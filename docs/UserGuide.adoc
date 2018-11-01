@@ -306,8 +306,10 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
+// tag::template[]
 === Using templates to specify resume formats
 Templates are stored as text files and parsed and loaded into the application using the `loadtemplate` command.
+They should be saved in the same directory as the `resumaker.jar` file.
 
 ==== Loading template : `loadtemplate`
 
@@ -367,6 +369,8 @@ Will result in the resume being generated as follows:
 *Projects* +
 (project entries tagged with `software`, `java` and `recent`)
 --
+
+// end::template[]
 
 === Generating Resume : `make`
 
