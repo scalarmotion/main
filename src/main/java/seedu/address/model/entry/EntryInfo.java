@@ -11,9 +11,9 @@ import java.util.List;
  */
 public class EntryInfo {
 
-    public static final String ENTRYINFO_VALIDATION_REGEX = "^[A-Za-z0-9 -]+$";
+    public static final String ENTRYINFO_VALIDATION_REGEX = "^[A-Za-z0-9 ()-]+$";
     public static final String MESSAGE_ENTRYINFO_CONSTRAINTS =
-            "header, subHeader and duration must be alphanumeric and space or dash separated";
+            "header, subHeader and duration must be alphanumeric and separated by brackets or hyphen or space.";
 
     private List<String> entryInfo = new LinkedList<String>();
 
