@@ -306,11 +306,11 @@ A template specifies the format of the generated resume. It specifies the sectio
 
 ==== Template object structure
 
-A `Template` object consists of a list of `TemplateSection`, which consists of:
+The diagram below shows the structure of a `Template` object. A `Template` contains an `ArrayList` of `TemplateSection`,
+where each contains a title to be displayed and two predicates for filtering entries based on their category and tags.
 
-* The section heading
-* A `Predicate<ResumeEntry>` which checks that the entry is of the specified `Category`
-* A `Predicate<ResumeEntry>` which checks that the entry matches the specified tags
+.Template object UML class diagram
+image::Template_UML.png[width="500"]
 
 ==== Template file
 Templates are stored as text files, with each line in the following format:
@@ -323,14 +323,6 @@ If no tags are specified, all entries with the `[Category Tag]` will be included
 
 
 Template files are written by the user and loaded into the application using the `loadtemplate` command.
-
-==== Template objects
-The diagram below shows the structure of a `Template` object. A `Template` contains an `ArrayList` of `TemplateSection`,
-where each section contains a title and two predicates for filtering entries based on their category and tags.
-
-.Template object UML class diagram
-image::Template_UML.png[width="500"]
-
 
 ==== Template loading sequence
 
