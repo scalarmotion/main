@@ -349,27 +349,54 @@ This section describes the implementation of features related to managing entrie
 
 Below is the class diagram of classes under the package `seedu.address.model.entry`, which lays the foundation for the implementation of <<entryManagement, Entry Management>>
 
+.Class diagram for entry related classes
 image::classDiagramForEntry.png[width="800"]
 
 * Current Implementation
-.. As shown in the diagram, all data of an added entry in ResuMaker is encapsulated as a class `ResumeEntry`, which is composed of four other classes: namely one `Category`, one `EntryInfo`, one EntryDescription and multiple instances of `Tag`.
+.. As shown in the diagram, all data of an added entry in ResuMaker is encapsulated as a class `ResumeEntry`, which is composed of four other classes: namely one `Category`, one `EntryInfo`, one `EntryDescription` and multiple instances of `Tag`.
 .. ResuMaker extends a `Taggable` interface which allows manipulation of tags associated with itself.
 
 
 * Design Consideration
 .. `Taggable` Interface +
-Provides an additional abstraction layer for any class that needS to access methods that `ResumeEntry` overrides to implement `Taggable`. This enforces Interface Segregation Principle in which none related classes have limited knowledge about `ResumeEntry`.
+Provides an additional abstraction layer for any class that needs to access methods that `ResumeEntry` overrides to implement `Taggable`. This enforces Interface Segregation Principle in which unrelated classes have limited knowledge about `ResumeEntry`.
 
 .. Encapsulation of `EntryInfo` +
 ... Instead of lumping `title`, `subtitle` and `duration` in `ResumeEntry`, encapsulating the three into `EntryInfo` provides another layer of abstraction.
-... Not all entries have EntryInfo, a <<minorEntry, minor entry>> does not contain title, subtitle or duration. `EntryInfo` helps to differentiate <<minorEntry, minor entry>> from <<majorEntry, major entry>> using `isMinorEntry()`.
+... Not all entries have the three information, a <<minorEntry, minor entry>> does not contain title, subtitle or duration. `EntryInfo` helps to differentiate <<minorEntry, minor entry>> from <<majorEntry, major entry>> using `isMinorEntry()`.
 
-.. Encapsulation Using `EntryDescription` +
-... As opposed to representing an entry description as a `String` field in `ResumeEntry`, encapsulating it in `EntryDescription` provides another layer of abstraction.
-... `EntryDescription` contains `List<String>` that allows for easy modification of a specific segment of the desciption of a particular entry, i.e. allows users to edit a particular line of description of a particular entry.
+.. Encapsulation using `EntryDescription` +
+... As opposed to putting an entry description as a `String` field in `ResumeEntry`, encapsulating it in `EntryDescription` provides another layer of abstraction.
+... `EntryDescription` contains `List<String>` that allows for easy modification of a specific segment of the description of a particular entry, i.e. allows users to edit a particular line of description in that entry.
+
+==== Responsive Display of Expanded Entry
+This enhancement enables the Graphic User Interface to display the description of an entry responsively to any modification of an entry.
+
+* Current Implementation +
+.. The high level interaction between different components follows the same workflow as any other commands. +
+Diagram(part a) below illustrates the high level interaction between different components when an `addBullet` or `editBullet` command is executed.
+.. A noteworthy point is that it makes use of event driven design to allow UI to respond to Logic.
+`EventCenter` acts as the receiver of the three events raised by Logic and sends them to the respective handlers of these events.
+For `addBullet` command, the handlers of events raised are UI and Storage. Please refer to diagram(part b) below for more detail.
+
+.Sequence diagram for adding a bullet description to an entry (part a)
+image::SequenceDiagramAddBullet_1.png[width="800"]
+.Sequence diagram for adding a bullet description to an entry (part b)
+image::SequenceDiagramAddBullet_2.png[width="800"]
 
 
-==== Edit Bullet Description (work in progress)
+
+* Design Consideration
+
+.. Minimizing the amount of code to be added by tapping on the existing utility +
+Given how well-established event driven approach is, it will be more convenient to adopt it to minimize the addition of lines of code.
+Taking the alternative would mean extra code to be added to establish some form of reference of UI in Logic.
+
+.. Decoupling between Logic and UI +
+Rather than asking Logic to interact directly with UI to request for changes in UI, which increases coupling between the two, `EventCenter` acts as the
+"middle man" to minimize coupling.
+
+
 
 
 //end::entryManagement[]
