@@ -63,7 +63,7 @@ link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/33[#33], link:https://gi
 
 
 |===
-|_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
+|_Here are some sections I contributed to the User Guide which showcase my ability to write documentation for end-users._
 |===
 
 include::../UserGuide.adoc[tag=resume]
@@ -71,14 +71,7 @@ include::../UserGuide.adoc[tag=resume]
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
+|_Here are some sections I contributed to the Developer Guide which showcase the technical depth of my contributions to the project, as well as my ability to document them._
 |===
 
 include::../DeveloperGuide.adoc[tag=resume]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
