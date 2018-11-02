@@ -16,6 +16,7 @@ endif::[]
 
 By: `CS2103-W-17-1`      Since: `August 2018`      Licence: `MIT`
 
+// tag::intro[]
 == Introduction
 
 Do you find the need to maintain multiple versions of your resume?
@@ -29,6 +30,7 @@ It can also pick up contextual awareness about your world - with out-of-the-box 
 Interested? Jump to the <<Quick Start>> to get started. +
 
 With ResuMaker, __let your skills document themselves.__
+//end::intro[]
 
 == Quick Start
 To get started with using ResuMaker:
@@ -220,7 +222,7 @@ Deletes the 1st bullet of the 2nd entry in ResuMaker.
 Deletes the 1st bullet of the 1st entry displayed under education category of ResuMaker.
 
 //end::hengyuanUG[]
-
+// tag::anubhavUG[]
 === Creating a Contextual Event (Project / Work Experience / Skill): `nus`
 There are times when we just don't want to manually enter every piece of required information into a computer programme.
 After all, shouldn't some things __just be common knowledge?__
@@ -245,7 +247,7 @@ Creates a Nonacademics Entry for an Executive Commitee position in the Computing
 
 [NOTE]
 Slang and acronyms must be correctly configured in application data. In future releases, ResuMaker will ship with NUS / SOC specific slang and acronyms.
-
+//end::anubhavUG[]
 [[tags]]
 === Managing Tags
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
