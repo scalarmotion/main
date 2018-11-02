@@ -376,29 +376,62 @@ Provides an additional abstraction layer for any class that needS to access meth
 
 
 
-// tag:: resume[]
+// tag::resume[]
 === Resume Generation
+This section describes the implementation of the resume generation feature, explains the underlying classes and
+supporting data structures, and highlights areas that are open to extension.
 
-==== The Resume Object
+==== Resume Structure
 
-The `Resume` object contains a list of `ResumeSections`,
-each comprising a title and various `ResumeEntries` associated with it
-(as stipulated by the Template used to generate the Resume). +
-This Resume object can then be converted to a String using another class.
-While we have chosen to implement conversion into Markdown,
-it is possible to extend this functionality by implementing your own Converter class
-to convert the object into another format, such as HTML.
+The `Resume` contains a list of `ResumeSections`,
+each comprising a title and a list of `ResumeEntries` associated with it
+(as stipulated by the `Template` used to generate the `Resume`). +
+_[CLASS DIAGRAM]_
+
+==== Storage Management
+
+When a resume is to be saved to a file, the `ModelManager` raises a `ResumeSaveEvent`, which encapsulates
+the complete `Resume` as well as the specified file `Path`. This event is captured by the `StorageManager`,
+which passes the data to the `MarkdownResumeStorage` class. The `Resume` object is then converted to a markdown `String`
+by the `MarkdownConverter` utility class, after which it is written to a file (with the specified name) by the `MdUtil` class. +
+_[DIAGRAM]_
+
 
 ==== Markdown Conversion
 
-To transform this abstract representation of the Resume into concrete text,
-a `MarkdownConverter` utility class is first used to progressively convert each level of the Resume
-(from the titles, information and descriptions of each individual ResumeEntry,
-to a ResumeSection of ResumeEntries and finally to the full Resume)
-into a String containing its formatted Markdown representation.
-A file with the name stipulated by the user is then created and the String is written to it.
+To transform this abstract object representation of the `Resume` into concrete text,
+the `MarkdownConverter` utility class progressively converts each level of the `Resume`
+(from the titles, information and descriptions of each individual `ResumeEntry`,
+to a `ResumeSection` of `ResumeEntries` and finally the full `Resume`)
+into a `String` containing its formatted markdown representation.
 
-// end:: resume[]
+An external link:https://github.com/Steppschuh/Java-Markdown-Generator[Java Markdown Generator] library
+was used to handle the generation of the markdown `String` in `MarkdownConverter`,
+as it was built on a `Builder` pattern which made it easier and more organised to progressively
+generate markdown text for each part of the resume and combine it all together in the end.
+
+==== Possible Extensions
+
+===== Changing Markdown Layouts
+
+If you wish to modify the markdown layout produced by ResuMaker, look into the overloaded `toMarkdown` method
+within `MarkdownConverter`. The various versions of this method are implemented using the
+link:https://github.com/Steppschuh/Java-Markdown-Generator[Java Markdown Generator] external library and designed to be
+easy to understand and modify. +
+You are recommended to create a new subclass of `MarkdownConverter` and `@Override` its `toMarkdown` method
+with your own versions, so as to preserve the original functionality of the application for reference.
+
+===== Adding File Formats
+
+While we have chosen to implement conversion into markdown, you may prefer a different file format and want to avoid
+the hassle of converting markdown to other formats outside the application. To this end, you can extend ResuMaker by
+adding support for saving `Resumes` to a new format. +
+To achieve this, you would have to design your own class implementing the `ResumeStorage` interface. This new class would
+then need new utility methods to handle conversion of the `Resume` into another text format, such as XML. +
+_[DIAGRAM OF NECESSARY ADDITIONS]_
+
+
+// end::resume[]
 
 // tag:: contextualAwareness[]
 === Contextual Awareness

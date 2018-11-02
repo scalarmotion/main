@@ -369,20 +369,34 @@ Will result in the resume being generated as follows:
 *Projects* +
 (project entries tagged with `software`, `java` and `recent`)
 --
-
 // end::template[]
 
+// tag::resume[]
 === Generating Resume : `make`
 
-Generates a Resume file in Markdown format with the given name, using the _template_ currently loaded in the application.
+Generates a Resume file with the given name, using the _template_ currently loaded in the application. +
 
-
+[NOTE]
+====
+By default, the file will be saved in the same folder as the application.
+You can also specify a more complicated filepath if you want the file to be saved to a specific folder.
+====
 
 Examples:
 
 * `make sep.md` +
-Generates a file named sep.md, containing a Resume which lists entries as designated by the currently loaded template.
+Generates a file named sep.md in the same folder as the application,
+containing a Resume which lists entries as designated by the currently loaded template.
 
+ResuMaker generates your resume files in the _markdown_ format, which is commonly used around the web.
+Since you will likely need your resume in a different format such as a Word document or a PDF file,
+here are some of the many tools out there that can help you convert your resume:
+
+* link:http://www.writage.com/[Writage], which allows you to edit and convert markdown files in Microsoft Word.
+* link:https://pandoc.org/[Pandoc], which converts markdown files to a variety of formats like PDF.
+* link:https://dillinger.io/[Dillinger], which lets you edit markdown files and convert them to HTML.
+
+// end::resume[]
 
 === Clearing all entries : `clear` [Coming in v1.4]
 
