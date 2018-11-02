@@ -48,7 +48,6 @@ public class CommandBox extends UiPart<Region> {
             // As up and down buttons will alter the position of the caret,
             // consuming it causes the caret's position to remain unchanged
             keyEvent.consume();
-
             navigateToPreviousInput();
             break;
         case DOWN:
@@ -56,6 +55,9 @@ public class CommandBox extends UiPart<Region> {
             navigateToNextInput();
             break;
         default:
+            // trigger any command line observers
+            triggerObservers(commandTextField.textProperty().getValue());
+
             // let JavaFx handle the keypress
         }
     }
@@ -84,6 +86,13 @@ public class CommandBox extends UiPart<Region> {
         }
 
         replaceText(historySnapshot.next());
+    }
+
+    /**
+     * Asks the Logic object to trigger all CmdLineObservers
+     */
+    private void triggerObservers(String currentInput) {
+        logic.observe(currentInput);
     }
 
     /**

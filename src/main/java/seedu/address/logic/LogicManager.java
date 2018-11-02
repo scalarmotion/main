@@ -1,5 +1,7 @@
 package seedu.address.logic;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.collections.ObservableList;
@@ -8,6 +10,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.observers.AwarenessService;
+import seedu.address.logic.observers.CmdLineObserver;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -23,11 +27,20 @@ public class LogicManager extends ComponentManager implements Logic {
     private final Model model;
     private final CommandHistory history;
     private final AddressBookParser addressBookParser;
+    private final List<CmdLineObserver> cmdLineObservers = new LinkedList<>();
 
     public LogicManager(Model model) {
         this.model = model;
         history = new CommandHistory();
         addressBookParser = new AddressBookParser();
+        cmdLineObservers.add(new AwarenessService(model));
+    }
+
+    @Override
+    public void observe(String currentInput) {
+        for (CmdLineObserver observer : cmdLineObservers) {
+            observer.observe(currentInput).ifPresent(event -> raise(event));
+        }
     }
 
     @Override

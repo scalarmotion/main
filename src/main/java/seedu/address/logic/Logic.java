@@ -28,4 +28,7 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of entries */
     ObservableList<ResumeEntry> getFilteredEntryList();
+
+    /** Triggers any Command Line Observers held in the Logic Component */
+    void observe(String currentInput);
 }
