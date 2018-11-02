@@ -63,8 +63,8 @@ Here are the features available in ResuMaker:
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~SECTION, [t/TITLE], [s/SUBHEADER], [d/DURATION], [#TAGNAME]...`, `SECTION`, `TITLE` , `SUBHEADER`, `DURATION` and `TAGNAME` and  are parameters which can be used as `addEntry ~work #INTERNSHIP t/The Source Enterprise s/Software Engineering Intern d/Jan 2012 - June 2012`.
-* Items in square brackets are optional e.g `~SECTION [t/TITLE] [s/SUBHEADER] [d/DURATION] [#TAG]...` can be used as `~work t/The Source Enterprise s/Java programmer d/ Jan 2012 - Dec 2014 #JAVA` or `~awards`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `addEntry ~CATEGORY, [t/TITLE], [s/SUBHEADER], [d/DURATION], [#TAGNAME]...`, `CATEGORY`, `TITLE` , `SUBHEADER`, `DURATION` and `TAGNAME` are parameters which can be used as `addEntry ~work #INTERNSHIP t/The Source Enterprise s/Software Engineering Intern d/Jan 2012 - June 2012`.
+* Items in square brackets are optional e.g `~CATEGORY [t/TITLE] [s/SUBHEADER] [d/DURATION] [#TAG]...` can be used as `~work t/The Source Enterprise s/Java programmer d/ Jan 2012 - Dec 2014 #JAVA` or `~awards`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[#TAG]...` can be used as `{nbsp}` (i.e. 0 times), `#JAVA`, `#JAVA #Software Engineering`, `#JAVA #Software Engineering #AI` etc.
 * Parameters can be in any order e.g. if the command specifies `[t/TITLE] [s/SUBHEADER]`, `[s/SUBHEADER] [t/TITLE]` is also acceptable.
 ====
@@ -74,51 +74,47 @@ Here are the features available in ResuMaker:
 Displays a list of all commands available. +
 Format: `help`
 
-
+// tag::hengyuanUG[]
 === Adding an entry: `addEntry`
 
 Adds an entry to ResuMaker. +
-Format: `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]...`
+Format: `addEntry ~CATEGORY , [[t/TITLE], [s/SUBHEADER], [d/DURATION]], [#TAGNAME]...`
 
 [TIP]
 An entry need not have associated title, subheader and duration.
 An entry can have any number of tags (including 0).
 An entry contains description, which can be added using addBullet as a separate command.
-All parameter input from the user must be alphanumeric and can be separated by space, with the exception of `DURATION` which allows special character `-`.
+All parameter input from the user must be alphanumeric and can be separated by the following characters: space, `-`, or `()`.
 
 Examples:
 
 * `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
+* `addEntry ~work t/Carousell #work #web #mobile #backend s/intern d/Nov 2017 - Jan 2018`
+* `addEntry ~education #uni t/National University of Singapore s/Bachelor of Computing in Computer Science(Honours) d/2017 - 2021`
 * `addEntry ~awards #java`
 
-
-=== Listing entries : `listEntry` [Coming in v1.4] +
-Lists the entries in ResuMaker, filtered according to their sections and tags.
-Format: `listEntry [~SECTION] [#TAG]...`
-
-****
-* Both section and tags are optional - running with no arguments will display all entries
-* Note that the description of each entry will be hidden +
-****
-
-Examples:
-
-* `listEntry` +
-listing all entries.
-* `listEntry ~education #java` +
-listing all entries under education category and tagged as java.
 
 
 === Adding a bullet point to an entry: `addBullet`
 
-Adds a bullet point to the end of the description of an entry at index ENTRYINDEX in ResuMaker. +
+Adds a bullet point to the end of the description of an entry at index ENTRYINDEX in ResuMaker.
+The user needs to execute `tag ls` command to display a filtered list of entries and select a particular entry
+to add a bullet description to. +
 Format: `addBullet ENTRYINDEX CONTENTTOADD`
+
+****
+* `ENTRYINDEX` refers to the index of the displayed entry list from executing `tag ls`
+* `CONTENTTOADD` refers to a line of description that the user wants to add to an entry
+****
 
 Example:
 
-* `listEntry` +
-`addBullet 1 attain Best Financial Hack Award` +
-adds a bullet point at the end of the description of 1st entry.
+* `tag ls` +
+`addBullet 1 attained Best Financial Hack Award` +
+Adds the bullet point "attained Best Financial Hack Award" to the description of the 1st entry.
+* `tag ls ~education` +
+`addBullet 1 maintained a CAP of 4.95 on average throughout the four years` +
+Adds the bullet point "maintained a CAP of 4.95 on average throughout the four years" to the description of the 1st entry under the education category.
 
 
 === Viewing a particular entry : `selectEntry`
@@ -127,8 +123,8 @@ Displays detailed description of the entry in ResuMaker at the specified index o
 Format: `selectEntry INDEX`
 
 ****
-* `INDEX` refers to the index of the displayed entry list from executing `listEntry`
-* Detailed description will be displayed as an indexed list of all bulleted description in that entry
+* `INDEX` refers to the index of the displayed entry list from executing `tag ls`
+* Detailed description will be displayed as an indexed list of all bullet description in that entry
 ****
 
 Examples:
@@ -154,7 +150,7 @@ Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 Example:
 
 * `editEntry 1 t/R company  #JAVA` +
-edits the entry at index 1 by replacing its title as R company and replace all its tags by JAVA.
+Edits the entry at index 1 by replacing its title as R company and replace all its tags by JAVA.
 
 
 === Editing a bullet point: `editBullet` [Coming in v1.4]
@@ -174,7 +170,7 @@ Example:
 
 * `selectEntry` +
 `editBullet 1 1 implement scalable application for data visualization using java` +
-edits the entry at index 1 by replacing its bullet description at index 1 by "implement scalable application for data visualization using java".
+Edits the 1st entry by replacing its 1st bullet description with "implement scalable application for data visualization using java".
 
 
 === Deleting an entry: `deleteEntry` [Coming in v1.4]
@@ -183,19 +179,19 @@ Deletes the entry at the specified index. +
 Format: `deleteEntry INDEX`
 
 ****
-* The `INDEX` refers to the index number shown in the displayed entry list.
-* The `INDEX` *must be a positive integer* 1, 2, 3, ...
+* `INDEX` refers to the index number shown in the displayed entry list.
+* `INDEX` *must be a positive integer* 1, 2, 3, ...
 ****
 
 
 Examples:
 
-* `listEntry` +
+* `tag ls` +
 `deleteEntry 2` +
 Deletes the 2nd entry in ResuMaker.
-* `listEntry ~education` +
+* `tag ls ~education` +
 `deleteEntry 1` +
-Deletes the 1st entry displayed under education section.
+Deletes the 1st entry displayed under education category.
 
 
 === Deleting a bullet: `deleteBullet` [Coming in v1.4]
@@ -214,16 +210,16 @@ Format: `deleteBullet ENTRYINDEX BULLETINDEX`
 
 Examples:
 
-* `listEntry` +
+* `tag ls` +
 `selectEntry` +
 `deleteBullet 2 1` +
 Deletes the 1st bullet of the 2nd entry in ResuMaker.
-* `listEntry ~education` +
+* `tag ls ~education` +
 `selectEntry` +
 `deleteBullet 1 1` +
-Deletes the 1st bullet of the 1st entry displayed under education section of ResuMaker.
+Deletes the 1st bullet of the 1st entry displayed under education category of ResuMaker.
 
-
+//end::hengyuanUG[]
 
 === Creating a Contextual Event (Project / Work Experience / Skill): `nus`
 There are times when we just don't want to manually enter every piece of required information into a computer programme.
@@ -292,7 +288,7 @@ Format: `tag rm 10` remove all tags and categories from entry 10.
 
 ==== Retagging a particular entry: `tag retag` or `tag rt` [Coming in v1.4]
 
-Remove all current tags and replace it with current tags (space separated).
+Remove all current tags and replace them with given tags (space separated).
 
 Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, adding tag `#java` and category `~work` to entry 1.
 
@@ -429,7 +425,7 @@ For reference, here is a brief summary of the commands available and their synta
 
 * *Add Bullet* `addBullet INDEX CONTENTTOADD` +
 e.g. `addBullet 0 attain Best Financial Hack Award`
-* *Add Entry* `addEntry ~SECTION , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
+* *Add Entry* `addEntry ~CATEGORY , [t/TITLE], [s/SUBHEADER], [d/DURATION] [#TAGNAME]…` +
 e.g. `addEntry ~work #java t/The Source Enterprise s/Java Programmer intern d/ May 2010 - Aug 2010`
 * *Add Nus Entry* : `nus EVENT_NAME` +
 e.g. `nus hack n roll`
@@ -447,8 +443,6 @@ e.g. `selectEntry 2`
 * *Generate Resume* : `make FILENAME`
 * *Help* : `help`
 * *History* : `history`
-* *List Entry* : `listEntry [~SECTION] [#TAG]…` +
-e.g. `listEntry ~education java`
 * *Load Template*: `loadtemplate FILEPATH` +
 e.g. `loadtemplate google.txt`
 * *Select* : `select INDEX` +
