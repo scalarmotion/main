@@ -30,4 +30,23 @@ public class TemplateSection {
     public Predicate<ResumeEntry> getTagPredicate() {
         return tagPredicate;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof TemplateSection)) {
+            return false;
+        }
+
+        // state check
+        TemplateSection other = (TemplateSection) obj;
+        return title.equals(other.title)
+                && catePredicate.equals(other.catePredicate)
+                && tagPredicate.equals(other.tagPredicate);
+    }
 }
