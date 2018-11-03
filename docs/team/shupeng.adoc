@@ -9,17 +9,21 @@
 
 == Overview
 
-AddressBook - Level 4 is a desktop address book application used for teaching Software Engineering principles. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLoC.
+This portfolio showcases my contributions for a software engineering team project for our software engineering module. In a period of 6 weeks, we were tasked to implement a command line interface (CLI) based application targeted at a specific group of users.
+
+Our project, ResuMaker, is a fast and flexible resume generator, optimised for students in the School of Computing. The user interacts with it using a CLI, and it has a GUI created with JavaFX. It is written in Java, and has about 10 kLo.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
-** Credits: _{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}_
+* *Major enhancement*: added *tag management system*
+** What it does: This enhancement allows the user to use tags to identify resume entries to include in the display or resume output.
+** Justification: This enhancement allows ResuMaker to achieve one of its highlights: ability to selectively include specific entries to include in the resume creation process.
+** Highlights: This enhancement will be needed for many of the other features, therefore many implementation details have to be considered to cater for the various different usages of the tags in the application.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: added commands to alter existing tags of entries
+Instead of having to reinsert entries, addition tag management functions have been implement to add, remove and replace tags. This will streamline the process of managing existing resume entries giving users more control over
+** What it does: This enhancement allows the user to alter tags of existing entries
+** Justification: This enhancement streamlines the tag management process, instead of having to reinsert entries, users can make use of the functions to alter the tags instead.
 
 * *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
 
@@ -45,14 +49,11 @@ _{you can add/remove categories in the list above}_
 
 == Contributions to the User Guide
 
-
 |===
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
 include::../UserGuide.adoc[tag=tags]
-
-include::../UserGuide.adoc[tag=dataencryption]
 
 == Contributions to the Developer Guide
 
@@ -60,9 +61,7 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
+include::../DeveloperGuide.adoc[tag=tags]
 
 
 == PROJECT: PowerPointLabs

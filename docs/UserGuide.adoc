@@ -247,34 +247,32 @@ Creates a Nonacademics Entry for an Executive Commitee position in the Computing
 
 [NOTE]
 Slang and acronyms must be correctly configured in application data. In future releases, ResuMaker will ship with NUS / SOC specific slang and acronyms.
+=======
 //end::anubhavUG[]
+
+//tag::tags[]
 [[tags]]
+
 === Managing Tags
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
-
-==== Viewing currently active tags: `tag status` [Coming in v1.4]
-
-Lists all the tags currently active, and which will be included in the generated resume. This will effectively list out all the tags active in the current loaded template.
-
-Format: `tag status` lists all the corresponding tags and categories that will appear in the resume.
 
 ==== Listing entries under specific tags: `tag list` or `tag ls`
 
 List all entries under specific tags (space separated).
 
-By default, if a tag is not given, all the tags will be displayed. +
+By default, if a tag is not given, all entries will be displayed.
 
-Format: `tag ls` list all the tags and the relevant entries for each tag.
+Format: `tag ls` will display all entries in ResuMaker.
 
-Format: `tag ls ~work ~projects #java` list all the `~work` and `~project` entries tagged with `#java`
+Format: `tag ls ~work #java` list all the `~work` entries tagged with `#java`
 
-Entries displayed will be accompanied with their relevant entry id.
+All entries displayed will be accompanied with their relevant entry id, to be used when editing.
 
 ==== Add particular tag to entry: `tag add` [Coming in v1.4]
 
 Add tags (space separated) to particular entry (identified by index).
 
-Duplicated tags will be ignored
+Duplicate tags will be ignored
 
 Format: `tag add 10 ~work #java` add tag `#java` and category `~work` to entry 10.
 
@@ -293,6 +291,8 @@ Format: `tag rm 10` remove all tags and categories from entry 10.
 Remove all current tags and replace them with given tags (space separated).
 
 Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, adding tag `#java` and category `~work` to entry 1.
+
+//end::tags[]
 
 === Listing entered commands : `history`
 
