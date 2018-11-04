@@ -247,12 +247,12 @@ Creates a Nonacademics Entry for an Executive Commitee position in the Computing
 
 [NOTE]
 Slang and acronyms must be correctly configured in application data. In future releases, ResuMaker will ship with NUS / SOC specific slang and acronyms.
-=======
+
 //end::anubhavUG[]
 
-//tag::tags[]
 [[tags]]
 
+//tag::tags[]
 === Managing Tags
 These are functions to help you manage your tags; namely to view and edit the relevant tags and entries.
 
@@ -291,7 +291,6 @@ Format: `tag rm 10` remove all tags and categories from entry 10.
 Remove all current tags and replace them with given tags (space separated).
 
 Format: `tag rt 1 ~work #java` remove all tags and categories from entry 1, adding tag `#java` and category `~work` to entry 1.
-
 //end::tags[]
 
 === Listing entered commands : `history`
