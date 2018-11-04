@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static org.junit.Assert.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
@@ -9,6 +10,8 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import seedu.address.logic.commands.TagListCommand;
+import seedu.address.logic.commands.TagRetagCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TagCommandParserTest {
 
@@ -17,6 +20,20 @@ public class TagCommandParserTest {
     @Test
     public void parse_help_throwsParseException() {
         assertParseFailure(parser, "", String.format(MESSAGE_INVALID_COMMAND_FORMAT, TagCommandParser.MESSAGE_USAGE));
+    }
+
+    @Test
+    public void parse_rightCommmand_returnsRightCommand() throws ParseException {
+        assertTrue(parser.parse("list ~work #java") instanceof TagListCommand);
+        assertTrue(parser.parse("ls ~work #java") instanceof TagListCommand);
+
+        assertTrue(parser.parse("retag 1 ~work #java") instanceof TagRetagCommand);
+        assertTrue(parser.parse("rt 1 ~work #java") instanceof TagRetagCommand);
+
+        // TODO: check parser type for TagAdd & TagRm
+        // assertTrue(parser.parse("add 1 ~work #java") instanceof TagAddCommand);
+        // assertTrue(parser.parse("remove 1 #java") instanceof TagRmCommand);
+        // assertTrue(parser.parse("rm 1 #java") instanceof TagRmCommand);
     }
 
     @Test
