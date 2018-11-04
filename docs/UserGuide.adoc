@@ -272,6 +272,8 @@ All entries displayed will be accompanied with their relevant entry id, to be us
 
 Add tags (space separated) to particular entry (identified by index).
 
+If a category tag is given, it will replace the current category of the specific entry.
+
 Duplicate tags will be ignored
 
 Format: `tag add 10 ~work #java` add tag `#java` and category `~work` to entry 10.
