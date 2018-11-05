@@ -16,6 +16,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
@@ -92,7 +93,7 @@ public class TestApp extends MainApp {
      * Returns a defensive copy of the model.
      */
     public Model getModel() {
-        Model copy = new ModelManager((model.getAddressBook()), model.getEntryBook(), new UserPrefs());
+        Model copy = new ModelManager((model.getAddressBook()), model.getEntryBook(), new UserPrefs(), new Awareness());
         ModelHelper.setFilteredList(copy, model.getFilteredPersonList());
         return copy;
     }

@@ -9,10 +9,17 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.events.ui.ContextUpdateEvent;
+import seedu.address.model.AddressBook;
+import seedu.address.model.EntryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
+import seedu.address.model.util.SampleDataUtil;
 
 public class AwarenessServiceTest {
+
+    private static final Awareness typicalAwareness = SampleDataUtil.getSampleAwareness();
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -35,7 +42,7 @@ public class AwarenessServiceTest {
 
     @Test
     public void observe_relevantInput() {
-        Model model = new ModelManager();
+        Model model = new ModelManager(new AddressBook(), new EntryBook(), new UserPrefs(), typicalAwareness);
         AwarenessService awarenessService = new AwarenessService(model);
 
         ContextUpdateEvent actual = (ContextUpdateEvent) awarenessService.observe("nus ta ma1101r").get();

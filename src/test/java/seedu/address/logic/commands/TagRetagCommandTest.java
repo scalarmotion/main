@@ -18,6 +18,7 @@ import seedu.address.model.EntryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.tag.Tag;
@@ -74,9 +75,12 @@ public class TagRetagCommandTest {
 
     @Test
     public void execute_category_added() {
-        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new EntryBook(model.getEntryBook()), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs(),
+                                               new Awareness());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                                                       new EntryBook(model.getEntryBook()), new UserPrefs(),
+                                                       new Awareness());
 
         Set<Tag> tags = new HashSet<Tag>();
         Category category = new Category("fb");
@@ -93,9 +97,12 @@ public class TagRetagCommandTest {
 
     @Test
     public void execute_categoryAndTags_added() {
-        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new EntryBook(model.getEntryBook()), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs(),
+                                               new Awareness());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                                                       new EntryBook(model.getEntryBook()), new UserPrefs(),
+                                                       new Awareness());
 
         Set<Tag> tags = new HashSet<Tag>();
         tags.add(new Tag("intern"));

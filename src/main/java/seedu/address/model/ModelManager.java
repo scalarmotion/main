@@ -30,7 +30,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
 import seedu.address.model.tag.TagManager;
 import seedu.address.model.template.Template;
-import seedu.address.model.util.SampleDataUtil;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -51,9 +50,10 @@ public class ModelManager extends ComponentManager implements Model {
     private final CategoryManager categoryManager;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given entrybook, userPrefs and awareness object
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEntryBook entryBook, UserPrefs userPrefs) {
+    public ModelManager(ReadOnlyAddressBook addressBook, ReadOnlyEntryBook entryBook, UserPrefs userPrefs,
+                        Awareness awareness) {
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -62,7 +62,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredPersons = new FilteredList<>(versionedAddressBook.getPersonList());
         loadedTemplate = Optional.empty();
-        awareness = SampleDataUtil.getSampleAwareness();
+        this.awareness = awareness;
         versionedEntryBook = new VersionedEntryBook(entryBook);
         filteredEntries = new FilteredList<>(versionedEntryBook.getEntryList());
 
@@ -71,7 +71,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new EntryBook(), new UserPrefs());
+        this(new AddressBook(), new EntryBook(), new UserPrefs(), new Awareness());
     }
 
     @Override

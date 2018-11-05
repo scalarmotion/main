@@ -18,6 +18,7 @@ import seedu.address.model.EntryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.tag.Tag;
 
@@ -79,9 +80,12 @@ public class TagRmCommandTest {
 
     @Test
     public void execute_rmTags_tagsRemoved() {
-        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new EntryBook(model.getEntryBook()), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs(),
+                                               new Awareness());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                                                       new EntryBook(model.getEntryBook()), new UserPrefs(),
+                                                       new Awareness());
 
         Set<Tag> tags = new HashSet<Tag>();
         tags.add(new Tag("java"));
@@ -100,9 +104,12 @@ public class TagRmCommandTest {
 
     @Test
     public void execute_rmTags_allRemoved() {
-        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new EntryBook(model.getEntryBook()), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs(),
+                                               new Awareness());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                                                       new EntryBook(model.getEntryBook()), new UserPrefs(),
+                                                       new Awareness());
 
         Set<Tag> tags = new HashSet<Tag>();
         Index index = Index.fromZeroBased(0);
@@ -120,9 +127,12 @@ public class TagRmCommandTest {
 
     @Test
     public void execute_rmTags_nothingRemoved() {
-        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs());
-        Model expectedModel = new ModelManager(
-                new AddressBook(model.getAddressBook()), new EntryBook(model.getEntryBook()), new UserPrefs());
+        Model model = new ModelManager(getTypicalAddressBook(), getDefaultEntryBook(), new UserPrefs(),
+                                               new Awareness());
+
+        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
+                                                       new EntryBook(model.getEntryBook()), new UserPrefs(),
+                                                       new Awareness());
 
         Set<Tag> tags = new HashSet<Tag>();
         tags.add(new Tag("python"));

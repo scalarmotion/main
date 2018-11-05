@@ -42,6 +42,11 @@ public class Awareness {
 
     }
 
+    /** Constructor to create an empty Awareness object */
+    public Awareness() {
+        this(new HashMap<String, String>(), new TreeSet<String>());
+    }
+
     /**
      * Given an expression, returns a possible Event name. An Event with this name may not actually exist.
      * For example, given the expression "cs", "computer science" is returned as an Event name.
@@ -118,6 +123,23 @@ public class Awareness {
      */
     public Optional<ResumeEntry> getContextualResumeEntry(String possibleEventName) {
         return Optional.ofNullable(nameToEntryMappings.get(possibleEventName));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Awareness)) {
+            return false;
+        }
+
+        Awareness otherAwareness = (Awareness) other;
+
+        return this.dictionary.equals(otherAwareness.dictionary)
+                 && this.allFullPhrases.equals(otherAwareness.allFullPhrases)
+                 && this.nameToEntryMappings.equals(otherAwareness.nameToEntryMappings);
     }
 
 

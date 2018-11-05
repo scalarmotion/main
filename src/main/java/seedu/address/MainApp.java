@@ -103,7 +103,7 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-        return new ModelManager(initialData, initialDataForEntryBook, userPrefs);
+        return new ModelManager(initialData, initialDataForEntryBook, userPrefs, SampleDataUtil.getSampleAwareness());
     }
 
     private void initLogging(Config config) {

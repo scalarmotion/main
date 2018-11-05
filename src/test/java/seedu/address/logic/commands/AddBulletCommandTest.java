@@ -22,12 +22,14 @@ import seedu.address.model.EntryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.util.EntryBuilder;
 
 public class AddBulletCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEntryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEntryBook(), new UserPrefs(),
+                                                   new Awareness());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -43,7 +45,8 @@ public class AddBulletCommandTest {
         String expectedMessage = String.format(AddBulletCommand.MESSAGE_ADDBULLET_SUCCESS, DESC_BULLET_FINANCIAL_HACK);
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()),
-                new EntryBook(model.getEntryBook()), new UserPrefs());
+                new EntryBook(model.getEntryBook()), new UserPrefs(), new Awareness());
+
         expectedModel.updateEntry(model.getFilteredEntryList().get(0), editedEntry);
         expectedModel.commitEntryBook();
 
