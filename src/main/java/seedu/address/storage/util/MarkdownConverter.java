@@ -2,9 +2,11 @@ package seedu.address.storage.util;
 
 import java.util.List;
 
+import net.steppschuh.markdowngenerator.link.Link;
 import net.steppschuh.markdowngenerator.list.UnorderedList;
 import net.steppschuh.markdowngenerator.text.Text;
 import net.steppschuh.markdowngenerator.text.TextBuilder;
+import net.steppschuh.markdowngenerator.text.emphasis.BoldText;
 import net.steppschuh.markdowngenerator.text.emphasis.ItalicText;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 
@@ -13,7 +15,7 @@ import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.resume.Resume;
-//import seedu.address.model.resume.ResumeHeader;
+import seedu.address.model.resume.ResumeHeader;
 import seedu.address.model.resume.ResumeSection;
 
 /**
@@ -47,8 +49,8 @@ public final class MarkdownConverter {
      */
     public static String toMarkdown(Resume resume) {
         return new TextBuilder()
-                //.append(new Text(MarkdownConverter.toMarkdown(resume.getHeader())))
-                //.newLines(2)
+                .append(new Text(MarkdownConverter.toMarkdown(resume.getHeader())))
+                .newLines(2)
                 .append(new Text(MarkdownConverter.toMarkdown(resume.getSectionList())))
                 .toString();
     }
@@ -56,12 +58,29 @@ public final class MarkdownConverter {
     /**
      * param header is the Header of a Resume which will be converted to
      * return a String containing its Markdown representation.
-     *
+     */
     public static String toMarkdown(ResumeHeader header) {
-        // TODO: Implement when personal info structure has been confirmed
         return new TextBuilder()
+                .append(new Heading(header.getName(), 2))
+                .newLines(2)
+                .append(new BoldText(header.getPhone()))
+                .newLines(2)
+                .append(new Link(header.getEmail(),
+                        "mailto:" + (header.getEmail())))
+                .newLines(2)
+                .append(new Text(header.getAddress()))
                 .toString();
     }
+
+    /**
+     * param name is a name field which will be converted to
+     * return a String containing its Markdown representation.
+     *
+    public static String toMarkdown(Name name) {
+        return new TextBuilder()
+                .append(MarkdownConverter.toMarkdown(name.toString()))
+                .toString();
+    }*/
 
     /**
      * @param sectionList is the list of Sections of a Resume which will be converted to
