@@ -34,4 +34,10 @@ public class AddBulletCommandParserTest {
         parser.parse("-9 " + description);
     }
 
+    @Test
+    public void parse_noDescription_failure() throws Exception {
+        thrown.expect(ParseException.class);
+        parser.parse("1");
+    }
+
 }

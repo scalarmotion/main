@@ -1,5 +1,9 @@
 package seedu.address.model.entry;
 
+import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.commons.util.StringUtil.isEmptyString;
+import static seedu.address.commons.util.StringUtil.isOnlyWhiteSpace;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +11,10 @@ import java.util.List;
  *  Represents bullet points content for an entry.
  */
 public class EntryDescription {
+
+    public static final String MESSAGE_ENTRYDESC_CONSTRAINTS = "A bullet description must not be "
+            + "empty and must have at least one non whitespace character.";
+
     private List<String> descriptionList;
 
     public EntryDescription() {
@@ -17,8 +25,23 @@ public class EntryDescription {
         return descriptionList;
     }
 
+    /**
+     * Add a bullet to the descriptionList
+     * @param bullet
+     */
     public void addBullet(String bullet) {
+        checkArgument(isValidBullet(bullet), MESSAGE_ENTRYDESC_CONSTRAINTS);
         descriptionList.add(bullet);
+    }
+
+    /**
+     * Checks if a bullet is valid.
+     * i.e bullet is not empty string and does not consist entirely of whitespace
+     * @param bullet a bullet description
+     * @return
+     */
+    public static boolean isValidBullet(String bullet) {
+        return !isOnlyWhiteSpace(bullet) && !isEmptyString(bullet);
     }
 
     @Override

@@ -28,11 +28,10 @@ public class AddBulletCommandParser implements Parser<AddBulletCommand> {
 
         try {
             index = ParserUtil.parseIndex(t.getIndex());
+            return new AddBulletCommand(index, t.getDescription());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddBulletCommand.MESSAGE_USAGE), pe);
         }
-
-        return new AddBulletCommand(index, t.getDescription());
     }
 
     /**
@@ -54,7 +53,10 @@ public class AddBulletCommandParser implements Parser<AddBulletCommand> {
             return argsArr[0];
         }
 
-        public String getDescription() {
+        public String getDescription() throws ParseException {
+            if (argsArr.length == 1) {
+                throw new ParseException("");
+            }
             return argsArr[1];
         }
     }
