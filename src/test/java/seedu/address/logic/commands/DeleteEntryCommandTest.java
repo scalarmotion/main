@@ -18,10 +18,12 @@ import seedu.address.logic.commands.exceptions.DeleteEntryCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.awareness.Awareness;
 import seedu.address.model.entry.ResumeEntry;
 
 public class DeleteEntryCommandTest {
-    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEntryBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), getTypicalEntryBook(), new UserPrefs(),
+                                                   new Awareness());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -32,7 +34,8 @@ public class DeleteEntryCommandTest {
         String expectedMessage = String.format(DeleteEntryCommand.MESSAGE_DELETE_ENTRY_SUCCESS, entryToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(),
-                model.getEntryBook(), new UserPrefs());
+                                                              model.getEntryBook(), new UserPrefs(),
+                                                              new Awareness());
         expectedModel.deleteEntry(entryToDelete);
         expectedModel.commitEntryBook();
 
