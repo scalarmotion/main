@@ -56,7 +56,7 @@ public class TagListCommandTest {
         String category = "";
         List<String> tags = new ArrayList<>();
 
-        int count = 4;
+        int count = 5;
 
         String expectedMessage = String.format(MESSAGE_ENTRIES_LISTED_OVERVIEW, count);
         TagListCommand command = new TagListCommand(category, tags);
@@ -70,7 +70,7 @@ public class TagListCommandTest {
         String category = "work";
         List<String> tags = new ArrayList<>();
 
-        int count = 1;
+        int count = 2;
 
         String expectedMessage = String.format(MESSAGE_ENTRIES_LISTED_OVERVIEW, count);
         TagListCommand command = new TagListCommand(category, tags);
@@ -85,7 +85,7 @@ public class TagListCommandTest {
         List<String> tags = new ArrayList<>();
         tags.add("java");
 
-        int count = 1;
+        int count = 2;
 
         String expectedMessage = String.format(MESSAGE_ENTRIES_LISTED_OVERVIEW, count);
         TagListCommand command = new TagListCommand(category, tags);

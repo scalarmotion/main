@@ -135,10 +135,10 @@ Examples:
 * `selectEntry 0`
 
 
-=== Editing an entry : `editEntry` [Coming in v1.4]
+=== Editing an entry : `editEntryInfo`
 
-Edits non-description fields of an existing entry in ResuMaker, i.e title, sub-header, duration, and tags of an entry. +
-Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
+Edits entry info fields of an existing entry in ResuMaker, i.e title, sub-header and duration. +
+Format: `editEntryInfo INDEX [t/TITLE] [s/SUBHEADER] [d/DURATION]`
 
 ****
 * Edits the entry at the specified `INDEX`. The index refers to the index number shown in the displayed entry list. The index *must be a positive integer* 1, 2, 3, ...
@@ -151,8 +151,10 @@ Format: `editEntry INDEX [t/TITLE ] [s/SUBHEADER] [d/DURATION] [#TAG]...`
 
 Example:
 
-* `editEntry 1 t/R company  #JAVA` +
-Edits the entry at index 1 by replacing its title as R company and replace all its tags by JAVA.
+* `editEntryInfo 1 t/R Company s/Data Science Intern` +
+Edits the entry at index 1 by replacing its title as R Company and subtitle as
+Data Science Intern.
+
 
 
 === Editing a bullet point: `editBullet` [Coming in v1.4]

@@ -56,8 +56,18 @@ public class EntryInfo {
         return entryInfo.isEmpty();
     }
 
+    /**
+     * checks if a string is a valid EntryInfo field
+     */
+    public static boolean isValidEntryInfoField(String s) {
+        return s.matches(ENTRYINFO_VALIDATION_REGEX);
+    }
+
+    /**
+     * checks if a list of string matches the EntryInfo Regex
+     */
     public static boolean isValidEntryInfo(List<String> entryInfo) {
-        return entryInfo.stream().allMatch(s -> s.matches(ENTRYINFO_VALIDATION_REGEX));
+        return entryInfo.stream().allMatch(s -> isValidEntryInfoField(s));
     }
     /**
      * @return Title of the entry.

@@ -15,4 +15,8 @@
     <entryInfo title="National University of Singapore" subheader="Bachelor of computing" duration="2010 - 2014"/>
     <tags>machinelearning</tags>
 </entry>
+<entry category="work">
+    <entryInfo title="Facebook" subheader="Data Science Intern" duration="May 2007 - July 2007"/>
+    <tags>java</tags>
+</entry>
 </entrybook>

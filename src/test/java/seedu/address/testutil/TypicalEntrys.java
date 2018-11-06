@@ -21,6 +21,11 @@ public class TypicalEntrys {
             .withSubHeader("software engineering intern")
             .withTags("java").build();
 
+    public static final ResumeEntry WORK_FACEBOOK_DIFF_ENTRYINFO_SAME_CAT_TAG = new EntryBuilder().withCategory("work")
+            .withTitle("Facebook").withDuration("May 2007 - July 2007")
+            .withSubHeader("Data Science Intern")
+            .withTags("java").build();
+
     public static final ResumeEntry NUS_EDUCATION = new EntryBuilder().withCategory("education")
             .withTitle("National University of Singapore").withDuration("2010 - 2014")
             .withSubHeader("Bachelor of computing")
@@ -61,6 +66,7 @@ public class TypicalEntrys {
                     WORK_FACEBOOK,
                     NUS_EDUCATION_WITH_SPACED_TAG,
                     AWARD_WITH_NO_ENTRYINFO_NO_DESC,
-                    NUS_EDUCATION));
+                    NUS_EDUCATION,
+                    WORK_FACEBOOK_DIFF_ENTRYINFO_SAME_CAT_TAG));
     }
 }

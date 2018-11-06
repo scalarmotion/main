@@ -47,8 +47,8 @@ public class CommandTestUtil {
     public static final String VALID_SUBTITLE_COMPUTING = "Bachelor of Computing";
     public static final String VALID_DURATION_1 = "JAN 2006 - DEC 2010";
     public static final String VALID_TITLE_FACEBOOK = "Facebook";
-    public static final String VALID_SUBTITLE_SE = "Software Engineering Intern";
-    public static final String VALID_DURATION_2 = "Jan 2010 - Dec 2012";
+    public static final String VALID_SUBTITLE_SE = "software engineering intern";
+    public static final String VALID_DURATION_2 = "2010 - 2013";
     public static final String VALID_TAG_JAVA = "java";
     public static final String VALID_TAG_SE = "SE";
 
@@ -70,6 +70,9 @@ public class CommandTestUtil {
     public static final String TITLE_DESC_NUS = " " + PREFIX_TITLE + VALID_TITLE_SOURCE;
     public static final String SUBTITLE_DESC = " " + PREFIX_SUBHEADER + VALID_SUBTITLE_COMPUTING;
     public static final String DURATION_DESC = " " + PREFIX_DURATION + VALID_DURATION_1;
+    public static final String TITLE_DESC_FACEBOOK = " " + PREFIX_TITLE + VALID_TITLE_FACEBOOK;
+    public static final String SUBTITLE_DESC_FACEBOOK = " " + PREFIX_SUBHEADER + VALID_SUBTITLE_SE;
+    public static final String DURATION_FACEBOOK = " " + PREFIX_DURATION + VALID_DURATION_2;
 
     public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "James&"; // '&' not allowed in names
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones

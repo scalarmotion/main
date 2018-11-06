@@ -30,14 +30,12 @@ public class ParserUtil {
 
     /**
      * Parses {@code s} into an {@code Index} and returns it. Leading and trailing whitespaces will be
-     * trimmed.
-     * @throws ParseException if the specified index is invalid (not non-zero unsigned integer).
+     * trimmed
      */
     public static String parseString(String s) {
         String string = s.trim();
         return string;
     }
-
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading and trailing whitespaces will be
@@ -110,6 +108,19 @@ public class ParserUtil {
             throw new ParseException(Category.MESSAGE_CATE_CONSTRAINTS);
         }
         return new Category(trimmedCategory);
+    }
+
+    /**
+     * Parses {@code s} into an {@code Index} and returns it. Leading and trailing whitespaces will be
+     * trimmed.
+     * @throws ParseException if the fields are not in the valid form.
+     */
+    public static String parseEntryInfoFields(String s) throws ParseException {
+        String trimmedfield = s.trim();
+        if (!EntryInfo.isValidEntryInfoField(trimmedfield)) {
+            throw new ParseException(EntryInfo.MESSAGE_ENTRYINFO_CONSTRAINTS);
+        }
+        return trimmedfield;
     }
 
     /**

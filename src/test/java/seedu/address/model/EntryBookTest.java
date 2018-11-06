@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DE
 import static seedu.address.testutil.TypicalEntrys.NUS_EDUCATION;
 import static seedu.address.testutil.TypicalEntrys.NUS_EDUCATION_WITH_SPACED_TAG;
 import static seedu.address.testutil.TypicalEntrys.WORK_FACEBOOK;
+import static seedu.address.testutil.TypicalEntrys.WORK_FACEBOOK_DIFF_ENTRYINFO_SAME_CAT_TAG;
 import static seedu.address.testutil.TypicalEntrys.getTypicalEntryBook;
 import static seedu.address.testutil.TypicalPersons.ALICE;
 
@@ -108,7 +109,7 @@ public class EntryBookTest {
         EntryBook newData = getTypicalEntryBook();
         assertEquals(getTypicalEntryBook(), new EntryBook(newData));
         // test toString method
-        assertEquals("4 entries", newData.toString());
+        assertEquals("5 entries", newData.toString());
         //test hashcode
         assertEquals(getTypicalEntryBook().hashCode(), newData.hashCode());
     }
@@ -123,6 +124,7 @@ public class EntryBookTest {
                 .withEntry(WORK_FACEBOOK)
                 .withEntry(AWARD_WITH_NO_ENTRYINFO_NO_DESC)
                 .withEntry(NUS_EDUCATION)
+                .withEntry(WORK_FACEBOOK_DIFF_ENTRYINFO_SAME_CAT_TAG)
                 .build();
         assertEquals(editedEntryBook, typicalEntryBook);
     }
