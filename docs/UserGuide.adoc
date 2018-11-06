@@ -177,7 +177,7 @@ Example:
 Edits the 1st entry by replacing its 1st bullet description with "implement scalable application for data visualization using java".
 
 
-=== Deleting an entry: `deleteEntry` [Coming in v1.4]
+=== Deleting an entry: `deleteEntry`
 
 Deletes the entry at the specified index. +
 Format: `deleteEntry INDEX`

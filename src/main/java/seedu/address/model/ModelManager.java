@@ -125,6 +125,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteEntry(ResumeEntry target) {
+        versionedEntryBook.removeEntry(target);
+        indicateEntryBookChanged();
+    }
+
+    @Override
     public void addPerson(Person person) {
         versionedAddressBook.addPerson(person);
         updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

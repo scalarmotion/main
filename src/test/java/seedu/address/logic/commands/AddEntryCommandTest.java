@@ -137,6 +137,11 @@ public class AddEntryCommandTest {
         }
 
         @Override
+        public void deleteEntry(ResumeEntry target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public void updatePerson(Person target, Person editedPerson) {
             throw new AssertionError("This method should not be called.");
         }
