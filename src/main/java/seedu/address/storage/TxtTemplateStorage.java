@@ -9,6 +9,7 @@ import java.util.Scanner;
 import java.util.logging.Logger;
 
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.exceptions.InvalidTemplateFileException;
 import seedu.address.model.template.Template;
 
 /**
@@ -33,7 +34,7 @@ public class TxtTemplateStorage implements TemplateStorage {
     }
 
     //@Override
-    public Template loadTemplate() throws IOException {
+    public Template loadTemplate() throws IOException, InvalidTemplateFileException {
         return loadTemplate(filePath);
     }
 
@@ -44,7 +45,7 @@ public class TxtTemplateStorage implements TemplateStorage {
      * @throws IOException if the file is not found.
      */
     public Template loadTemplate(Path filePath)
-        throws IOException {
+        throws IOException, InvalidTemplateFileException {
 
         requireNonNull(filePath);
 

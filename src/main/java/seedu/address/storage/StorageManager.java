@@ -18,6 +18,7 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.InvalidTemplateFileException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.resume.Resume;
@@ -98,16 +99,13 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Template loadTemplate() throws IOException {
+    public Template loadTemplate() throws IOException, InvalidTemplateFileException {
 
         return loadTemplate(templateStorage.getTemplateFilePath());
     }
 
-    /**
-     * Loads a Template from a text file
-     */
     @Override
-    public Template loadTemplate(Path filePath) throws IOException {
+    public Template loadTemplate(Path filePath) throws IOException, InvalidTemplateFileException {
         requireNonNull(filePath);
 
         logger.fine("Attempting to load template from: " + filePath);
@@ -125,6 +123,7 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    @Override
     @Subscribe
     public void handleTemplateLoadRequestedEvent(TemplateLoadRequestedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load from "
@@ -141,7 +140,7 @@ public class StorageManager extends ComponentManager implements Storage {
         try {
             t = loadTemplate(event.filepath);
             raise(new TemplateLoadedEvent(t, event.filepath));
-        } catch (IOException e) {
+        } catch (IOException | InvalidTemplateFileException e) {
             raise(new TemplateLoadingExceptionEvent(e, event.filepath));
         }
     }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Set;
 import java.util.function.Predicate;
 
+import seedu.address.commons.exceptions.InvalidTemplateFileException;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.tag.Tag;
@@ -17,6 +18,7 @@ public class Template {
     private static final String DELIMITER = ":";
     private static final String AND_DELIMITER = "&";
     private static final String OR_DELIMITER = " ";
+    private static final String TEMPLATE_LINE_REGEX = "^[^:]+:~([^:\\s])+:[^:]*$";
 
     private ArrayList<TemplateSection> sections;
     private String stringRepresentation = "";
@@ -30,32 +32,41 @@ public class Template {
      * Returns a default template with no filters
      */
     public static Template getDefaultTemplate() {
-        Template t = new Template("default template");
-        t.addSection("Work Experience" + DELIMITER + "~work" + DELIMITER);
-        t.addSection("Education" + DELIMITER + "~education" + DELIMITER);
-        t.addSection("Projects" + DELIMITER + "~projects" + DELIMITER);
+        Template t = new Template("default_template");
+        try {
+            t.addSection("Work Experience" + DELIMITER + "~work" + DELIMITER);
+            t.addSection("Education" + DELIMITER + "~education" + DELIMITER);
+            t.addSection("Projects" + DELIMITER + "~projects" + DELIMITER);
+        } catch (InvalidTemplateFileException e) {
+            //Exception will never occur in this case
+        }
         return t;
     }
 
     /**
      * Adds a section to the Template
      */
-    public void addSection(String line) {
+    public void addSection(String line) throws InvalidTemplateFileException {
+        if (!line.matches(TEMPLATE_LINE_REGEX)) {
+            throw new InvalidTemplateFileException("Specified file has invalid format.");
+        }
+
         /*
-         * Work Experience:~work:#nus&#java #nus&#c
+         * Work Experience:~work:nus&java nus&c
          * returns (nus AND java) OR (nus AND c)
          */
         String[] parts = line.split(DELIMITER);
+
         String title = parts[0];
-        String cateName = parts[1].replaceFirst("~", "");
-        String tags = parts.length == 3 ? parts[2] : "";
+        String cateName = parts[1].substring(1); // remove ~
+        String tags = parts.length == 3 ? parts[2].trim() : "";
 
         Predicate<ResumeEntry> tagPredicate = createTagPredicate(tags);
         Predicate<ResumeEntry> catePredicate = createCategoryPredicate(cateName);
 
         sections.add(new TemplateSection(title, catePredicate, tagPredicate));
 
-        stringRepresentation += String.format("%s: ~%s\n%s\n", title, cateName, tags == "" ? "" : tags + "\n");
+        stringRepresentation += String.format("%s: ~%s\n%s\n", title, cateName, tags.equals("") ? "" : tags + "\n");
     }
 
     /**
@@ -66,10 +77,12 @@ public class Template {
             return entry -> true;
         }
 
-        //nus&java nus&c recent
-        //split sum of products into array of products:
-        //[nus&java, nus&c, recent]
-        //TODO: see if can be renamed to be clearer
+        /*
+         * nus&java nus&c recent
+         * split sum of products into array of products:
+         * [nus&java, nus&c, recent]
+         * TODO: see if can be renamed to be clearer
+         */
         String[] products = tags.split(OR_DELIMITER);
 
         ArrayList<ArrayList<Tag>> expressions = new ArrayList<>();
@@ -134,7 +147,6 @@ public class Template {
 
         // state check
         Template other = (Template) obj;
-        return sections.equals(other.sections)
-                && stringRepresentation.equals(other.stringRepresentation);
+        return stringRepresentation.equals(other.stringRepresentation);
     }
 }

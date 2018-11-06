@@ -22,7 +22,6 @@ import seedu.address.commons.events.model.ResumeSaveEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.TemplateLoadedEvent;
 import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
-import seedu.address.commons.events.ui.NewResultAvailableEvent;
 import seedu.address.model.awareness.Awareness;
 import seedu.address.model.category.CategoryManager;
 import seedu.address.model.entry.ResumeEntry;
@@ -316,6 +315,5 @@ public class ModelManager extends ComponentManager implements Model {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Exception when attempting to load template from "
                 + event.filepath.toString()));
         loadedTemplate = Optional.empty();
-        raise(new NewResultAvailableEvent("Failed to load template"));
     }
 }
