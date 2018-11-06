@@ -2,6 +2,7 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -34,6 +35,7 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.entry.XmlEntryBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
 
@@ -76,6 +78,7 @@ public class MainApp extends Application {
         ui = new UiManager(logic, config, userPrefs);
 
         initEventsCenter();
+
     }
 
     /**
@@ -84,10 +87,11 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
+
+        // need to update system tests before these can be removed
         Optional<ReadOnlyAddressBook> addressBookOptional;
         ReadOnlyAddressBook initialData;
-        // hardcoded for now, to be implemented when storage component is completed
-        ReadOnlyEntryBook initialDataForEntryBook = new EntryBook();
+
         try {
             addressBookOptional = storage.readAddressBook();
             initialData = addressBookOptional.orElseGet(() -> {
@@ -102,6 +106,30 @@ public class MainApp extends Application {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialData = new AddressBook();
         }
+
+
+        // need to update system tests before these can be removed
+        Optional<ReadOnlyEntryBook> entryBookOptional;
+        ReadOnlyEntryBook initialDataForEntryBook;
+
+        // filepath to the entrybook xml is hardcoded for now
+        Path entryBookPath = Paths.get("resume-data.xml");
+
+        try {
+            entryBookOptional = new XmlEntryBookStorage(entryBookPath).readEntryBook();
+            initialDataForEntryBook = entryBookOptional.orElseGet(() -> {
+                logger.info("Data file not found. Will be starting with a sample entrybook");
+                return SampleDataUtil.getSampleEntryBook();
+            }
+            );
+        } catch (DataConversionException e) {
+            logger.warning("Data file not in the correct format. Will be starting with an empty entrybook");
+            initialDataForEntryBook = new EntryBook();
+        } catch (IOException e) {
+            logger.warning("Problem while reading from the file. Will be starting with an empty entrybook");
+            initialDataForEntryBook = new EntryBook();
+        }
+
 
         return new ModelManager(initialData, initialDataForEntryBook, userPrefs, SampleDataUtil.getSampleAwareness());
     }

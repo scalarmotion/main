@@ -8,7 +8,9 @@ import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import seedu.address.model.AddressBook;
+import seedu.address.model.EntryBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.awareness.Awareness;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Address;
@@ -80,6 +82,15 @@ public class SampleDataUtil {
             sampleAb.addPerson(samplePerson);
         }
         return sampleAb;
+    }
+
+    public static ReadOnlyEntryBook getSampleEntryBook() {
+        EntryBook sampleEb = new EntryBook();
+        sampleEb.addEnty(MA1101R_TA);
+        sampleEb.addEnty(COMP_CLUB_EXCO);
+        sampleEb.addEnty(NUS_CS2103T);
+
+        return sampleEb;
     }
 
     /**
