@@ -9,8 +9,10 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import seedu.address.logic.commands.TagAddCommand;
 import seedu.address.logic.commands.TagListCommand;
 import seedu.address.logic.commands.TagRetagCommand;
+import seedu.address.logic.commands.TagRmCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 public class TagCommandParserTest {
@@ -30,10 +32,10 @@ public class TagCommandParserTest {
         assertTrue(parser.parse("retag 1 ~work #java") instanceof TagRetagCommand);
         assertTrue(parser.parse("rt 1 ~work #java") instanceof TagRetagCommand);
 
-        // TODO: check parser type for TagAdd & TagRm
-        // assertTrue(parser.parse("add 1 ~work #java") instanceof TagAddCommand);
-        // assertTrue(parser.parse("remove 1 #java") instanceof TagRmCommand);
-        // assertTrue(parser.parse("rm 1 #java") instanceof TagRmCommand);
+        assertTrue(parser.parse("add 1 ~work #java") instanceof TagAddCommand);
+
+        assertTrue(parser.parse("remove 1 #java") instanceof TagRmCommand);
+        assertTrue(parser.parse("rm 1 #java") instanceof TagRmCommand);
     }
 
     @Test
