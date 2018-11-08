@@ -109,6 +109,11 @@ public interface Model {
     void updateFilteredEntryList(Predicate<ResumeEntry> predicate);
 
     /**
+     * Returns the user particulars.
+     */
+    UserParticulars getUserParticulars();
+
+    /**
      * Loads a template from the specified filepath.
      */
     void loadTemplate(Path filepath);

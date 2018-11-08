@@ -24,6 +24,7 @@ import seedu.address.model.EntryBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEntryBook;
+import seedu.address.model.UserParticulars;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Person;
 import seedu.address.model.resume.Resume;
@@ -178,6 +179,11 @@ public class AddEntryCommandTest {
 
         @Override
         public void updateFilteredEntryList(Predicate<ResumeEntry> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public UserParticulars getUserParticulars() {
             throw new AssertionError("This method should not be called.");
         }
 
