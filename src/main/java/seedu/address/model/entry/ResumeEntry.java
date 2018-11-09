@@ -80,7 +80,15 @@ public class ResumeEntry implements Taggable {
     }
 
     /**
-     * @return duplicated ResumeEntry
+     * setter for the description field
+     * @param description
+     */
+    public void setDescription(EntryDescription description) {
+        this.description = description;
+    }
+
+    /**
+     * @return shallow copy of ResumeEntry
      */
     public ResumeEntry duplicate() {
         return new ResumeEntry(category, entryInfo, tags, description);
@@ -89,12 +97,15 @@ public class ResumeEntry implements Taggable {
     /**
      *
      * @param bullet bullet description to add
-     * @return another instance of ResumeEntry with added bullet
+     * @return another instance of ResumeEntry with added bullet. this function should be
+     * pure, i.e. `this` should not be modified.
      */
     public ResumeEntry getEntryWithAddedBullet(String bullet) {
-        ResumeEntry editedEntry = duplicate();
-        editedEntry.getDescription().addBullet(bullet);
-        return duplicate();
+        EntryDescription description = new EntryDescription(getDescription());
+        description.addBullet(bullet);
+        ResumeEntry duplicate = duplicate();
+        duplicate.setDescription(description);
+        return duplicate;
     }
 
     /**

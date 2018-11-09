@@ -1,11 +1,13 @@
 package seedu.address.model.entry;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.StringUtil.isEmptyString;
 import static seedu.address.commons.util.StringUtil.isOnlyWhiteSpace;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *  Represents bullet points content for an entry.
@@ -19,6 +21,18 @@ public class EntryDescription {
 
     public EntryDescription() {
         this.descriptionList = new ArrayList<>();
+    }
+
+    /**
+     * construct to duplicate EntryDescription
+     * @param toCopy
+     */
+    public EntryDescription(EntryDescription toCopy) {
+        requireNonNull(toCopy);
+        descriptionList = toCopy
+                .getDescriptionList()
+                .stream()
+                .collect(Collectors.toList());
     }
 
     public List<String> getDescriptionList() {
