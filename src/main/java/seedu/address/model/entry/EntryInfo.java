@@ -2,6 +2,8 @@ package seedu.address.model.entry;
 
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.commons.util.StringUtil.isEmptyString;
+import static seedu.address.commons.util.StringUtil.isOnlyWhiteSpace;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +15,9 @@ public class EntryInfo {
 
     public static final String ENTRYINFO_VALIDATION_REGEX = "^[A-Za-z0-9 ()-]+$";
     public static final String MESSAGE_ENTRYINFO_CONSTRAINTS =
-            "header, subHeader and duration must be alphanumeric and separated by brackets or hyphen or space.";
+            "header, subHeader and duration must be alphanumeric, "
+                    + "separated by brackets or hyphen or space and cannot be an empty string or"
+                    + "entirely consist of whitespaces";
 
     private List<String> entryInfo = new LinkedList<String>();
 
@@ -60,7 +64,9 @@ public class EntryInfo {
      * checks if a string is a valid EntryInfo field
      */
     public static boolean isValidEntryInfoField(String s) {
-        return s.matches(ENTRYINFO_VALIDATION_REGEX);
+        return !isOnlyWhiteSpace(s)
+                && !isEmptyString(s)
+                && s.matches(ENTRYINFO_VALIDATION_REGEX);
     }
 
     /**
