@@ -1,13 +1,17 @@
 package seedu.address.model;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotEquals;
+
+import java.util.TreeMap;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.awareness.Awareness;
+import seedu.address.model.awareness.Dictionary;
+import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.util.SampleDataUtil;
 
 public class AwarenessTest {
@@ -18,76 +22,40 @@ public class AwarenessTest {
     @Test
     public void constructor_null_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new Awareness(null, null);
+
+        Dictionary dictionary = null;
+        TreeMap<String, ResumeEntry> nameToEntryMappings = null;
+
+        new Awareness(dictionary, nameToEntryMappings);
     }
 
     @Test
-    public void getPossibleEventName_postiveMatches() {
-        Awareness awareness = SampleDataUtil.getSampleAwareness();
+    public void equals() {
 
-        // Expression consisting of single full phrase should match the correct possibleEventName
-        assertEquals("hackathon", awareness.getPossibleEventName("hackathon"));
+        Dictionary sampleDictionary = SampleDataUtil.getSampleDictionary();
+        Dictionary emptyDictionary = new Dictionary();
 
-        // Expression consisting of multiple full phrases should match the correct possibleEventName
-        assertEquals("financial technology hackathon",
-                awareness.getPossibleEventName("financial technology hackathon"));
+        TreeMap<String, ResumeEntry> sampleNameToEntryMappings = SampleDataUtil.makeNameToEntryMappings();
+        TreeMap<String, ResumeEntry> emptyNameToEntryMappings = new TreeMap<String, ResumeEntry>();
 
-        // Expression consisting of a single partial phrase should match the correct possibleEventName
-        assertEquals("computer", awareness.getPossibleEventName("comp"));
-        assertEquals("science", awareness.getPossibleEventName("sci"));
+        Awareness sampleAwareness = SampleDataUtil.getSampleAwareness();
+        Awareness sampleAwarenessDuplicate = new Awareness(sampleDictionary, sampleNameToEntryMappings);
 
-        // Expression consisting of multiple partial phrases should match the correct possibleEventName
-        assertEquals("computer science", awareness.getPossibleEventName("comp sci"));
-        assertEquals("teaching assistant", awareness.getPossibleEventName("teach assist"));
+        // same object --> true
+        assertEquals(sampleAwareness, sampleAwareness);
 
-        // Expression consisting a single slang should match the correct possibleEventName
-        assertEquals("computer science", awareness.getPossibleEventName("cs"));
-        assertEquals("singapore", awareness.getPossibleEventName("sg"));
+        // same mappings in both dictionary and treemap --> true
+        assertEquals(sampleAwareness, sampleAwarenessDuplicate);
 
-        // Expression consisting of multiple slang should match the correct possibleEventName
-        assertEquals("undergraduate teaching assistant", awareness.getPossibleEventName("ug ta"));
+        // not an instance of Awareness --> false
+        assertNotEquals(sampleAwareness, "a string");
 
-        // Expression consisting of both partial and full phrases should match correct possibleEventName
-        assertEquals("financial technology research programme",
-                awareness.getPossibleEventName("financial tech research prog"));
+        // different mappings in dictionary, same mappings in treemap --> false
+        assertNotEquals(sampleAwareness, new Awareness(emptyDictionary, sampleNameToEntryMappings));
 
-        assertEquals("double degree programme", awareness.getPossibleEventName("double deg prog"));
-
-        // Expression consisting of both partial phrase and slang should match correct possibleEventName
-        assertEquals("undergraduate research assistant", awareness.getPossibleEventName("ug res asst"));
-
-
-        // Expression consisting of both full phrase and slang should match correct possibleEventName
-        assertEquals("teaching assistant", awareness.getPossibleEventName("teaching asst"));
-        assertEquals("financial technology hackathon", awareness.getPossibleEventName("fintech hackathon"));
-
-        // Expression consisting of slang, partial phrase and full phrase should match correct possibleEventName
-        assertEquals("undergraduate research programme", awareness.getPossibleEventName("ug research prog"));
-        assertEquals("postgraduate machine learning research opportunities",
-                awareness.getPossibleEventName("pg ml research opp"));
+        // same mappings in dictionary, different mappings treemap --> false
+        assertNotEquals(sampleAwareness, new Awareness(sampleDictionary, emptyNameToEntryMappings));
 
     }
-
-    @Test
-    public void isValidSlang_negativeMatches() {
-        Awareness awareness = SampleDataUtil.getSampleAwareness();
-
-        // Should not be able to add slang that has already been added
-        assertFalse(awareness.isValidSlang("cs"));
-
-        // Should not be able to add slang that is more than one word
-        assertFalse(awareness.isValidSlang("fyp gp ml"));
-
-        // Should not be able to add slang that is an empty string
-        assertFalse(awareness.isValidSlang(""));
-
-        // Should not be able to add slang that is only whitespace
-        assertFalse(awareness.isValidSlang("    "));
-
-        // Should not be able to add slang that is mixture of whitespace and existing slang
-        assertFalse(awareness.isValidSlang("     cs  "));
-
-    }
-
 
 }

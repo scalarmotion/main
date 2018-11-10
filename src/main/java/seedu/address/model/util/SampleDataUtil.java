@@ -1,17 +1,17 @@
 package seedu.address.model.util;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.EntryBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.awareness.Awareness;
+import seedu.address.model.awareness.Dictionary;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -50,8 +50,6 @@ public class SampleDataUtil {
                                                                  + "new product")
                                                   .withTags("software_engineering", "java")
                                                   .build();
-
-    private static final String SPACE = " ";
 
     public static Person[] getSamplePersons() {
         return new Person[] {
@@ -102,74 +100,43 @@ public class SampleDataUtil {
                 .collect(Collectors.toSet());
     }
 
+    public static Dictionary getSampleDictionary() {
+        Dictionary dictionary = new Dictionary();
+
+        try {
+
+            dictionary.registerMultipleMapping(new String[]{"cs", "compsci", "comsci"}, "computer science");
+
+            dictionary.registerMapping("ta", "teaching assistant");
+            dictionary.registerMapping("ug", "undergraduate");
+            dictionary.registerMapping("pg", "postgraduate");
+            dictionary.registerMapping("asst", "assistant");
+            dictionary.registerMapping("ddp", "double degree programme");
+            dictionary.registerMapping("ml", "machine learning");
+            dictionary.registerMapping("sg", "singapore");
+            dictionary.registerMapping("fintech", "financial technology");
+            dictionary.registerMapping("exco", "executive committee");
+
+            dictionary.registerFullPhrase("opportunities");
+            dictionary.registerFullPhrase("hackathon");
+            dictionary.registerFullPhrase("research");
+            dictionary.registerFullPhrase("programme");
+            dictionary.registerFullPhrase("club");
+
+        } catch (IllegalValueException willNotOccur) {
+
+            // the sample mappings will not throw this exception
+        }
+
+        return dictionary;
+    }
+
     public static Awareness getSampleAwareness() {
 
-        HashMap<String, String> dictionary = new HashMap<String, String>();
-        TreeSet<String> allFullPhrases = new TreeSet<String>();
+        Dictionary dictionary = getSampleDictionary();
+        TreeMap<String, ResumeEntry> nameToEntryMappings = makeNameToEntryMappings();
 
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "computer science",
-                new String[] {"cs", "compsci", "comsci"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "undergraduate",
-                new String[] {"ug"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "postgraduate",
-                new String[] {"pg"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "teaching assistant",
-                new String[] {"ta"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "assistant",
-                new String[] {"asst"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "double degree programme",
-                new String[] {"ddp"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "machine learning",
-                new String[] {"ml"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "singapore", new String[] {"sg"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "financial technology",
-                new String[] {"fintech"});
-
-        addSlangToFullPhraseMappings(dictionary, allFullPhrases, "executive committee", new String[] {"exco"});
-
-        addFullPhrase(allFullPhrases, "opportunities");
-
-        addFullPhrase(allFullPhrases, "hackathon");
-
-        addFullPhrase(allFullPhrases, "research");
-
-        addFullPhrase(allFullPhrases, "programme");
-
-        addFullPhrase(allFullPhrases, "club");
-
-        // wip add sample Event Name - ResumeEntry mappings
-        return new Awareness(dictionary, allFullPhrases);
-
-    }
-
-    /**
-     * Updates a given dictionary and set of fullPhrases with additional mappings between a given fullPhrase and its
-     * set of slang
-     */
-    private static void addSlangToFullPhraseMappings(HashMap<String, String> dictionary, TreeSet<String> allFullPhrases,
-                                                     String fullPhrase, String[] slangSet) {
-
-        addFullPhrase(allFullPhrases, fullPhrase);
-        addSlang(dictionary, fullPhrase, slangSet);
-
-    }
-
-    private static void addFullPhrase(TreeSet<String> allFullPhrases, String fullPhrase) {
-        Arrays.stream(fullPhrase.split(SPACE))
-              .forEach(spaceDelimitedPhrase -> allFullPhrases.add(spaceDelimitedPhrase));
-    }
-
-    private static void addSlang(HashMap<String, String> dictionary, String fullPhrase, String[] slangSet) {
-        Arrays.stream(slangSet)
-              .forEach(eachSlang -> dictionary.put(eachSlang, fullPhrase));
+        return new Awareness(dictionary, nameToEntryMappings);
     }
 
     /**
