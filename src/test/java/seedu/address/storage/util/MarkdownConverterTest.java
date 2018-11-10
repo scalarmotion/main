@@ -16,6 +16,7 @@ import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.resume.Resume;
+import seedu.address.model.resume.ResumeHeader;
 import seedu.address.model.resume.ResumeSection;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
@@ -190,6 +191,14 @@ public class MarkdownConverterTest {
                         + System.lineSeparator()
                         + System.lineSeparator(),
                 toMarkdown(testSectionList));
+    }
+
+    @Test
+    public void resumeHeaderToMarkdown() {
+        // TODO: add more cases
+        ResumeHeader testHeader = new ResumeHeader(new UserParticulars());
+        assertEquals("",
+                toMarkdown(testHeader));
     }
 
     @Test
