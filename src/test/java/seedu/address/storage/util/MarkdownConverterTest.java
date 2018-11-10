@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.UserParticulars;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
@@ -61,7 +62,7 @@ public class MarkdownConverterTest {
 
     @Test
     public void entryToMarkdown() {
-        // No description
+        // Has Info, no Description (non-minor)
         ResumeEntry testEntry = new ResumeEntry(new Category("testCategory"), testInfo, new HashSet<>());
         assertEquals(toMarkdown(testInfo)
                         + System.lineSeparator()
@@ -70,7 +71,7 @@ public class MarkdownConverterTest {
                         + System.lineSeparator(),
                 toMarkdown(testEntry));
 
-        // Add description
+        // Has Info, has Description (non-minor)
         testEntry.getDescription().addBullet("first bullet");
         testEntry.getDescription().addBullet("second bullet");
         assertEquals(toMarkdown(testInfo)
@@ -80,6 +81,19 @@ public class MarkdownConverterTest {
                         + System.lineSeparator()
                         + System.lineSeparator(),
                 toMarkdown(testEntry));
+
+        // No Info, no Description (minor entry)
+        ResumeEntry minorEntry = new ResumeEntry(new Category("testCategory"), new EntryInfo(), new HashSet<>());
+        assertEquals(System.lineSeparator()
+                        + System.lineSeparator(),
+                toMarkdown(minorEntry));
+
+        // Minor entry - no description
+        minorEntry.getDescription().addBullet("minor bullet");
+        assertEquals(toMarkdown(minorEntry.getDescription())
+                        + System.lineSeparator()
+                        + System.lineSeparator(),
+                toMarkdown(minorEntry));
     }
 
     @Test
@@ -195,20 +209,45 @@ public class MarkdownConverterTest {
 
     @Test
     public void resumeHeaderToMarkdown() {
-        // TODO: add more cases
-        ResumeHeader testHeader = new ResumeHeader(new UserParticulars());
-        assertEquals("",
-                toMarkdown(testHeader));
+        // Default header
+        ResumeHeader defaultHeader = new ResumeHeader(new UserParticulars());
+        assertEquals("John Doe" + System.lineSeparator()
+                        + "--------" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "**+65 91234567**" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "[johndoe@example.com](mailto:johndoe@example.com)" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "412 Kent Ridge Road, #05-03",
+                toMarkdown(defaultHeader));
+
+        // Custom header
+        ResumeHeader fullHeader = new ResumeHeader(new UserParticulars("testName",
+                "testPhone",
+                "testEmail",
+                "testAddress"));
+        assertEquals("testName" + System.lineSeparator()
+                        + "--------" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "**testPhone**" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "[testEmail](mailto:testEmail)" + System.lineSeparator()
+                        + System.lineSeparator()
+                        + "testAddress",
+                toMarkdown(fullHeader));
     }
 
     @Test
     public void resumeToMarkdown() {
-        // Empty default resume with no header
+        // No entries, default header
         List<ResumeSection> testSectionList = new ArrayList<>();
         for (TemplateSection templateSection : Template.getDefaultTemplate().getSections()) {
             testSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
         }
-        assertEquals(toMarkdown(testSectionList),
+        ResumeHeader defaultHeader = new ResumeHeader(new UserParticulars());
+        assertEquals(toMarkdown(defaultHeader) + System.lineSeparator()
+                        + System.lineSeparator()
+                        + toMarkdown(testSectionList),
                 toMarkdown(new Resume(new TypicalResumeModel())));
 
         // TODO: implement test for resume with actual filtered entries
