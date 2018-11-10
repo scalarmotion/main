@@ -1,5 +1,6 @@
 package seedu.address.model.entry;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.commons.util.StringUtil.isEmptyString;
@@ -33,6 +34,7 @@ public class EntryInfo {
      */
     public EntryInfo(String title, String subheader, String duration) {
         requireAllNonNull(title, subheader, duration);
+        checkArguments(title, subheader, duration);
         entryInfo.add(title);
         entryInfo.add(subheader);
         entryInfo.add(duration);
@@ -75,6 +77,18 @@ public class EntryInfo {
     public static boolean isValidEntryInfo(List<String> entryInfo) {
         return entryInfo.stream().allMatch(s -> isValidEntryInfoField(s));
     }
+
+    /**
+     * checks if any of the fields is of invalid format.
+     * @throws IllegalArgumentException with error message MESSAGE_ENTRYINFO_CONSTRAINTS if invalid format is detected.
+     */
+    private void checkArguments(String title, String subtitle, String duration) {
+        checkArgument(isValidEntryInfoField(title), MESSAGE_ENTRYINFO_CONSTRAINTS);
+        checkArgument(isValidEntryInfoField(subtitle), MESSAGE_ENTRYINFO_CONSTRAINTS);
+        checkArgument(isValidEntryInfoField(duration), MESSAGE_ENTRYINFO_CONSTRAINTS);
+
+    }
+
     /**
      * @return Title of the entry.
      */
@@ -103,6 +117,8 @@ public class EntryInfo {
      * set title of the entry
      */
     public void setTitle(String title) {
+        requireNonNull(title);
+        checkArgument(isValidEntryInfoField(title), MESSAGE_ENTRYINFO_CONSTRAINTS);
         entryInfo.set(0, title);
     }
 
@@ -111,6 +127,8 @@ public class EntryInfo {
      * set subHeader of the entry
      */
     public void setSubHeader(String subHeader) {
+        requireNonNull(subHeader);
+        checkArgument(isValidEntryInfoField(subHeader), MESSAGE_ENTRYINFO_CONSTRAINTS);
         entryInfo.set(1, subHeader);
     }
 
@@ -119,6 +137,8 @@ public class EntryInfo {
      * set duration of the entry
      */
     public void setDuration(String duration) {
+        requireNonNull(duration);
+        checkArgument(isValidEntryInfoField(duration), MESSAGE_ENTRYINFO_CONSTRAINTS);
         entryInfo.set(2, duration);
     }
 

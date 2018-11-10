@@ -37,7 +37,7 @@ public class SampleDataUtil {
                                                      .withCategory("nonacademics")
                                                      .withTitle("Computing Club Executive Committee Member")
                                                      .withDuration("2010 Semester 1 and 2")
-                                                     .withSubHeader("Organised the club's budget")
+                                                     .withSubHeader("Organised budget of the club")
                                                      .withTags("leadership", "management", "entrepreneurship")
                                                      .build();
 
