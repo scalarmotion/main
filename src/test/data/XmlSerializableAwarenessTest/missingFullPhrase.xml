@@ -1,6 +1,6 @@
 <awareness>
   <mapping>
-    <fullPhrase>Computer Science</fullPhrase>
+      <!-- This mapping does not have a full phrase -->
       <slang>cs</slang>
       <slang>computing</slang>
    </mapping>

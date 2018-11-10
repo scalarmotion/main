@@ -18,10 +18,7 @@
     <!-- This full phrase has no associated slang -->
    </mapping>
    <context-entry eventName="sep">
-     <entry category="education">
-        <entryInfo title="National University of Singapore" subheader="Bachelor of computing" duration="2010 - 2013"/>
-        <tags>Machine Learning</tags>
-     </entry>
+     <!-- This contextual entry element is missing an entry element -->
    </context-entry>
    <context-entry eventName="noc">
      <entry category="education">

@@ -17,7 +17,8 @@
     <fullPhrase>hackathon</fullPhrase>
     <!-- This full phrase has no associated slang -->
    </mapping>
-   <context-entry eventName="sep">
+   <context-entry>
+     <!-- This event has a missing event name -->
      <entry category="education">
         <entryInfo title="National University of Singapore" subheader="Bachelor of computing" duration="2010 - 2013"/>
         <tags>Machine Learning</tags>
@@ -25,7 +26,7 @@
    </context-entry>
    <context-entry eventName="noc">
      <entry category="education">
-        <entryInfo title="Overseas College" subheader="Bachelor of computing" duration="2010 - 2013"/>
+        <entryInfo title="NUS Overseas College" subheader="Bachelor of computing" duration="2010 - 2013"/>
         <tags>Leadership</tags>
      </entry>
    </context-entry>

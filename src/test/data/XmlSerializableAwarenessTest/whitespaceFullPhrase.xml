@@ -1,6 +1,7 @@
 <awareness>
   <mapping>
-    <fullPhrase>Computer Science</fullPhrase>
+    <!-- This mapping has a full phrase that is only whitespace -->
+    <fullPhrase>     </fullPhrase>
       <slang>cs</slang>
       <slang>computing</slang>
    </mapping>
