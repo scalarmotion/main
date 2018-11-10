@@ -438,7 +438,7 @@ Rather than asking Logic to interact directly with UI to request for changes in 
 // tag::resume[]
 === Resume Generation
 This section describes the implementation of the resume generation feature, explains the underlying classes and
-supporting data structures, and highlights areas that are open to extension.
+supporting data structures, justifies a key design decision and highlights areas that are open to extension.
 
 ==== Resume Structure
 
@@ -468,6 +468,35 @@ An external link:https://github.com/Steppschuh/Java-Markdown-Generator[Java Mark
 was used to handle the generation of the markdown `String` in `MarkdownConverter`,
 as it was built on a `Builder` pattern which made it easier and more organised to progressively
 generate markdown text for each part of the resume and combine it all together in the end.
+
+==== Design Consideration
+
+===== Markdown Conversion
+
+There were some considerations regarding how and where the conversion of
+`Resume` objects to markdown `Strings` would be done. We had to decide between these alternative approaches:
+
+====== Approach 1:
+
+All markdown conversion is done in a class (`MarkdownConverter`) separate from the `Resume` and `ResumeEntry` packages.
+This ensures that the "abstract" data classes in the `Model` are completely separated from the conversion to "concrete"
+markdown text in accordance to the Single Responsibility Principle and also allows for extension by adding a different
+class to format the markdown differently. However, this causes heavy coupling in `MarkdownConverter`, as any change to
+the internal structure of `Resume` and `ResumeEntry` classes would require extensive changes across multiple methods in
+`MarkdownConverter`.
+
+====== Approach 2:
+
+Every class that could be converted to markdown would contain a `toMarkdown` method, possibly implementing a
+`Markdownable` interface. This would ensure that any change to the structure or formatting of a particular class would
+only require changes to the `toMarkdown` method of that class. However, this exposes the "abstract" data classes in the
+`Model` to the implementation of using markdown text in `Storage` and does not allow for the extension of adding a
+different markdown layout without replacing the existing markdown formatting.
+
+====== Decision
+
+Ultimately, we decided that it was more important to enforce the separation between the `Model` and `Storage` modules
+as well as allow for potential further extension, so we chose Approach 1.
 
 ==== Possible Extensions
 
