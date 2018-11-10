@@ -5,24 +5,21 @@
 
 == PROJECT: ResuMaker
 
----
-
 == Overview
 
-ResuMaker is a fast and flexible resume generator optimised for
-students of the School of Computing at the National University of Singapore (NUS SOC),
-and can help customise one's resumes for specific jobs or requirements.
+This portfolio aims to introduce a software engineering project I participated in and
+highlight my contributions to it, both technical and otherwise.
+This project was done as part of a Software Engineering module during my Computer Science studies
+at the National University of Singapore's School of Computing (NUS SoC),
+Over a period of 6 weeks, my team of 5 students developed a
+Resume Generation app targeted specifically at students of NUS SoC.
 
-ResuMaker allows a user to store entries of information relevant to their career.
-These entries can be about work experience, personal skills, education history or anything else they would want in a resume.
-To facilitate easy browsing and management, entries each belong to a category and can have tags added to them. +
-When a resume is needed for, for instance, a job application, the user prepares a template file
-which dictates the sections they want in the resume and lists the tags which decide which entries should be shown.
-The user can then generate a resume file which will display entries previously stored in the ResuMaker
-that match the criteria specified in the template. This resume file is created in markdown,
-a commonly used file format that can then easily be converted to other formats like Word or PDF documents by a variety of other tools.
-
-_[DIAGRAM SHOWING WORKFLOW]_
+The project entailed morphing an existing medium scale software product
+(about 6000 lines of code) into a totally new product
+while learning and applying software engineering best practices.
+It also imposed various constraints on the final product, such as
+having to focus on only taking input from a Command Line Interface (CLI)
+and requiring an incremental approach to development.
 
 == Summary of contributions
 
@@ -39,11 +36,12 @@ While this functionality was important, it is not essential to the feature - gen
 could have been done without it, although it would have either taken more work to develop the functionality separately
 or been much messier.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=scalarmotion&sort=displayName&since=2018-09-12&until=2018-11-10&timeframe=day&reverse=false&repoSort=true[Reposense Overview]]
 
 * *Other contributions*:
 ** Project management:
-*** Designed a link:https://github.com/CS2103-AY1819S1-W17-1/main/issues/62[neat, organised format] for managing development issues for use by the project team.
+*** Designed a link:https://github.com/CS2103-AY1819S1-W17-1/main/issues/62[neat, organised format] of
+managing development issues for use by the project team.
 *** Coordinated API design between team members across components and features to ensure smooth integration.
 *** Reviewed test coverage and quality.
 ** Documentation:
