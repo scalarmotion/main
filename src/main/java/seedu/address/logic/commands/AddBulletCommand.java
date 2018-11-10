@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_ENTRIES;
 
 import java.util.List;
 
@@ -59,7 +58,6 @@ public class AddBulletCommand extends Command {
         ResumeEntry editedEntry = createEntryWithAddedBullet(entryToEdit, bullet);
 
         model.updateEntry(entryToEdit, editedEntry);
-        model.updateFilteredEntryList(PREDICATE_SHOW_ALL_ENTRIES);
         model.commitEntryBook();
         EventsCenter.getInstance().post(new JumpToEntryListRequestEvent(index));
         EventsCenter.getInstance().post(new UpdateExpandedEntryRequestEvent(editedEntry));

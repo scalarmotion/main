@@ -27,6 +27,7 @@
                 </Label>
                 <Label fx:id="title" text="\$first" styleClass="cell_big_label" />
             </HBox>
+            <Label fx:id="categoryTag" styleClass="cell_small_label" text="\$categoryTag"> </Label>
             <FlowPane fx:id="tags" />
             <Label fx:id="subtitle" styleClass="cell_small_label" text="\$subtitle" />
             <Label fx:id="duration" styleClass="cell_small_label" text="\$duration" />

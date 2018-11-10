@@ -18,12 +18,14 @@ public class EntryCardHandle extends NodeHandle<Node> {
     private static final String TITLE_FIELD_ID = "#title";
     private static final String SUBTITLE_FIELD_ID = "#subtitle";
     private static final String DURATION_FIELD_ID = "#duration";
+    private static final String CAT_FIELD_ID = "#categoryTag";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label titleLabel;
     private final Label subtitleLabel;
     private final Label durationLabel;
+    private final Label categoryLabel;
     private final List<Label> tagLabels;
 
     public EntryCardHandle(Node cardNode) {
@@ -33,6 +35,7 @@ public class EntryCardHandle extends NodeHandle<Node> {
         titleLabel = getChildNode(TITLE_FIELD_ID);
         subtitleLabel = getChildNode(SUBTITLE_FIELD_ID);
         durationLabel = getChildNode(DURATION_FIELD_ID);
+        categoryLabel = getChildNode(CAT_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -47,7 +50,7 @@ public class EntryCardHandle extends NodeHandle<Node> {
     }
 
     public String getCategory() {
-        return tagLabels.get(0).getText();
+        return categoryLabel.getText();
     }
 
     public String getTitle() {
@@ -64,7 +67,6 @@ public class EntryCardHandle extends NodeHandle<Node> {
 
     public List<String> getTags() {
         return tagLabels
-                .subList(1, tagLabels.size())
                 .stream()
                 .map(Label::getText)
                 .collect(Collectors.toList());

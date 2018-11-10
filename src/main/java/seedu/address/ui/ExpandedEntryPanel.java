@@ -30,6 +30,8 @@ public class ExpandedEntryPanel extends UiPart<Region> {
         super(FXML);
         expandedEntryText.textProperty().bind(displayed);
         registerAsAnEventHandler(this);
+        // set word wrap
+        expandedEntryText.setWrapText(true);
     }
 
     @Subscribe

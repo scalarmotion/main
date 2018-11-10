@@ -382,3 +382,18 @@
     -fx-background-radius: 2;
     -fx-font-size: 11;
 }
+
+#categoryTag {
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-background-color: #00695C;
+    -fx-padding: 1 3 1 3;
+    -fx-border-radius: 2;
+    -fx-background-radius: 2;
+    -fx-font-size: 11;
+}
+
+.circle_color {
+    -fx-stroke: "green";
+    -fx-stroke-width: 5;
+}
