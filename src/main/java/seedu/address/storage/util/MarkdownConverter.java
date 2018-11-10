@@ -31,6 +31,7 @@ public final class MarkdownConverter {
     }
 
     /**
+     * This version of the method is necessary because the call made to {@code toMarkdown} uses generic types.
      * @param object is a generic object which will be converted to
      * @return a String containing its Markdown representation by
      * another overloaded version of this method.
@@ -73,21 +74,13 @@ public final class MarkdownConverter {
     }
 
     /**
-     * param name is a name field which will be converted to
-     * return a String containing its Markdown representation.
-     *
-    public static String toMarkdown(Name name) {
-        return new TextBuilder()
-                .append(MarkdownConverter.toMarkdown(name.toString()))
-                .toString();
-    }*/
-
-    /**
      * @param sectionList is the list of Sections of a Resume which will be converted to
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(List<ResumeSection> sectionList) {
-        TextBuilder sectionListBuilder = new TextBuilder().rule().newLines(2);
+        TextBuilder sectionListBuilder = new TextBuilder()
+                .rule()
+                .newLines(2);
         for (ResumeSection section : sectionList) {
             sectionListBuilder = sectionListBuilder
                     .append(toMarkdown(section))
@@ -102,9 +95,12 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(ResumeSection section) {
-        TextBuilder sectionBuilder = new TextBuilder().append(new Heading(section.title, 2)).newLines(2);
+        TextBuilder sectionBuilder = new TextBuilder()
+                .append(new Heading(section.title, 2))
+                .newLines(2);
         for (ResumeEntry entry : section.getEntryList()) {
-            sectionBuilder = sectionBuilder.append(toMarkdown(entry));
+            sectionBuilder = sectionBuilder
+                    .append(toMarkdown(entry));
         }
         return sectionBuilder.toString();
     }
@@ -114,9 +110,13 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(ResumeEntry entry) {
-        return new TextBuilder()
-                .append(new Text(MarkdownConverter.toMarkdown(entry.getEntryInfo())))
-                .newLines(2)
+        TextBuilder entryBuilder = new TextBuilder();
+        if (!entry.isMinorEntry()) {
+            entryBuilder = entryBuilder
+                    .append(new Text(MarkdownConverter.toMarkdown(entry.getEntryInfo())))
+                    .newLines(2);
+        }
+        return entryBuilder
                 .append(new Text(MarkdownConverter.toMarkdown(entry.getDescription())))
                 .newLines(2)
                 .toString();
@@ -127,15 +127,25 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(EntryInfo info) {
-        return new TextBuilder()
-                .append(new Heading(info.getTitle(), 5))
-                .append(new Text(" ("))
-                .append(new ItalicText(info.getDuration()))
-                .append(new Text(")"))
-                .newLines(2)
-                .append(new Text(info.getSubHeader()))
-                .newLines(2)
-                .toString();
+        TextBuilder infoBuilder = new TextBuilder();
+        if (!info.getTitle().equals("")) {
+            infoBuilder = infoBuilder
+                    .append(new Heading(info.getTitle(), 5));
+            if (!info.getDuration().equals("")) {
+                infoBuilder = infoBuilder
+                        .append(new Text(" ("))
+                        .append(new ItalicText(info.getDuration()))
+                        .append(new Text(")"));
+            }
+            infoBuilder = infoBuilder
+                    .newLines(2);
+        }
+        if (!info.getSubHeader().equals("")) {
+            infoBuilder = infoBuilder
+                    .append(new Text(info.getSubHeader()))
+                    .newLines(2);
+        }
+        return infoBuilder.toString();
     }
 
 
