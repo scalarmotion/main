@@ -444,8 +444,17 @@ supporting data structures, justifies a key design decision and highlights areas
 
 The `Resume` contains a list of `ResumeSections`,
 each comprising a title and a list of `ResumeEntries` associated with it
-(as stipulated by the `Template` used to generate the `Resume`). +
-_[CLASS DIAGRAM]_
+(as stipulated by the `Template` used to generate the `Resume`).
+The class structure is shown by the following class diagram:
+
+.Class diagram for Resume related classes
+image::resumeClassDiagram.png[width="800"]
+
+The creation of a `Resume` by a `make` command is shown by this sequence diagram:
+
+.Sequence diagram for Resume creation
+image::generateResumeSequenceDiagram.png[width="800"]
+
 
 ==== Storage Management
 
@@ -453,7 +462,6 @@ When a resume is to be saved to a file, the `ModelManager` raises a `ResumeSaveE
 the complete `Resume` as well as the specified file `Path`. This event is captured by the `StorageManager`,
 which passes the data to the `MarkdownResumeStorage` class. The `Resume` object is then converted to a markdown `String`
 by the `MarkdownConverter` utility class, after which it is written to a file (with the specified name) by the `MdUtil` class. +
-_[DIAGRAM]_
 
 
 ==== Markdown Conversion
