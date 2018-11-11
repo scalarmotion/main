@@ -17,6 +17,7 @@ import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
+import seedu.address.testutil.TypicalEntrys;
 import seedu.address.testutil.TypicalResumeModel;
 
 public class ResumeTest {
@@ -26,17 +27,34 @@ public class ResumeTest {
     @Test
     public void constructorTest() {
         Model testModel = new TypicalResumeModel();
-        Resume resume = new Resume(testModel);
 
         // default template, no entries
-        List<ResumeSection> expectedSectionList = new ArrayList<>();
+        Resume blankResume = new Resume(testModel);
+        List<ResumeSection> expectedBlankSectionList = new ArrayList<>();
         Template defaultTemplate = Template.getDefaultTemplate();
         for (TemplateSection templateSection : defaultTemplate.getSections()) {
-            expectedSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
+            expectedBlankSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
         }
-        assertEquals(resume.getSectionList(), expectedSectionList);
+        assertEquals(expectedBlankSectionList, blankResume.getSectionList());
 
-        // TODO: add tests for "typical" ModelManager
+        // default template, typical entries
+        List<ResumeEntry> typicalEntries = TypicalEntrys.getTypicalEntries();
+        for (ResumeEntry entry : typicalEntries) {
+            testModel.addEntry(entry);
+        }
+        Resume typicalResume = new Resume(testModel);
+        // filtering entries manually to get expected section list
+        List<ResumeSection> expectedTypicalSectionList = new ArrayList<>();
+        for (TemplateSection templateSection : defaultTemplate.getSections()) {
+            List<ResumeEntry> testEntryList = new ArrayList<>();
+            for (ResumeEntry entry : typicalEntries) {
+                if (templateSection.getCategoryPredicate().test(entry) && templateSection.getTagPredicate().test(entry)) {
+                    testEntryList.add(entry);
+                }
+            }
+            expectedTypicalSectionList.add(new ResumeSection(templateSection.getTitle(), testEntryList));
+        }
+        assertEquals(expectedTypicalSectionList, typicalResume.getSectionList());
     }
 
     @Test
@@ -56,7 +74,7 @@ public class ResumeTest {
         // Different state
         List<ResumeEntry> testSectionList = new ArrayList<>();
         testSectionList.add(new ResumeEntry(new Category("Test"), new EntryInfo(), new HashSet<>()));
-        ResumeSection testSectionTwo = new ResumeSection("section 2", new ArrayList<>());
+        ResumeSection testSectionTwo = new ResumeSection("section 2", testSectionList);
         assertNotEquals(testSectionOne, testSectionTwo);
 
 
@@ -74,6 +92,8 @@ public class ResumeTest {
         assertEquals(testResumeOne, testResumeTwo);
 
         // Different state
-        // TODO: implement using "typical" ModelManager
+        Model typicalModel = new TypicalResumeModel();
+        typicalModel.addEntry(TypicalEntrys.NUS_EDUCATION);
+        assertNotEquals(new Resume(new TypicalResumeModel()), new Resume(typicalModel));
     }
 }
