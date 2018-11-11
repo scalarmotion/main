@@ -11,5 +11,5 @@
     <HBox spacing="20" alignment="CENTER">
         <Label styleClass="cell_list_label" text="Template"/>
     </HBox>
-    <TextArea fx:id="templatePanelDisplay" editable="false" styleClass="template-panel-display"/>
+    <TextArea fx:id="templatePanelDisplay" editable="false" styleClass="template-panel-display" VBox.vgrow="ALWAYS"/>
 </VBox>
