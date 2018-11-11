@@ -62,8 +62,7 @@ public class ResumeTest {
     @Test
     public void resumeConstructorTest() {
         // no template loaded
-        assertThrows(IllegalArgumentException.class, "Template cannot be blank.",
-                () -> new Resume(new ModelManager()));
+        assertThrows(IllegalArgumentException.class, "Template cannot be blank.", () -> new Resume(new ModelManager()));
 
         Model testModel = TypicalResumeModel.getDefaultTemplateModel();
 
@@ -87,7 +86,8 @@ public class ResumeTest {
         for (TemplateSection templateSection : defaultTemplate.getSections()) {
             List<ResumeEntry> testEntryList = new ArrayList<>();
             for (ResumeEntry entry : typicalEntries) {
-                if (templateSection.getCategoryPredicate().test(entry) && templateSection.getTagPredicate().test(entry)) {
+                if (templateSection.getCategoryPredicate().test(entry)
+                        && templateSection.getTagPredicate().test(entry)) {
                     testEntryList.add(entry);
                 }
             }
