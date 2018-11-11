@@ -15,6 +15,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.template.Template;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class MakeCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
@@ -41,12 +42,9 @@ public class MakeCommandTest {
     public void resumeSaved() {
         Path testPath = Paths.get("test", "path");
         MakeCommand testCommand = new MakeCommand(testPath);
-        Model testModel = new ModelManager();
-        Template defaultTemplate = Template.getDefaultTemplate();
-
-        /* Need to add simulated entries and template
-        assertEquals(testCommand.execute(testModel, EMPTY_COMMAND_HISTORY).feedbackToUser,
-                String.format(MakeCommand.MESSAGE_SUCCESS, testPath));*/
+        Model testModel = TypicalResumeModel.getDefaultTemplateModel();
+        assertEquals(String.format(MakeCommand.MESSAGE_SUCCESS, testPath),
+                testCommand.execute(testModel, EMPTY_COMMAND_HISTORY).feedbackToUser);
     }
 
     @Test
