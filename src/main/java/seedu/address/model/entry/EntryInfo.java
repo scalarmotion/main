@@ -19,7 +19,7 @@ public class EntryInfo {
             "header, subHeader and duration must be alphanumeric, "
                     + "separated by brackets or hyphen or space and cannot be an empty string or"
                     + "entirely consist of whitespaces";
-
+    private static final String NEW_LINE = "\n";
     private List<String> entryInfo = new LinkedList<String>();
 
     /**
@@ -157,11 +157,13 @@ public class EntryInfo {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Title: ")
+        builder.append("Title: ")
                 .append(getTitle())
-                .append(" SubHeader: ")
+                .append(NEW_LINE)
+                .append("SubHeader: ")
                 .append(getSubHeader())
-                .append(" Duration: ")
+                .append(NEW_LINE)
+                .append("Duration: ")
                 .append(getDuration());
         return builder.toString();
     }

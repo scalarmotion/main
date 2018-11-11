@@ -37,8 +37,7 @@ public class ExpandedEntryPanel extends UiPart<Region> {
     @Subscribe
     private void handleUpdateExpandedEntryRequestEvent(UpdateExpandedEntryRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        Platform.runLater(() -> displayed.setValue(event.getUpdatedEntry().getDescription().toString()));
-
+        Platform.runLater(() -> displayed.setValue(event.getUpdatedEntry().toString()));
     }
 
 }
