@@ -24,13 +24,14 @@ and requiring an incremental approach to development.
 == Summary of contributions
 
 * *Major enhancement*: Added *the ability to generate a resume and save it to a file*.
-**	This feature uses the specifications of a given template to filter and organise the entries stored in ResuMaker
+**	This enhancement uses the specifications of a given template to filter and organise the entries stored in ResuMaker
 into a visually appealing resume file, saved in the markdown format for easy conversion to other commonly used document formats.
-**	This enhancement makes use of various components across ResuMaker and was also designed to be modular enough
-to allow for easy extension. For instance, the use of markdown to format the text of the resume was designed
-such that it would be easy to change the layout of the resume (such as changing the font size of its section headers
+**  This enhancement is a core feature of the project and brings together the work of the team to generate a resume.
+**	This enhancement was designed to be modular enough to allow for easy extension.
+For instance, the use of markdown to format the text of the resume was designed such that it would be easy to
+change the layout of the resume (such as changing the font size of its section headers
 or adding other content to the resume) or even switch to a different file format altogether.
-**	An link:https://github.com/Steppschuh/Java-Markdown-Generator[external library] was used to handle the
+**	This enhancement made use of an link:https://github.com/Steppschuh/Java-Markdown-Generator[external library] to handle the
 generation of markdown text in a more organised way rather than manipulating the text directly.
 While this functionality was important, it is not essential to the feature - generating the markdown text of the resume
 could have been done without it, although it would have either taken more work to develop the functionality separately
@@ -52,7 +53,10 @@ link:https://github.com/CS2103-AY1819S1-W17-1/main/commit/e3509a0af98fce9277896e
 *** Reviewed pull requests (with non-trivial review comments):
 link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/119[#119],
 link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/152[#152],
-link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/163[#163]
+link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/163[#163],
+link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/220[#220],
+link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/231[#231],
+link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/280[#280]
 ** Tools:
 *** Integrated a third party library to the project to generate markdown text:
 link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/33[#33], link:https://github.com/CS2103-AY1819S1-W17-1/main/pull/112[#112].
@@ -69,7 +73,8 @@ include::../UserGuide.adoc[tag=resume]
 == Contributions to the Developer Guide
 
 |===
-|_Here are some sections I contributed to the Developer Guide which showcase the technical depth of my contributions to the project, as well as my ability to document them._
+|_Here are some sections I contributed to the Developer Guide which showcase the
+technical depth of my contributions to the project, as well as my ability to document them._
 |===
 
 include::../DeveloperGuide.adoc[tag=resume]
