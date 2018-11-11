@@ -13,7 +13,7 @@ public class MdFileStorage {
     /**
      * Empty constructor to prevent instantiation.
      */
-    public MdFileStorage() {}
+    private MdFileStorage() {}
 
     /**
      * Saves the given resume data to the specified file.
