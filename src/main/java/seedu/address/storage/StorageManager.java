@@ -20,9 +20,11 @@ import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.InvalidTemplateFileException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
+import seedu.address.storage.entry.EntryBookStorage;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -31,14 +33,17 @@ public class StorageManager extends ComponentManager implements Storage {
 
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
+    private EntryBookStorage entryBookStorage;
     private UserPrefsStorage userPrefsStorage;
     private TemplateStorage templateStorage;
     private ResumeStorage resumeStorage;
 
 
-    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
+    public StorageManager(AddressBookStorage addressBookStorage, EntryBookStorage entryBookStorage,
+                          UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
+        this.entryBookStorage = entryBookStorage;
         this.userPrefsStorage = userPrefsStorage;
         this.templateStorage = new TxtTemplateStorage();
         this.resumeStorage = new MarkdownResumeStorage();
@@ -89,6 +94,35 @@ public class StorageManager extends ComponentManager implements Storage {
     public void saveAddressBook(ReadOnlyAddressBook addressBook, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
         addressBookStorage.saveAddressBook(addressBook, filePath);
+    }
+
+    // ================ EntryBook methods ==============================
+
+    @Override
+    public Path getEntryBookFilePath() {
+        return entryBookStorage.getEntryBookFilePath();
+    }
+
+    @Override
+    public Optional<ReadOnlyEntryBook> readEntryBook() throws DataConversionException, IOException {
+        return readEntryBook(entryBookStorage.getEntryBookFilePath());
+    }
+
+    @Override
+    public Optional<ReadOnlyEntryBook> readEntryBook(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return entryBookStorage.readEntryBook(filePath);
+    }
+
+    @Override
+    public void saveEntryBook(ReadOnlyEntryBook entryBook) throws IOException {
+        saveEntryBook(entryBook, entryBookStorage.getEntryBookFilePath());
+    }
+
+    @Override
+    public void saveEntryBook(ReadOnlyEntryBook entryBook, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        entryBookStorage.saveEntryBook(entryBook, filePath);
     }
 
     // ================ Template methods ==============================

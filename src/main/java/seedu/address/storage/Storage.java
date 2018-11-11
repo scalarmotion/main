@@ -13,14 +13,17 @@ import seedu.address.commons.events.storage.TemplateLoadingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.InvalidTemplateFileException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.resume.Resume;
 import seedu.address.model.template.Template;
+import seedu.address.storage.entry.EntryBookStorage;
 
 /**
  * API of the Storage component
  */
-public interface Storage extends AddressBookStorage, UserPrefsStorage, TemplateStorage, ResumeStorage {
+public interface Storage extends AddressBookStorage, EntryBookStorage, UserPrefsStorage, TemplateStorage,
+        ResumeStorage {
 
     @Override
     Optional<UserPrefs> readUserPrefs() throws DataConversionException, IOException;
@@ -28,6 +31,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TemplateS
     @Override
     void saveUserPrefs(UserPrefs userPrefs) throws IOException;
 
+    // --- TO REMOVE ---
     @Override
     Path getAddressBookFilePath();
 
@@ -36,6 +40,17 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, TemplateS
 
     @Override
     void saveAddressBook(ReadOnlyAddressBook addressBook) throws IOException;
+    // ---------
+
+    // ENTRYBOOK
+    @Override
+    Path getEntryBookFilePath();
+
+    @Override
+    Optional<ReadOnlyEntryBook> readEntryBook() throws DataConversionException, IOException;
+
+    @Override
+    void saveEntryBook(ReadOnlyEntryBook entryBook) throws IOException;
 
     @Override
     Path getTemplateFilePath();

@@ -2,7 +2,6 @@ package seedu.address;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -35,6 +34,7 @@ import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
+import seedu.address.storage.entry.EntryBookStorage;
 import seedu.address.storage.entry.XmlEntryBookStorage;
 import seedu.address.ui.Ui;
 import seedu.address.ui.UiManager;
@@ -66,8 +66,12 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getEntryBookFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        AddressBookStorage addressBookStorage = new XmlAddressBookStorage(
+                // Paths.get("data", "addressbook.xml"));
+                // ^ Temp, to avoid breaking system tests. TODO: Remove with other AB code.
+                userPrefs.getEntryBookFilePath());
+        EntryBookStorage entryBookStorage = new XmlEntryBookStorage(userPrefs.getEntryBookFilePath());
+        storage = new StorageManager(addressBookStorage, entryBookStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -107,16 +111,15 @@ public class MainApp extends Application {
             initialData = new AddressBook();
         }
 
-
-        // need to update system tests before these can be removed
         Optional<ReadOnlyEntryBook> entryBookOptional;
         ReadOnlyEntryBook initialDataForEntryBook;
 
         // filepath to the entrybook xml is hardcoded for now
-        Path entryBookPath = Paths.get("resume-data.xml");
+        // Path entryBookPath = Paths.get("resume-data.xml");
 
         try {
-            entryBookOptional = new XmlEntryBookStorage(entryBookPath).readEntryBook();
+            // entryBookOptional = new XmlEntryBookStorage(entryBookPath).readEntryBook();
+            entryBookOptional = storage.readEntryBook();
             initialDataForEntryBook = entryBookOptional.orElseGet(() -> {
                 logger.info("Data file not found. Will be starting with a sample entrybook");
                 return SampleDataUtil.getSampleEntryBook();

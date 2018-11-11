@@ -1,5 +1,6 @@
 package seedu.address.storage.entry;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -20,6 +21,10 @@ public class XmlAdaptedEntryDescription {
      */
     public XmlAdaptedEntryDescription() {}
 
+    public XmlAdaptedEntryDescription(EntryDescription source) {
+        bullets = new ArrayList<>(source.getDescriptionList());
+    }
+
     /**
      * Converts this jaxb-friendly adapted entry description object into the model's EntryDescription object.
      * // TODO: Add data validation
@@ -30,6 +35,8 @@ public class XmlAdaptedEntryDescription {
         EntryDescription desc = new EntryDescription();
 
         if (bullets == null) {
+            /* TODO: check if this will only occur if XmlAdaptedResumeEntry is constructed with fields given manually,
+            or in other cases as well*/
             throw new IllegalValueException(MESSAGE_MISSING_BULLETS);
         }
 

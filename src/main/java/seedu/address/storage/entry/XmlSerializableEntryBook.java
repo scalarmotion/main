@@ -2,12 +2,14 @@ package seedu.address.storage.entry;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.EntryBook;
+import seedu.address.model.ReadOnlyEntryBook;
 import seedu.address.model.entry.ResumeEntry;
 
 /**
@@ -29,6 +31,13 @@ public class XmlSerializableEntryBook {
         resumeEntries = new ArrayList<>();
     }
 
+    /**
+     * Conversion
+     */
+    public XmlSerializableEntryBook(ReadOnlyEntryBook src) {
+        this();
+        resumeEntries.addAll(src.getEntryList().stream().map(XmlAdaptedResumeEntry::new).collect(Collectors.toList()));
+    }
 
     /**
      * Converts this entrybook into the model's {@code EntryBook} object.
