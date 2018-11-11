@@ -523,8 +523,11 @@ While we have chosen to implement conversion into markdown, you may prefer a dif
 the hassle of converting markdown to other formats outside the application. To this end, you can extend ResuMaker by
 adding support for saving `Resumes` to a new format. +
 To achieve this, you would have to design your own class implementing the `ResumeStorage` interface. This new class would
-then need new utility methods to handle conversion of the `Resume` into another text format, such as XML. +
-_[DIAGRAM OF NECESSARY ADDITIONS]_
+also need new utility methods to handle conversion of the `Resume` into another text format.
+The diagram below illustrates the key additions necessary to implement saving resumes in a new file format:
+
+.Class diagram for Resume Storage extension
+image::resumeStorageExtensionClassDiagram.png[width="800"]
 
 
 // end::resume[]
