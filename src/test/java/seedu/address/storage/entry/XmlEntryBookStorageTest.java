@@ -86,14 +86,14 @@ public class XmlEntryBookStorageTest {
         assertEquals(original, new EntryBook(readBack));
 
         //Modify data, overwrite exiting file, and read back
-        original.addEnty(WORK_CAROUSELL);
+        original.addEntry(WORK_CAROUSELL);
         original.removeEntry(WORK_FACEBOOK);
         xmlEntryBookStorage.saveEntryBook(original, filePath);
         readBack = xmlEntryBookStorage.readEntryBook(filePath).get();
         assertEquals(original, new EntryBook(readBack));
 
         //Save and read without specifying file path
-        original.addEnty(PROJECT_ORBITALAPP);
+        original.addEntry(PROJECT_ORBITALAPP);
         xmlEntryBookStorage.saveEntryBook(original); //file path not specified
         readBack = xmlEntryBookStorage.readEntryBook().get(); //file path not specified
         assertEquals(original, new EntryBook(readBack));

@@ -67,7 +67,7 @@ public class TypicalEntrys {
         EntryBook eb = new EntryBook();
         /* to be completed when model is updated. */
         for (ResumeEntry entry : getTypicalEntries()) {
-            eb.addEnty(entry);
+            eb.addEntry(entry);
         }
         return eb;
     }

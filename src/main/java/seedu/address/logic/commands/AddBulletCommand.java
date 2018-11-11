@@ -28,6 +28,7 @@ public class AddBulletCommand extends Command {
             + "attained Best Financial Hack Award";
 
     public static final String MESSAGE_ADDBULLET_SUCCESS = "Added Bullet : %1$s";
+    public static final String MESSAGE_ADDBULLET_DUPLICATE_BULLET = "This bullet already exists";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
 
     private final Index index;
@@ -55,13 +56,27 @@ public class AddBulletCommand extends Command {
         }
 
         ResumeEntry entryToEdit = lastShownList.get(index.getZeroBased());
+
+        if (entryToEdit.getDescription().contains(bullet)) {
+            throw new CommandException(MESSAGE_ADDBULLET_DUPLICATE_BULLET);
+        }
+
         ResumeEntry editedEntry = createEntryWithAddedBullet(entryToEdit, bullet);
 
         model.updateEntry(entryToEdit, editedEntry);
         model.commitEntryBook();
+
+        postAddBulletCommandEvents(index, editedEntry);
+
+        return new CommandResult(String.format(MESSAGE_ADDBULLET_SUCCESS, bullet));
+    }
+
+    /**
+     * raise events to UI when a bullet is successfully added to an entry.
+     */
+    private void postAddBulletCommandEvents(Index index, ResumeEntry editedEntry) {
         EventsCenter.getInstance().post(new JumpToEntryListRequestEvent(index));
         EventsCenter.getInstance().post(new UpdateExpandedEntryRequestEvent(editedEntry));
-        return new CommandResult(String.format(MESSAGE_ADDBULLET_SUCCESS, bullet));
     }
 
     /**

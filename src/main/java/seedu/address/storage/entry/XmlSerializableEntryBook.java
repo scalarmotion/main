@@ -52,7 +52,7 @@ public class XmlSerializableEntryBook {
             if (entryBook.hasEntry(entry)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_ENTRY);
             }
-            entryBook.addEnty(entry);
+            entryBook.addEntry(entry);
         }
         return entryBook;
     }

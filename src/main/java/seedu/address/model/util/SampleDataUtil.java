@@ -84,9 +84,9 @@ public class SampleDataUtil {
 
     public static ReadOnlyEntryBook getSampleEntryBook() {
         EntryBook sampleEb = new EntryBook();
-        sampleEb.addEnty(MA1101R_TA);
-        sampleEb.addEnty(COMP_CLUB_EXCO);
-        sampleEb.addEnty(NUS_CS2103T);
+        sampleEb.addEntry(MA1101R_TA);
+        sampleEb.addEntry(COMP_CLUB_EXCO);
+        sampleEb.addEntry(NUS_CS2103T);
 
         return sampleEb;
     }
