@@ -258,7 +258,9 @@ public class MarkdownConverterTest {
             testModel.addEntry(entry);
         }
         Resume typicalResume = new Resume(testModel);
-        assertEquals(toMarkdown(typicalResume.getSectionList()),
+        assertEquals(toMarkdown(typicalResume.getHeader())
+                        + System.lineSeparator() + System.lineSeparator()
+                        + toMarkdown(typicalResume.getSectionList()),
                 toMarkdown(typicalResume));
     }
 }
