@@ -205,7 +205,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     private FilteredList<ResumeEntry> getFullEntryList() {
-        return new FilteredList(versionedEntryBook.getEntryList());
+        return new FilteredList<ResumeEntry>(versionedEntryBook.getEntryList());
     }
 
     @Override
