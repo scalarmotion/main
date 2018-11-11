@@ -14,7 +14,6 @@ import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.template.Template;
 import seedu.address.testutil.TypicalResumeModel;
 
 public class MakeCommandTest {
