@@ -114,11 +114,7 @@ public class MainApp extends Application {
         Optional<ReadOnlyEntryBook> entryBookOptional;
         ReadOnlyEntryBook initialDataForEntryBook;
 
-        // filepath to the entrybook xml is hardcoded for now
-        // Path entryBookPath = Paths.get("resume-data.xml");
-
         try {
-            // entryBookOptional = new XmlEntryBookStorage(entryBookPath).readEntryBook();
             entryBookOptional = storage.readEntryBook();
             initialDataForEntryBook = entryBookOptional.orElseGet(() -> {
                 logger.info("Data file not found. Will be starting with a sample entrybook");

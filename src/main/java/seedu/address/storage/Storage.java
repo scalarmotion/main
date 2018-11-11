@@ -5,6 +5,7 @@ import java.nio.file.Path;
 import java.util.Optional;
 
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EntryBookChangedEvent;
 import seedu.address.commons.events.model.ResumeSaveEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -67,6 +68,13 @@ public interface Storage extends AddressBookStorage, EntryBookStorage, UserPrefs
      * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
      */
     void handleAddressBookChangedEvent(AddressBookChangedEvent abce);
+
+    /**
+     * Saves the current version of the Entry Book to the hard disk.
+     *   Creates the data file if it is missing.
+     * Raises {@link DataSavingExceptionEvent} if there was an error during saving.
+     */
+    void handleEntryBookChangedEvent(EntryBookChangedEvent ebce);
 
     /**
      * Attempts to load the template from the hard disk.

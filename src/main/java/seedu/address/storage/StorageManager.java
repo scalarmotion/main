@@ -12,6 +12,7 @@ import com.google.common.eventbus.Subscribe;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.EntryBookChangedEvent;
 import seedu.address.commons.events.model.ResumeSaveEvent;
 import seedu.address.commons.events.model.TemplateLoadRequestedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
@@ -152,6 +153,17 @@ public class StorageManager extends ComponentManager implements Storage {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
         try {
             saveAddressBook(event.data);
+        } catch (IOException e) {
+            raise(new DataSavingExceptionEvent(e));
+        }
+    }
+
+    @Override
+    @Subscribe
+    public void handleEntryBookChangedEvent(EntryBookChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event, "Local data changed, saving to file"));
+        try {
+            saveEntryBook(event.data);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }
