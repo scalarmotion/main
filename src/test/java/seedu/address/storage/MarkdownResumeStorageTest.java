@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import static java.util.Objects.requireNonNull;
+import static org.junit.Assert.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,8 +13,11 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.rules.TemporaryFolder;
 
+import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.model.resume.Resume;
+import seedu.address.storage.util.MarkdownConverter;
+import seedu.address.testutil.TypicalResumeModel;
 
 public class MarkdownResumeStorageTest {
 
@@ -30,11 +34,10 @@ public class MarkdownResumeStorageTest {
                 ? TEST_DATA_FOLDER.resolve(userPrefsFileInTestDataFolder)
                 : null;
     }
-    /*
+
     private Resume getTypicalResume() {
-        // Does not work because still pending ability to import resume manually
-        return new Resume(new ModelManager());
-    }*/
+        return new Resume(TypicalResumeModel.getDefaultTemplateModel());
+    }
 
     @Test
     public void saveResume_nullResume_throwsNullPointerException() {
@@ -42,11 +45,11 @@ public class MarkdownResumeStorageTest {
         saveResume(null, "SomeFile.md");
     }
 
-    /*@Test
+    @Test
     public void saveResume_nullFilePath_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         saveResume(getTypicalResume(), null);
-    }*/
+    }
 
     /**
      * Saves {@code resume} at the specified {@code resumeFileInTestDataFolder} filepath.
@@ -61,7 +64,8 @@ public class MarkdownResumeStorageTest {
     }
 
     /**
-     * Reads a {@code resume} from the specified {@code filePath}.
+     * Reads the text of a resume from the specified {@code filePath}.
+     * Only used for testing as the app does not usually need to load a resume from file.
      */
     private String readTestResume(Path filePath) {
         requireNonNull(filePath);
@@ -81,7 +85,6 @@ public class MarkdownResumeStorageTest {
         return resumeText;
     }
 
-    /*
     @Test
     public void saveResume_allInOrder_success() throws DataConversionException, IOException {
         Path resumeFilePath = testFolder.getRoot().toPath().resolve("testresume.md");
@@ -98,6 +101,6 @@ public class MarkdownResumeStorageTest {
         markdownResumeStorage.saveResume(getTypicalResume());
         readBack = readTestResume(resumeFilePath);
         assertEquals(original, readBack);
-    }*/
+    }
 
 }
