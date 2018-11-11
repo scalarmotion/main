@@ -111,7 +111,7 @@ public class ModelManagerTest {
 
     @Test
     public void getAndGenerateResume() {
-        Model testResumeModel = new TypicalResumeModel();
+        Model testResumeModel = TypicalResumeModel.getDefaultTemplateModel();
         assertFalse(testResumeModel.getLastResume().isPresent());
         testResumeModel.generateResume();
         Resume actual = testResumeModel.getLastResume().orElseThrow(AssertionError::new);

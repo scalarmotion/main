@@ -6,16 +6,22 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.template.Template;
 
 /**
- * An extension of the ModelManager for testing purposes. Returns the default template as its loaded template
+ * An extension of the ModelManager for testing purposes. Returns the given template
  * to bypass the usual requirement for templates to be loaded through storage.
  */
 public class TypicalResumeModel extends ModelManager {
-    public TypicalResumeModel() {
+    private Template testTemplate;
+    public TypicalResumeModel(Template template) {
         super();
+        testTemplate = template;
     }
 
     @Override
     public Optional<Template> getLoadedTemplate() {
-        return Optional.of(Template.getDefaultTemplate());
+        return Optional.of(testTemplate);
+    }
+
+    public static TypicalResumeModel getDefaultTemplateModel() {
+        return new TypicalResumeModel(Template.getDefaultTemplate());
     }
 }

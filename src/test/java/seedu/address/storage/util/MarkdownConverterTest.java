@@ -249,10 +249,10 @@ public class MarkdownConverterTest {
         assertEquals(toMarkdown(defaultHeader) + System.lineSeparator()
                         + System.lineSeparator()
                         + toMarkdown(testSectionList),
-                toMarkdown(new Resume(new TypicalResumeModel())));
+                toMarkdown(new Resume(TypicalResumeModel.getDefaultTemplateModel())));
 
         // Default resume with entries, no header
-        Model testModel = new TypicalResumeModel();
+        Model testModel = TypicalResumeModel.getDefaultTemplateModel();
         List<ResumeEntry> typicalEntries = TypicalEntrys.getTypicalEntries();
         for (ResumeEntry entry : typicalEntries) {
             testModel.addEntry(entry);
