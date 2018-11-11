@@ -21,13 +21,16 @@ public class XmlAdaptedEntryDescription {
      */
     public XmlAdaptedEntryDescription() {}
 
+    public XmlAdaptedEntryDescription(List<String> bullets) {
+        this.bullets = bullets;
+    }
+
     public XmlAdaptedEntryDescription(EntryDescription source) {
         bullets = new ArrayList<>(source.getDescriptionList());
     }
 
     /**
      * Converts this jaxb-friendly adapted entry description object into the model's EntryDescription object.
-     * // TODO: Add data validation
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted entry description.
      */
@@ -41,7 +44,11 @@ public class XmlAdaptedEntryDescription {
         }
 
         for (String bullet : bullets) {
-            // TODO: Validate bullet
+
+            if (!EntryDescription.isValidBullet(bullet)) {
+                throw new IllegalValueException(EntryDescription.MESSAGE_ENTRYDESC_CONSTRAINTS);
+            }
+
             desc.addBullet(bullet);
         }
 
