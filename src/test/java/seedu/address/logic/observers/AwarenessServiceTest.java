@@ -1,8 +1,7 @@
 package seedu.address.logic.observers;
 
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
-import java.util.NoSuchElementException;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -31,26 +30,43 @@ public class AwarenessServiceTest {
     }
 
     @Test
-    public void observe_miscInput() {
-        thrown.expect(NoSuchElementException.class);
+    public void observe_irrelevantInput() {
 
         Model model = new ModelManager();
         AwarenessService awarenessService = new AwarenessService(model);
-        awarenessService.observe("test input").get();
 
+        assertFalse(awarenessService.observe("test input").isPresent());
+        assertFalse(awarenessService.observe("                ").isPresent());
+        assertFalse(awarenessService.observe("       test         ").isPresent());
+        assertFalse(awarenessService.observe("").isPresent());
     }
+
 
     @Test
     public void observe_relevantInput() {
         Model model = new ModelManager(new AddressBook(), new EntryBook(), new UserPrefs(), typicalAwareness);
         AwarenessService awarenessService = new AwarenessService(model);
 
-        ContextUpdateEvent actual = (ContextUpdateEvent) awarenessService.observe("nus ta ma1101r").get();
-
         ContextUpdateEvent expected = new ContextUpdateEvent(String.format(AwarenessService.MESSAGE_AVAILABLE_ENTRY,
                                                                                    "teaching assistant ma1101r"));
 
-        assertEquals(actual.message, expected.message);
+
+        ContextUpdateEvent exactMatch = (ContextUpdateEvent) awarenessService.observe("nus ta ma1101r").get();
+
+        ContextUpdateEvent trailingSpacesInput =
+                (ContextUpdateEvent) awarenessService.observe("  nus ta ma1101r").get();
+
+        ContextUpdateEvent leadingSpacesInput =
+                (ContextUpdateEvent) awarenessService.observe("nus ta ma1101r    ").get();
+
+        ContextUpdateEvent paddedSpacesInput =
+               (ContextUpdateEvent) awarenessService.observe("   nus ta ma1101r    ").get();
+
+        assertEquals(exactMatch.message, expected.message);
+        assertEquals(trailingSpacesInput.message, expected.message);
+        assertEquals(leadingSpacesInput.message, expected.message);
+        assertEquals(paddedSpacesInput.message, expected.message);
+
     }
 
 }
