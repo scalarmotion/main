@@ -25,27 +25,25 @@ Instead of having to reinsert entries, addition tag management functions have be
 ** What it does: This enhancement allows the user to alter tags of existing entries
 ** Justification: This enhancement streamlines the tag management process, instead of having to reinsert entries, users can make use of the functions to alter the tags instead.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=ongspxm&sort=displayName&timeframe=day&reverse=false&repoSort=true[CS2103 Dashboard]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+*** Managed merging of PR and handling of repository cleanups
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Extended model functions (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/187[#187])
+*** Refactored existing address book classes (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/171[#171])
+*** Created EntryBook and corresponding testing utilities (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/87[#87])
+*** Developed command sub parser pattern (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/174[#174])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/262[#262])
+*** Included details on tags and category implementation (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/170[#170], https://github.com/CS2103-AY1819S1-W17-1/main/pull/54[#54])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** PRs reviewed (with non-trivial review comments): (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/45[#45], https://github.com/CS2103-AY1819S1-W17-1/main/pull/253[#253])
+*** Reported bugs and suggestions F10-4 in PE Dry Run: (PR https://github.com/CS2103-AY1819S1-F10-4/main/issues?q=is%3Aissue+PE+Dry+Run+ongspxm[#219, #225, #232, #237, #239, #243, #245, #249])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated a third party tool (RepoSense) to the project (PR https://github.com/CS2103-AY1819S1-W17-1/main/pull/101[#101])
 
 == Contributions to the User Guide
 
@@ -62,10 +60,3 @@ include::../UserGuide.adoc[tag=tags]
 |===
 
 include::../DeveloperGuide.adoc[tag=tags]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
