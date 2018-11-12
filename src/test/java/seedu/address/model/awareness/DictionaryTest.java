@@ -1,10 +1,9 @@
 package seedu.address.model.awareness;
 
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -122,45 +121,58 @@ public class DictionaryTest {
         Dictionary dictionary = SampleDataUtil.getSampleDictionary();
 
         // Expression consisting of single full phrase should match the correct possibleEventName
-        Assert.assertEquals("hackathon", dictionary.getPossibleEventName("hackathon"));
+        assertEquals("hackathon", dictionary.getPossibleEventName("hackathon"));
 
         // Expression consisting of multiple full phrases should match the correct possibleEventName
-        Assert.assertEquals("financial technology hackathon",
+        assertEquals("financial technology hackathon",
                                     dictionary.getPossibleEventName("financial technology hackathon"));
 
         // Expression consisting of a single partial phrase should match the correct possibleEventName
-        Assert.assertEquals("computer", dictionary.getPossibleEventName("comp"));
-        Assert.assertEquals("science", dictionary.getPossibleEventName("sci"));
+        assertEquals("computer", dictionary.getPossibleEventName("comp"));
+        assertEquals("science", dictionary.getPossibleEventName("sci"));
 
         // Expression consisting of multiple partial phrases should match the correct possibleEventName
-        Assert.assertEquals("computer science", dictionary.getPossibleEventName("comp sci"));
-        Assert.assertEquals("teaching assistant", dictionary.getPossibleEventName("teach assist"));
+        assertEquals("computer science", dictionary.getPossibleEventName("comp sci"));
+        assertEquals("teaching assistant", dictionary.getPossibleEventName("teach assist"));
 
         // Expression consisting a single slang should match the correct possibleEventName
-        Assert.assertEquals("computer science", dictionary.getPossibleEventName("cs"));
-        Assert.assertEquals("singapore", dictionary.getPossibleEventName("sg"));
+        assertEquals("computer science", dictionary.getPossibleEventName("cs"));
+        assertEquals("singapore", dictionary.getPossibleEventName("sg"));
 
         // Expression consisting of multiple slang should match the correct possibleEventName
-        Assert.assertEquals("undergraduate teaching assistant", dictionary.getPossibleEventName("ug ta"));
+        assertEquals("undergraduate teaching assistant", dictionary.getPossibleEventName("ug ta"));
 
         // Expression consisting of both partial and full phrases should match correct possibleEventName
-        Assert.assertEquals("financial technology research programme",
+        assertEquals("financial technology research programme",
                                     dictionary.getPossibleEventName("financial tech research prog"));
 
-        Assert.assertEquals("double degree programme", dictionary.getPossibleEventName("double deg prog"));
+        assertEquals("double degree programme", dictionary.getPossibleEventName("double deg prog"));
 
         // Expression consisting of both partial phrase and slang should match correct possibleEventName
-        Assert.assertEquals("undergraduate research assistant", dictionary.getPossibleEventName("ug res asst"));
+        assertEquals("undergraduate research assistant", dictionary.getPossibleEventName("ug res asst"));
 
 
         // Expression consisting of both full phrase and slang should match correct possibleEventName
-        Assert.assertEquals("teaching assistant", dictionary.getPossibleEventName("teaching asst"));
-        Assert.assertEquals("financial technology hackathon", dictionary.getPossibleEventName("fintech hackathon"));
+        assertEquals("teaching assistant", dictionary.getPossibleEventName("teaching asst"));
+        assertEquals("financial technology hackathon", dictionary.getPossibleEventName("fintech hackathon"));
 
         // Expression consisting of slang, partial phrase and full phrase should match correct possibleEventName
-        Assert.assertEquals("undergraduate research programme", dictionary.getPossibleEventName("ug research prog"));
-        Assert.assertEquals("postgraduate machine learning research opportunities",
+        assertEquals("undergraduate research programme", dictionary.getPossibleEventName("ug research prog"));
+        assertEquals("postgraduate machine learning research opportunities",
                                     dictionary.getPossibleEventName("pg ml research opp"));
 
+    }
+
+    @Test
+    public void getPossibleEventName_negativeCases() {
+
+        Dictionary dictionary = SampleDataUtil.getSampleDictionary();
+
+        // edge cases
+        assertEquals("", dictionary.getPossibleEventName(""));
+        assertEquals("", dictionary.getPossibleEventName("     "));
+        assertEquals("slang1 slang2", dictionary.getPossibleEventName("slang1   slang2"));
+        assertEquals("slang1 slang2", dictionary.getPossibleEventName("   slang1   slang2  "));
+        assertEquals("slang1 slang2 slang3", dictionary.getPossibleEventName("   slang1   slang2      slang3"));
     }
 }
