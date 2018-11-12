@@ -21,11 +21,18 @@ public class Template {
     private static final String TEMPLATE_LINE_REGEX = "^[^:]+:~([^:\\s])+:[^:]*$";
 
     private ArrayList<TemplateSection> sections;
-    private String stringRepresentation = "";
+    // filepath string, purely for display purposes
+    private String filepath;
+    private String stringRepresentation;
 
     public Template(String filepath) {
+        this.filepath = filepath;
         sections = new ArrayList<TemplateSection>();
-        stringRepresentation = filepath + "\n\n";
+        stringRepresentation = "";
+    }
+
+    public String getFilepath() {
+        return filepath;
     }
 
     /**
@@ -147,6 +154,7 @@ public class Template {
 
         // state check
         Template other = (Template) obj;
-        return stringRepresentation.equals(other.stringRepresentation);
+        return filepath.equals(other.filepath)
+                && stringRepresentation.equals(other.stringRepresentation);
     }
 }

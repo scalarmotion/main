@@ -37,7 +37,7 @@ public class ExpandedEntryPanelTest extends GuiUnitTest {
         // new result received
         postNow(NEW_RESULT_EVENT_STUB);
         guiRobot.pauseForHuman();
-        assertEquals(WORK_FACEBOOK.toString(), expandedEntryPanelHandle.getText());
+        assertEquals(WORK_FACEBOOK.getDescription().toString(), expandedEntryPanelHandle.getText());
     }
 
 }

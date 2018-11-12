@@ -9,7 +9,7 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:id="templatePanel">
     <HBox spacing="20" alignment="CENTER">
-        <Label styleClass="cell_list_label" text="Template"/>
+        <Label fx:id="templateLabel" styleClass="cell_list_label" text="Current Template"/>
     </HBox>
     <TextArea fx:id="templatePanelDisplay" editable="false" styleClass="template-panel-display" VBox.vgrow="ALWAYS"/>
 </VBox>

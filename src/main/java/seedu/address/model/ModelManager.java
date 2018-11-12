@@ -328,6 +328,6 @@ public class ModelManager extends ComponentManager implements Model {
     public void handleTemplateLoadingExceptionEvent(TemplateLoadingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Exception when attempting to load template from "
                 + event.filepath.toString()));
-        loadedTemplate = null;
+        // if there was a previous template, it remains as the active one
     }
 }

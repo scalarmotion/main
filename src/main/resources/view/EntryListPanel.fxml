@@ -7,7 +7,7 @@
 
 <VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
     <HBox spacing="20" alignment="CENTER">
-        <Label styleClass="cell_list_label" text="ENTRY LIST"/>
+        <Label styleClass="cell_list_label" text="Entries"/>
     </HBox>
     <ListView fx:id="entryListView" VBox.vgrow="ALWAYS" />
 </VBox>
