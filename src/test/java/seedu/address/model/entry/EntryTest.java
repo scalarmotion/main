@@ -2,6 +2,7 @@ package seedu.address.model.entry;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static seedu.address.testutil.TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DESC;
 import static seedu.address.testutil.TypicalEntrys.NUS_EDUCATION;
 import static seedu.address.testutil.TypicalEntrys.WORK_FACEBOOK;
 
@@ -10,7 +11,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.model.util.EntryBuilder;
-import seedu.address.testutil.TypicalEntrys;
 
 public class EntryTest {
 
@@ -71,13 +71,25 @@ public class EntryTest {
         assertFalse(NUS_EDUCATION.equals(WORK_FACEBOOK));
 
         // test toString() of a majorEntry
+        String expected = "Category: ~work\n"
+                + "Title: Facebook\n"
+                + "SubHeader: software engineering intern\n"
+                + "Duration: 2010 - 2013\n"
+                + "Tags: #java\n\n"
+                + "Bullet Description:\n";
         assertTrue(WORK_FACEBOOK.toString()
-                .equals(" Category: ~work Title: Facebook SubHeader: software engineering intern"
-                        + " Duration: 2010 - 2013 Tags: #java"));
+                .equals(expected));
 
         // test toString of a minorEntry which does not contain entryInfo
-        assertTrue(TypicalEntrys.AWARD_WITH_NO_ENTRYINFO_NO_DESC.toString()
-                .equals(" Category: ~awards Title:  SubHeader:  Duration:  Tags: "));
+        System.out.println(AWARD_WITH_NO_ENTRYINFO_NO_DESC);
+        expected = "Category: ~awards\n"
+                + "Title: \n"
+                + "SubHeader: \n"
+                + "Duration: \n"
+                + "Tags: \n\n"
+                + "Bullet Description:\n";
+        assertTrue(AWARD_WITH_NO_ENTRYINFO_NO_DESC.toString()
+                .equals(expected));
     }
 
     @Test

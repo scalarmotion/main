@@ -32,12 +32,12 @@ public class ExpandedEntryPanelTest extends GuiUnitTest {
     public void display() {
         // default result text
         guiRobot.pauseForHuman();
-        assertEquals("", expandedEntryPanelHandle.getText());
+        assertEquals(EMPTY_STRING, expandedEntryPanelHandle.getText());
 
         // new result received
         postNow(NEW_RESULT_EVENT_STUB);
         guiRobot.pauseForHuman();
-        assertEquals(EMPTY_STRING, expandedEntryPanelHandle.getText());
+        assertEquals(WORK_FACEBOOK.getDescription().toString(), expandedEntryPanelHandle.getText());
     }
 
 }

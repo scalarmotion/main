@@ -15,7 +15,7 @@ import seedu.address.model.util.EntryBuilder;
  */
 public class TypicalEntrys {
 
-    // manually added
+    // included in getTypicalEntries()
     public static final ResumeEntry WORK_FACEBOOK = new EntryBuilder().withCategory("work")
             .withTitle("Facebook").withDuration("2010 - 2013")
             .withSubHeader("software engineering intern")
@@ -47,6 +47,17 @@ public class TypicalEntrys {
             .withDescription(getTypicalEntryDescription())
             .build();
 
+    // manually added
+    public static final ResumeEntry WORK_CAROUSELL = new EntryBuilder().withCategory("work")
+            .withTitle("Carousell").withDuration("Nov 2017 - Jan 2018")
+            .withSubHeader("Intern")
+            .withTags("mobile", "web").build();
+
+    public static final ResumeEntry PROJECT_ORBITALAPP = new EntryBuilder().withCategory("projects")
+            .withTitle("Schedule Planner for Android").withDuration("May 2018 - Aug 2018")
+            .withSubHeader("NUS Orbital Gemini level project")
+            .withTags("mobile", "app", "school").build();
+
     private TypicalEntrys() {} // prevents instantiation
 
     /**
@@ -56,7 +67,7 @@ public class TypicalEntrys {
         EntryBook eb = new EntryBook();
         /* to be completed when model is updated. */
         for (ResumeEntry entry : getTypicalEntries()) {
-            eb.addEnty(entry);
+            eb.addEntry(entry);
         }
         return eb;
     }

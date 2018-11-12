@@ -34,6 +34,8 @@ public class EntryCard extends UiPart<Region> {
     @FXML
     private Label duration;
     @FXML
+    private Label categoryTag;
+    @FXML
     private FlowPane tags;
 
     public EntryCard(ResumeEntry entry, int displayedIndex) {
@@ -43,7 +45,7 @@ public class EntryCard extends UiPart<Region> {
         title.setText(entry.getEntryInfo().getTitle());
         subtitle.setText(entry.getEntryInfo().getSubHeader());
         duration.setText(entry.getEntryInfo().getDuration());
-        tags.getChildren().add(new Label(entry.getCategory().cateName));
+        categoryTag.setText(entry.getCategory().cateName);
         entry.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

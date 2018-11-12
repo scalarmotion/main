@@ -28,7 +28,7 @@ public class SampleDataUtil {
     public static final ResumeEntry MA1101R_TA = new EntryBuilder()
                                                  .withCategory("work")
                                                  .withTitle("Teaching Assistant for MA1101R")
-                                                 .withDuration("")
+                                                 .withDuration("2010 Semester 1")
                                                  .withSubHeader("Tutored an undergraduate linear algebra module")
                                                  .withTags("teaching", "math")
                                                  .build();
@@ -36,8 +36,8 @@ public class SampleDataUtil {
     public static final ResumeEntry COMP_CLUB_EXCO = new EntryBuilder()
                                                      .withCategory("nonacademics")
                                                      .withTitle("Computing Club Executive Committee Member")
-                                                     .withDuration("")
-                                                     .withSubHeader("")
+                                                     .withDuration("2010 Semester 1 and 2")
+                                                     .withSubHeader("Organised budget of the club")
                                                      .withTags("leadership", "management", "entrepreneurship")
                                                      .build();
 
@@ -45,7 +45,7 @@ public class SampleDataUtil {
     public static final ResumeEntry NUS_CS2103T = new EntryBuilder()
                                                   .withCategory("education")
                                                   .withTitle("CS2103T - Software Engineering")
-                                                  .withDuration("")
+                                                  .withDuration("2011 Semester 2")
                                                   .withSubHeader("Worked on morphing a large legacy codebase into a "
                                                                  + "new product")
                                                   .withTags("software_engineering", "java")
@@ -84,9 +84,9 @@ public class SampleDataUtil {
 
     public static ReadOnlyEntryBook getSampleEntryBook() {
         EntryBook sampleEb = new EntryBook();
-        sampleEb.addEnty(MA1101R_TA);
-        sampleEb.addEnty(COMP_CLUB_EXCO);
-        sampleEb.addEnty(NUS_CS2103T);
+        sampleEb.addEntry(MA1101R_TA);
+        sampleEb.addEntry(COMP_CLUB_EXCO);
+        sampleEb.addEntry(NUS_CS2103T);
 
         return sampleEb;
     }

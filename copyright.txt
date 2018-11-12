@@ -9,4 +9,4 @@ Copyright by Jan Jan Kovařík - http://glyphicons.com/
 - edit.png
 
 Copyright by Icons8 - https://icons8.com/
-- resume.png: https://icons8.com/icon/20471/client-base
+- resume.png: https://icons8.com/icon/46438/profile

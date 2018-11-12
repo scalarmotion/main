@@ -19,7 +19,7 @@ public class Resume {
     // Data
     private final Model model;
     private final Template template;
-    //private final ResumeHeader resumeHeader;
+    private final ResumeHeader resumeHeader;
     private final List<ResumeSection> resumeSectionList;
 
     public Resume(Model model) {
@@ -29,9 +29,8 @@ public class Resume {
         template = model.getLoadedTemplate().get();
         requireAllNonNull(template);
 
-        // TODO: Implement personal info
-        //resumeHeader = new ResumeHeader(model.getPersonInfo());
-        //requireAllNonNull(resumeHeader);
+        resumeHeader = new ResumeHeader(model.getUserParticulars());
+        requireAllNonNull(resumeHeader);
 
         resumeSectionList = new ArrayList<>();
         populateSectionList();
@@ -59,9 +58,9 @@ public class Resume {
                 model.getFilteredEntryList(sectionPredicate));
     }
 
-    /*public ResumeHeader getHeader() {
+    public ResumeHeader getHeader() {
         return resumeHeader;
-    }*/
+    }
 
     public List<ResumeSection> getSectionList() {
         return resumeSectionList;

@@ -2,9 +2,11 @@ package seedu.address.storage.util;
 
 import java.util.List;
 
+import net.steppschuh.markdowngenerator.link.Link;
 import net.steppschuh.markdowngenerator.list.UnorderedList;
 import net.steppschuh.markdowngenerator.text.Text;
 import net.steppschuh.markdowngenerator.text.TextBuilder;
+import net.steppschuh.markdowngenerator.text.emphasis.BoldText;
 import net.steppschuh.markdowngenerator.text.emphasis.ItalicText;
 import net.steppschuh.markdowngenerator.text.heading.Heading;
 
@@ -13,7 +15,7 @@ import seedu.address.model.entry.EntryDescription;
 import seedu.address.model.entry.EntryInfo;
 import seedu.address.model.entry.ResumeEntry;
 import seedu.address.model.resume.Resume;
-//import seedu.address.model.resume.ResumeHeader;
+import seedu.address.model.resume.ResumeHeader;
 import seedu.address.model.resume.ResumeSection;
 
 /**
@@ -29,6 +31,7 @@ public final class MarkdownConverter {
     }
 
     /**
+     * This version of the method is necessary because the call made to {@code toMarkdown} uses generic types.
      * @param object is a generic object which will be converted to
      * @return a String containing its Markdown representation by
      * another overloaded version of this method.
@@ -47,8 +50,8 @@ public final class MarkdownConverter {
      */
     public static String toMarkdown(Resume resume) {
         return new TextBuilder()
-                //.append(new Text(MarkdownConverter.toMarkdown(resume.getHeader())))
-                //.newLines(2)
+                .append(new Text(MarkdownConverter.toMarkdown(resume.getHeader())))
+                .newLines(2)
                 .append(new Text(MarkdownConverter.toMarkdown(resume.getSectionList())))
                 .toString();
     }
@@ -56,10 +59,17 @@ public final class MarkdownConverter {
     /**
      * param header is the Header of a Resume which will be converted to
      * return a String containing its Markdown representation.
-     *
+     */
     public static String toMarkdown(ResumeHeader header) {
-        // TODO: Implement when personal info structure has been confirmed
         return new TextBuilder()
+                .append(new Heading(header.getName(), 2))
+                .newLines(2)
+                .append(new BoldText(header.getPhone()))
+                .newLines(2)
+                .append(new Link(header.getEmail(),
+                        "mailto:" + (header.getEmail())))
+                .newLines(2)
+                .append(new Text(header.getAddress()))
                 .toString();
     }
 
@@ -68,7 +78,9 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(List<ResumeSection> sectionList) {
-        TextBuilder sectionListBuilder = new TextBuilder().rule().newLines(2);
+        TextBuilder sectionListBuilder = new TextBuilder()
+                .rule()
+                .newLines(2);
         for (ResumeSection section : sectionList) {
             sectionListBuilder = sectionListBuilder
                     .append(toMarkdown(section))
@@ -83,9 +95,12 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(ResumeSection section) {
-        TextBuilder sectionBuilder = new TextBuilder().append(new Heading(section.title, 2)).newLines(2);
+        TextBuilder sectionBuilder = new TextBuilder()
+                .append(new Heading(section.title, 2))
+                .newLines(2);
         for (ResumeEntry entry : section.getEntryList()) {
-            sectionBuilder = sectionBuilder.append(toMarkdown(entry));
+            sectionBuilder = sectionBuilder
+                    .append(toMarkdown(entry));
         }
         return sectionBuilder.toString();
     }
@@ -95,9 +110,13 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(ResumeEntry entry) {
-        return new TextBuilder()
-                .append(new Text(MarkdownConverter.toMarkdown(entry.getEntryInfo())))
-                .newLines(2)
+        TextBuilder entryBuilder = new TextBuilder();
+        if (!entry.isMinorEntry()) {
+            entryBuilder = entryBuilder
+                    .append(new Text(MarkdownConverter.toMarkdown(entry.getEntryInfo())))
+                    .newLines(2);
+        }
+        return entryBuilder
                 .append(new Text(MarkdownConverter.toMarkdown(entry.getDescription())))
                 .newLines(2)
                 .toString();
@@ -108,15 +127,25 @@ public final class MarkdownConverter {
      * @return a String containing its Markdown representation.
      */
     public static String toMarkdown(EntryInfo info) {
-        return new TextBuilder()
-                .append(new Heading(info.getTitle(), 5))
-                .append(new Text(" ("))
-                .append(new ItalicText(info.getDuration()))
-                .append(new Text(")"))
-                .newLines(2)
-                .append(new Text(info.getSubHeader()))
-                .newLines(2)
-                .toString();
+        TextBuilder infoBuilder = new TextBuilder();
+        if (!info.getTitle().equals("")) {
+            infoBuilder = infoBuilder
+                    .append(new Heading(info.getTitle(), 5));
+            if (!info.getDuration().equals("")) {
+                infoBuilder = infoBuilder
+                        .append(new Text(" ("))
+                        .append(new ItalicText(info.getDuration()))
+                        .append(new Text(")"));
+            }
+            infoBuilder = infoBuilder
+                    .newLines(2);
+        }
+        if (!info.getSubHeader().equals("")) {
+            infoBuilder = infoBuilder
+                    .append(new Text(info.getSubHeader()))
+                    .newLines(2);
+        }
+        return infoBuilder.toString();
     }
 
 

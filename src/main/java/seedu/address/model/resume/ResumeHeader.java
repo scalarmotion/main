@@ -1,14 +1,30 @@
 package seedu.address.model.resume;
 
-import seedu.address.model.entry.PersonalInfo;
+import seedu.address.model.UserParticulars;
 
 /**
  * Represents information that is only printed once in the resume such as the user's personal particulars.
  */
 public class ResumeHeader {
-    public final PersonalInfo personalInfo;
+    private final UserParticulars userParticulars;
 
-    public ResumeHeader(PersonalInfo personalInfo) {
-        this.personalInfo = personalInfo;
+    public ResumeHeader(UserParticulars userParticulars) {
+        this.userParticulars = userParticulars;
+    }
+
+    public String getName() {
+        return userParticulars.getName();
+    }
+
+    public String getPhone() {
+        return userParticulars.getMobile();
+    }
+
+    public String getEmail() {
+        return userParticulars.getEmail();
+    }
+
+    public String getAddress() {
+        return userParticulars.getAddress();
     }
 }

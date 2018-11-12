@@ -84,13 +84,13 @@ public class EntryBookTest {
 
     @Test
     public void hasPerson_personInAddressBook_returnsTrue() {
-        entryBook.addEnty(NUS_EDUCATION);
+        entryBook.addEntry(NUS_EDUCATION);
         assertTrue(entryBook.hasEntry(NUS_EDUCATION));
     }
 
     @Test
     public void hasEntry_entryWithSameIdentityFieldsInEntryBook_returnsTrue() {
-        entryBook.addEnty(NUS_EDUCATION);
+        entryBook.addEntry(NUS_EDUCATION);
         ResumeEntry editedNusEducation = new EntryBuilder().withCategory("education")
                 .withTitle("National University of Singapore").withDuration("2010 - 2014")
                 .withSubHeader("Bachelor of computing")

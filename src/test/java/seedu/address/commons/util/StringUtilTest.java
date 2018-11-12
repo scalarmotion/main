@@ -21,6 +21,32 @@ public class StringUtilTest {
     public void isOnlyWhitespace() {
         assertTrue(StringUtil.isOnlyWhiteSpace(" "));
         assertFalse(StringUtil.isOnlyWhiteSpace("test"));
+        assertFalse(StringUtil.isOnlyWhiteSpace("  test  "));
+    }
+
+    @Test
+    public void hasNoTrailingWhiteSpace() {
+        assertTrue(StringUtil.isNotPaddedByWhiteSpace("test"));
+        assertTrue(StringUtil.isNotPaddedByWhiteSpace("test A   some space     B"));
+
+        assertFalse(StringUtil.isNotPaddedByWhiteSpace("test  "));
+        assertFalse(StringUtil.isNotPaddedByWhiteSpace("  test"));
+        assertFalse(StringUtil.isNotPaddedByWhiteSpace("  test  B     A    "));
+    }
+
+    @Test
+    public void isOneWord_validInput() {
+        assertTrue(StringUtil.isOneWord("one"));
+        assertTrue(StringUtil.isOneWord("!@#!@$-one-word"));
+
+        assertFalse(StringUtil.isOneWord("one two"));
+        assertFalse(StringUtil.isOneWord("1 2 3 4 5"));
+    }
+
+    @Test
+    public void isOneWord_invalidInput() {
+        thrown.expect(IllegalArgumentException.class);
+        StringUtil.isOneWord("  string with trailing whitespace   ");
     }
 
     //---------------- Tests for isUnsignedPositiveInteger --------------------------------------

@@ -13,7 +13,7 @@ We are, https://github.com/CS2103-AY1819S1-W17-1[CS2103-W-17-1], a team based in
 
 === Anubhav
 image::anubh-v.png[width="150", align="left"]
-{empty}[https://github.com/anubh-v[github]] [<<anubhav#, portfolio>>]
+{empty}[https://github.com/anubh-v[github]] [<<anubh-v#, portfolio>>]
 
 Role: Contextual Awareness +
 Responsibility: User Interface, project deliverables, documentation
@@ -22,7 +22,7 @@ Responsibility: User Interface, project deliverables, documentation
 
 === Jiang Hengyuan
 image::jhengy.png[width="150", align="left"]
-{empty}[https://github.com/jhengy[github]] [<<hengyuan#, portfolio>>]
+{empty}[https://github.com/jhengy[github]] [<<jhengy#, portfolio>>]
 
 Role: Data Management +
 Responsibility: Logic, system testing, code quality
@@ -31,7 +31,7 @@ Responsibility: Logic, system testing, code quality
 
 === Marvin Tan Xu Dong
 image::marvintxd.png[width="150", align="left"]
-{empty}[http://github.com/marvintxd[github]] [<<marvin#, portfolio>>]
+{empty}[http://github.com/marvintxd[github]] [<<marvintxd#, portfolio>>]
 
 Role: Resume Template Management +
 Responsibility: Storage, documentation, code quality
@@ -40,7 +40,7 @@ Responsibility: Storage, documentation, code quality
 
 === Ong Shu Peng
 image::ongspxm.png[width="150", align="left"]
-{empty}[http://github.com/ongspxm[github]] [<<shupeng#, portfolio>>]
+{empty}[http://github.com/ongspxm[github]] [<<ongspxm#, portfolio>>]
 
 Role: Data Filtering +
 Responsibility: Commons, integration, git expert
@@ -49,7 +49,7 @@ Responsibility: Commons, integration, git expert
 
 === Gu Wangfan
 image::scalarmotion.png[width="150", align="left"]
-{empty}[http://github.com/scalarmotion[github]] [<<wangfan#, portfolio>>]
+{empty}[http://github.com/scalarmotion[github]] [<<scalarmotion#, portfolio>>]
 
 Role: Resume Generation +
 Responsibility: Model, integration, testing, markdown expert

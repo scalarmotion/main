@@ -70,10 +70,9 @@ public class EntryBook implements ReadOnlyEntryBook {
      * Adds an entry to the address book.
      * The entry must not already exist in the entry book.
      */
-    public void addEnty(ResumeEntry e) {
+    public void addEntry(ResumeEntry e) {
         entries.add(e);
     }
-
     /**
      * Replaces the given entry {@code target} in the list with {@code editedEntry}.
      * {@code target} must exist in the address book.

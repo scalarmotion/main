@@ -145,7 +145,7 @@ Format: `addBullet ENTRYINDEX CONTENTTOADD`
 * `CONTENTTOADD` refers to a line of description that the user wants to add to an entry
 ****
 
-Example:
+Examples:
 
 * `tag ls` +
 `addBullet 1 attained Best Financial Hack Award` +
@@ -192,27 +192,6 @@ Edits the entry at index 1 by replacing its title as R Company and subtitle as
 Data Science Intern.
 
 
-
-=== Editing a bullet point: `editBullet` [Coming in v1.4]
-
-Edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
-Format: `editBullet ENTRYINDEX BULLETINDEX EDITEDCONTENT`
-
-****
-* Before executing this command, the user needs to execute `selectEntry`
-* `ENTRYINDEX` refers to the index number shown in the displayed entry list
-* `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
-*  `EDITEDCONTENT` refers to new content that the user wants to replace the old one with
-* Both parameters *must be a positive integer* 1, 2, 3, ...
-****
-
-Example:
-
-* `selectEntry` +
-`editBullet 1 1 implement scalable application for data visualization using java` +
-Edits the 1st entry by replacing its 1st bullet description with "implement scalable application for data visualization using java".
-
-
 === Deleting an entry: `deleteEntry`
 
 Deletes the entry at the specified index. +
@@ -233,8 +212,29 @@ Deletes the 2nd entry in ResuMaker.
 `deleteEntry 1` +
 Deletes the 1st entry displayed under education category.
 
+//end::hengyuanUG[]
 
-=== Deleting a bullet: `deleteBullet` [Coming in v1.4]
+=== Editing a bullet point: `editBullet` [Coming in v2.0]
+
+Edits a bullet description of an entry in ResuMaker. INDEX refers to the index of a particular bullet description. +
+Format: `editBullet ENTRYINDEX BULLETINDEX EDITEDCONTENT`
+
+****
+* Before executing this command, the user needs to execute `selectEntry`
+* `ENTRYINDEX` refers to the index number shown in the displayed entry list
+* `BULLETINDEX` refers to the index number shown of a particular bulleted description the displayed Entry
+*  `EDITEDCONTENT` refers to new content that the user wants to replace the old one with
+* Both parameters *must be a positive integer* 1, 2, 3, ...
+****
+
+Example:
+
+* `selectEntry` +
+`editBullet 1 1 implement scalable application for data visualization using java` +
+Edits the 1st entry by replacing its 1st bullet description with "implement scalable application for data visualization using java".
+
+
+=== Deleting a bullet: `deleteBullet` [Coming in v2.0]
 
 Deletes the bullet of a particular entry at the specified index.  +
 Format: `deleteBullet ENTRYINDEX BULLETINDEX`
@@ -259,7 +259,7 @@ Deletes the 1st bullet of the 2nd entry in ResuMaker.
 `deleteBullet 1 1` +
 Deletes the 1st bullet of the 1st entry displayed under education category of ResuMaker.
 
-//end::hengyuanUG[]
+
 // tag::anubhavUG[]
 === Creating a Contextual Event (Project / Work Experience / Skill): `nus`
 There are times when we just don't want to manually enter every piece of required information into a computer programme.
@@ -315,7 +315,7 @@ Lists all the `~work` entries tagged with `#java`.
 [NOTE]
 Each entry can only be tagged with one category, therefore calls like `tag ls ~work ~project` will only pick one of the categories to display
 
-==== Add particular tag to entry: `tag add` [Coming in v1.4]
+==== Add particular tag to entry: `tag add`
 
 Add tags (space separated) to particular entry (identified by index).
 
@@ -328,7 +328,7 @@ Examples:
 * `tag add 10 ~work #java` +
 Adds tag `#java` and category `~work` to entry 10.
 
-==== Remove particular tag from entry: `tag remove` or `tag rm` [Coming in v1.4]
+==== Remove particular tag from entry: `tag remove` or `tag rm`
 
 Remove tags (space separated) from a particular entry (identified by index).
 
@@ -341,7 +341,7 @@ Removes category `~work` and tag `#java` from entry 1.
 * `tag rm 10` +
 Removes all tags and categories from entry 10.
 
-==== Retagging a particular entry: `tag retag` or `tag rt` [Coming in v1.4]
+==== Retagging a particular entry: `tag retag` or `tag rt`
 
 Remove all current tags and replace them with given tags (space separated).
 
@@ -461,7 +461,7 @@ here are some of the many tools out there that can help you convert your resume:
 
 // end::resume[]
 
-=== Clearing all entries : `clear` [Coming in v1.4]
+=== Clearing all entries : `clear` [Coming in v2.0]
 
 Clears all entries from ResuMaker. +
 Format: `clear`
@@ -471,7 +471,7 @@ Format: `clear`
 Exits the program. +
 Format: `exit`
 
-=== Saving the data [Coming in v1.4]
+=== Saving the data
 
 ResuMaker data are saved in the hard disk automatically after any command that changes the data. +
 There is no need to save manually.
