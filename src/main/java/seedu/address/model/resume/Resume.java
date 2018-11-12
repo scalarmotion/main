@@ -16,7 +16,7 @@ import seedu.address.model.template.TemplateSection;
  * as well as ResumeSections comprising ResumeEntries as specified by the Template.
  */
 public class Resume {
-    // Data
+    // Data fields
     private final Model model;
     private final Template template;
     private final ResumeHeader resumeHeader;
@@ -26,7 +26,8 @@ public class Resume {
         requireAllNonNull(model);
         this.model = model;
 
-        template = model.getLoadedTemplate().get();
+        template = model.getLoadedTemplate()
+                .orElseThrow(() -> new IllegalArgumentException("Template cannot be blank."));
         requireAllNonNull(template);
 
         resumeHeader = new ResumeHeader(model.getUserParticulars());
@@ -80,6 +81,7 @@ public class Resume {
 
         // state check
         Resume other = (Resume) obj;
-        return model.equals(other.model);
+        return resumeHeader.equals(other.resumeHeader)
+                && resumeSectionList.equals(other.resumeSectionList);
     }
 }

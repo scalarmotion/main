@@ -11,6 +11,11 @@ import seedu.address.model.resume.Resume;
  */
 public class MdFileStorage {
     /**
+     * Empty constructor to prevent instantiation.
+     */
+    private MdFileStorage() {}
+
+    /**
      * Saves the given resume data to the specified file.
      */
     public static void saveDataToFile(Path file, Resume resume)

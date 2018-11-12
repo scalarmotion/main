@@ -11,6 +11,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.Model;
 import seedu.address.model.UserParticulars;
 import seedu.address.model.category.Category;
 import seedu.address.model.entry.EntryDescription;
@@ -21,6 +22,7 @@ import seedu.address.model.resume.ResumeHeader;
 import seedu.address.model.resume.ResumeSection;
 import seedu.address.model.template.Template;
 import seedu.address.model.template.TemplateSection;
+import seedu.address.testutil.TypicalEntrys;
 import seedu.address.testutil.TypicalResumeModel;
 
 public class MarkdownConverterTest {
@@ -180,7 +182,6 @@ public class MarkdownConverterTest {
         ResumeSection testSectionMixedEntries = new ResumeSection("mixed entries", testEntryListMixedEntries);
 
         // Combine into section list
-        List<ResumeSection> testSectionListMixed = new ArrayList<>();
         testSectionList.add(testSectionEmptyEntry);
         testSectionList.add(testSectionMixedEntries);
 
@@ -248,8 +249,18 @@ public class MarkdownConverterTest {
         assertEquals(toMarkdown(defaultHeader) + System.lineSeparator()
                         + System.lineSeparator()
                         + toMarkdown(testSectionList),
-                toMarkdown(new Resume(new TypicalResumeModel())));
+                toMarkdown(new Resume(TypicalResumeModel.getDefaultTemplateModel())));
 
-        // TODO: implement test for resume with actual filtered entries
+        // Default resume with entries, no header
+        Model testModel = TypicalResumeModel.getDefaultTemplateModel();
+        List<ResumeEntry> typicalEntries = TypicalEntrys.getTypicalEntries();
+        for (ResumeEntry entry : typicalEntries) {
+            testModel.addEntry(entry);
+        }
+        Resume typicalResume = new Resume(testModel);
+        assertEquals(toMarkdown(typicalResume.getHeader())
+                        + System.lineSeparator() + System.lineSeparator()
+                        + toMarkdown(typicalResume.getSectionList()),
+                toMarkdown(typicalResume));
     }
 }

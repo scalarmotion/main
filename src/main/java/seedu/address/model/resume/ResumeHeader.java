@@ -27,4 +27,24 @@ public class ResumeHeader {
     public String getAddress() {
         return userParticulars.getAddress();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        // short circuit if same object
+        if (obj == this) {
+            return true;
+        }
+
+        // instanceof handles nulls
+        if (!(obj instanceof ResumeHeader)) {
+            return false;
+        }
+
+        // state check
+        ResumeHeader other = (ResumeHeader) obj;
+        return this.getName().equals(other.getName())
+                && this.getPhone().equals(other.getPhone())
+                && this.getEmail().equals(other.getEmail())
+                && this.getAddress().equals(other.getAddress());
+    }
 }
