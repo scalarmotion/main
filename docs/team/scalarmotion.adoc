@@ -1,4 +1,4 @@
-== Gu Wangfan - Project Portfolio
+= Gu Wangfan - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
