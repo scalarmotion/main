@@ -20,7 +20,8 @@ public class TagListCommand extends TagCommand {
     public static final String COMMAND_WORD = "list";
     public static final String COMMAND_WORD2 = "ls";
 
-    public static final String MESSAGE_USAGE = TagCommand.COMMAND_WORD + " " + COMMAND_WORD + ": Filter list of entries \n"
+    public static final String MESSAGE_USAGE = TagCommand.COMMAND_WORD + " " + COMMAND_WORD
+            + ": Filter list of entries \n"
             + "Parameters: "
             + "[" + PREFIX_CATEGORY + "CATEGORY] "
             + "[" + PREFIX_TAG + "TAG]...\n"
