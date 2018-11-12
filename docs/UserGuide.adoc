@@ -57,18 +57,21 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 .  Edit your User Preferences file as shown in <<Setup>>.
 
 .  Refer to <<Features>> for the full details of all commands.
-// tag::wangfanUG[]
+
+// tag::wangfanUGDiag[]
 Here is an illustration of the usual workflow of using ResuMaker.
 
 [[workflowfig]]
 .Typical workflow of ResuMaker
 image::ugTypicalFlowDiagram.png[width="250"]
+// end::wangfanUGDiag[]
 
 [[Setup]]
 == Setup
 
 Here are some important steps to set up ResuMaker to work better for you.
 
+// tag::wangfanUG[]
 === Adding user particulars
 You need to add your personal particulars to the user preferences file in order for ResuMaker to display
 them at the top of your resume (see <<workflowfig>> for an example of how it will look). Here's how you do it:

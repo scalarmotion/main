@@ -498,6 +498,7 @@ the complete `Resume` as well as the specified file `Path`. This event is captur
 which passes the data to the `MarkdownResumeStorage` class. The `Resume` object is then converted to a markdown `String`
 by the `MarkdownConverter` utility class, after which it is written to a file (with the specified name) by the `MdUtil` class. +
 
+<<<
 
 ==== Markdown Conversion
 
@@ -512,9 +513,7 @@ was used to handle the generation of the markdown `String` in `MarkdownConverter
 as it was built on a `Builder` pattern which made it easier and more organised to progressively
 generate markdown text for each part of the resume and combine it all together in the end.
 
-==== Design Consideration
-
-===== Markdown Conversion
+===== Design Consideration
 
 There were some considerations regarding how and where the conversion of
 `Resume` objects to markdown `Strings` would be done. We had to decide between these alternative approaches:
@@ -540,6 +539,8 @@ different markdown layout without replacing the existing markdown formatting.
 
 Ultimately, we decided that it was more important to enforce the separation between the `Model` and `Storage` modules
 as well as allow for potential further extension, so we chose Approach 1.
+
+<<<
 
 ==== Possible Extensions
 
