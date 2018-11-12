@@ -62,7 +62,7 @@ Here is an illustration of the usual workflow of using ResuMaker.
 
 [[workflowfig]]
 .Typical workflow of ResuMaker
-image::ugTypicalFlowDiagram.png[]
+image::ugTypicalFlowDiagram.png[width="250"]
 
 [[Setup]]
 == Setup
@@ -73,10 +73,10 @@ Here are some important steps to set up ResuMaker to work better for you.
 You need to add your personal particulars to the user preferences file in order for ResuMaker to display
 them at the top of your resume (see <<workflowfig>> for an example of how it will look). Here's how you do it:
 
-1. Open the `preferences.json` file which should have been created in the same folder as the ResuMaker application.
+. Open the `preferences.json` file which should have been created in the same folder as the ResuMaker application.
 You can do this using Notepad or any other text editor you prefer.
 
-2. Look for the section that starts with `"userParticulars" : {`. It should look like this: +
+. Look for the section that starts with `"userParticulars" : {`. It should look like this: +
 ```
 "userParticulars" : {
     "name" : "John Doe",
@@ -86,14 +86,14 @@ You can do this using Notepad or any other text editor you prefer.
   }
 ```
 [start=3]
-3. Edit the name, phone number, email address and home address within the quotes.
+. Edit the name, phone number, email address and home address within the quotes.
 For instance, if your name is Mary Jane, edit the line `"name" : "John Doe"` to `"name" : "Mary Jane"`.
 Take note that you cannot leave any of the particulars fields empty.
 
-4. Save the `preferences.json` file and restart ResuMaker. Try generating a resume to check that the changes
+. Save the `preferences.json` file and restart ResuMaker. Try generating a resume to check that the changes
 have been reflected.
 
-// tag::wangfanUG[]
+// end::wangfanUG[]
 [[Features]]
 == Features
 Here are the features available in ResuMaker:

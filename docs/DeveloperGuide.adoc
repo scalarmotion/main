@@ -449,7 +449,7 @@ The class structure is shown by the following class diagram:
 
 .Class diagram for Resume related classes
 image::resumeClassDiagram.png[width="800"]
-
+<<<
 The creation of a `Resume` by a `make` command is shown by this sequence diagram:
 
 .Sequence diagram for Resume creation
