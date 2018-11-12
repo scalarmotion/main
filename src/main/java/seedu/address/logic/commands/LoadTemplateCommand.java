@@ -40,16 +40,16 @@ public class LoadTemplateCommand extends Command {
 
     private static final Logger logger = LogsCenter.getLogger(LoadTemplateCommand.class);
 
-    private final Path filepath;
+    private final Path filePath;
     private boolean isSuccessful;
     private Exception exception;
 
     /**
      * Creates a LoadTemplateCommand to load the specified {@code Template}
      */
-    public LoadTemplateCommand(Path filepath) {
-        requireNonNull(filepath);
-        this.filepath = filepath;
+    public LoadTemplateCommand(Path filePath) {
+        requireNonNull(filePath);
+        this.filePath = filePath;
         EventsCenter.getInstance().registerHandler(this);
     }
 
@@ -73,26 +73,26 @@ public class LoadTemplateCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        model.loadTemplate(filepath);
+        model.loadTemplate(filePath);
 
         // as events are handled sequentially, the listeners will set isSuccessful before the function continues
         // executing
         if (!isSuccessful) {
             if (exception instanceof InvalidTemplateFileException) {
-                throw new CommandException(String.format(MESSAGE_INVALID_FILE_FORMAT, filepath));
+                throw new CommandException(String.format(MESSAGE_INVALID_FILE_FORMAT, filePath));
             } else {
-                throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, filepath));
+                throw new CommandException(String.format(MESSAGE_FILE_NOT_FOUND, filePath));
             }
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, filepath));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, filePath));
     }
 
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
             || (other instanceof LoadTemplateCommand // instanceof handles nulls
-            && filepath.equals(((LoadTemplateCommand) other).filepath));
+            && filePath.equals(((LoadTemplateCommand) other).filePath));
     }
 
     @Subscribe

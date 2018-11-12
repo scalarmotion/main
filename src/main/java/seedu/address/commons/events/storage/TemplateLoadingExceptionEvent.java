@@ -10,15 +10,15 @@ import seedu.address.commons.events.BaseEvent;
 public class TemplateLoadingExceptionEvent extends BaseEvent {
 
     public final Exception exception;
-    public final Path filepath;
+    public final Path filePath;
 
-    public TemplateLoadingExceptionEvent(Exception exception, Path filepath) {
+    public TemplateLoadingExceptionEvent(Exception exception, Path filePath) {
         this.exception = exception;
-        this.filepath = filepath;
+        this.filePath = filePath;
     }
 
     @Override
     public String toString() {
-        return "Exception while attempting to load " + filepath + ":\n" + exception.toString();
+        return "Exception while attempting to load " + filePath + ":\n" + exception.toString();
     }
 }

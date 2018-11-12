@@ -35,6 +35,8 @@ import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
+import seedu.address.storage.TemplateStorage;
+import seedu.address.storage.TxtTemplateStorage;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlAddressBookStorage;
 import seedu.address.storage.XmlAwarenessStorage;
@@ -75,7 +77,8 @@ public class MainApp extends Application {
                 // ^ Temp, to avoid breaking system tests. TODO: Remove with other AB code.
                 userPrefs.getEntryBookFilePath());
         EntryBookStorage entryBookStorage = new XmlEntryBookStorage(userPrefs.getEntryBookFilePath());
-        storage = new StorageManager(addressBookStorage, entryBookStorage, userPrefsStorage);
+        TemplateStorage templateStorage = new TxtTemplateStorage();
+        storage = new StorageManager(addressBookStorage, entryBookStorage, templateStorage, userPrefsStorage);
 
         initLogging(config);
 

@@ -49,7 +49,7 @@ public class MarkdownResumeStorageTest {
     }*/
 
     /**
-     * Saves {@code resume} at the specified {@code resumeFileInTestDataFolder} filepath.
+     * Saves {@code resume} at the specified {@code resumeFileInTestDataFolder} filePath.
      */
     private void saveResume(Resume resume, String resumeFileInTestDataFolder) {
         try {

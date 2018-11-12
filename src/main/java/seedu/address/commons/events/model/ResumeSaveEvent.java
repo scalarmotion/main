@@ -10,15 +10,15 @@ public class ResumeSaveEvent extends BaseEvent {
 
     public final Resume data;
 
-    public final Path filepath;
+    public final Path filePath;
 
-    public ResumeSaveEvent(Resume data, Path filepath) {
+    public ResumeSaveEvent(Resume data, Path filePath) {
         this.data = data;
-        this.filepath = filepath;
+        this.filePath = filePath;
     }
 
     @Override
     public String toString() {
-        return "save resume to " + filepath.toString();
+        return "save resume to " + filePath.toString();
     }
 }

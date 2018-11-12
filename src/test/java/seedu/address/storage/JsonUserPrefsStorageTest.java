@@ -99,7 +99,7 @@ public class JsonUserPrefsStorageTest {
     }
 
     /**
-     * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filepath.
+     * Saves {@code userPrefs} at the specified {@code prefsFileInTestDataFolder} filePath.
      */
     private void saveUserPrefs(UserPrefs userPrefs, String prefsFileInTestDataFolder) {
         try {

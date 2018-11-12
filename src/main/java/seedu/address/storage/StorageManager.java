@@ -41,12 +41,12 @@ public class StorageManager extends ComponentManager implements Storage {
 
 
     public StorageManager(AddressBookStorage addressBookStorage, EntryBookStorage entryBookStorage,
-                          UserPrefsStorage userPrefsStorage) {
+                          TemplateStorage templateStorage, UserPrefsStorage userPrefsStorage) {
         super();
         this.addressBookStorage = addressBookStorage;
         this.entryBookStorage = entryBookStorage;
         this.userPrefsStorage = userPrefsStorage;
-        this.templateStorage = new TxtTemplateStorage();
+        this.templateStorage = templateStorage;
         this.resumeStorage = new MarkdownResumeStorage();
     }
 
@@ -173,7 +173,7 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleTemplateLoadRequestedEvent(TemplateLoadRequestedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Template load from "
-                + event.filepath.toString() + " requested, attempting to load"));
+                + event.filePath.toString() + " requested, attempting to load"));
         /*
          * loadTemplate directly returns a Template rather than Optional<Template>, so that
          * in case loading throws an exception, it will be propagated here, and can be caught to raise
@@ -184,10 +184,10 @@ public class StorageManager extends ComponentManager implements Storage {
          */
         Template t;
         try {
-            t = loadTemplate(event.filepath);
-            raise(new TemplateLoadedEvent(t, event.filepath));
+            t = loadTemplate(event.filePath);
+            raise(new TemplateLoadedEvent(t, event.filePath));
         } catch (IOException | InvalidTemplateFileException e) {
-            raise(new TemplateLoadingExceptionEvent(e, event.filepath));
+            raise(new TemplateLoadingExceptionEvent(e, event.filePath));
         }
     }
 
@@ -215,10 +215,10 @@ public class StorageManager extends ComponentManager implements Storage {
     @Subscribe
     public void handleResumeSaveEvent(ResumeSaveEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Save resume to "
-                + event.filepath.toString() + " requested, attempting to save"));
+                + event.filePath.toString() + " requested, attempting to save"));
 
         try {
-            saveResume(event.data, event.filepath);
+            saveResume(event.data, event.filePath);
         } catch (IOException e) {
             raise(new DataSavingExceptionEvent(e));
         }

@@ -11,11 +11,11 @@ import seedu.address.model.template.Template;
 public class TemplateLoadedEvent extends BaseEvent {
 
     public final Template template;
-    public final Path filepath;
+    public final Path filePath;
 
-    public TemplateLoadedEvent(Template template, Path filepath) {
+    public TemplateLoadedEvent(Template template, Path filePath) {
         this.template = template;
-        this.filepath = filepath;
+        this.filePath = filePath;
     }
 
     public Template getTemplate() {
@@ -24,6 +24,6 @@ public class TemplateLoadedEvent extends BaseEvent {
 
     @Override
     public String toString() {
-        return "Successfully loaded template from " + filepath.toString();
+        return "Successfully loaded template from " + filePath.toString();
     }
 }

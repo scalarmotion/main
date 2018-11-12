@@ -188,7 +188,7 @@ public class AddEntryCommandTest {
         }
 
         @Override
-        public void loadTemplate(Path filepath) {
+        public void loadTemplate(Path filePath) {
             throw new AssertionError("This method should not be called.");
         }
 
@@ -221,7 +221,7 @@ public class AddEntryCommandTest {
         public void commitEntryBook() {
             throw new AssertionError("This method should not be called.");
         }
-        public void saveLastResume(Path filepath) {
+        public void saveLastResume(Path filePath) {
             throw new AssertionError("This method should not be called.");
         }
 

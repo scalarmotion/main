@@ -114,9 +114,9 @@ public interface Model {
     UserParticulars getUserParticulars();
 
     /**
-     * Loads a template from the specified filepath.
+     * Loads a template from the specified filePath.
      */
-    void loadTemplate(Path filepath);
+    void loadTemplate(Path filePath);
 
     /**
      * Returns the currently loaded template.
@@ -163,9 +163,9 @@ public interface Model {
     Optional<Resume> getLastResume();
 
     /**
-     * Saves the last Resume generated to the specified filepath.
+     * Saves the last Resume generated to the specified filePath.
      */
-    void saveLastResume(Path filepath);
+    void saveLastResume(Path filePath);
 
     /**
      * Returns the name of an Event that possibly matches a given expression.

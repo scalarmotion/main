@@ -222,8 +222,8 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Template ==================================================================================
 
     @Override
-    public void loadTemplate(Path filepath) {
-        raise(new TemplateLoadRequestedEvent(filepath));
+    public void loadTemplate(Path filePath) {
+        raise(new TemplateLoadRequestedEvent(filePath));
     }
 
     @Override
@@ -312,22 +312,22 @@ public class ModelManager extends ComponentManager implements Model {
         return Optional.ofNullable(lastGeneratedResume);
     }
 
-    public void saveLastResume(Path filepath) {
-        raise(new ResumeSaveEvent(lastGeneratedResume, filepath));
+    public void saveLastResume(Path filePath) {
+        raise(new ResumeSaveEvent(lastGeneratedResume, filePath));
     }
 
     //=========== Listener for template loading =============================================================
     @Subscribe
     public void handleTemplateLoadedEvent(TemplateLoadedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event,
-                "Template loaded from " + event.filepath.toString() + " to Model"));
+                "Template loaded from " + event.filePath.toString() + " to Model"));
         loadedTemplate = event.getTemplate();
     }
 
     @Subscribe
     public void handleTemplateLoadingExceptionEvent(TemplateLoadingExceptionEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event, "Exception when attempting to load template from "
-                + event.filepath.toString()));
+                + event.filePath.toString()));
         // if there was a previous template, it remains as the active one
     }
 }

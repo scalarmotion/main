@@ -21,18 +21,23 @@ public class Template {
     private static final String TEMPLATE_LINE_REGEX = "^[^:]+:~([^:\\s])+:[^:]*$";
 
     private ArrayList<TemplateSection> sections;
-    // filepath string, purely for display purposes
-    private String filepath;
-    private String stringRepresentation;
 
-    public Template(String filepath) {
-        this.filepath = filepath;
-        sections = new ArrayList<TemplateSection>();
-        stringRepresentation = "";
+    // filePath string, purely for display purposes
+    private String filePath;
+    private String sectionsString;
+
+    public Template(String filePath) {
+        this.filePath = filePath;
+        sections = new ArrayList<>();
+        sectionsString = "";
     }
 
     public String getFilepath() {
-        return filepath;
+        return filePath;
+    }
+
+    public String getSectionsString() {
+        return sectionsString;
     }
 
     /**
@@ -66,14 +71,15 @@ public class Template {
 
         String title = parts[0];
         String cateName = parts[1].substring(1); // remove ~
-        String tags = parts.length == 3 ? parts[2].trim() : "";
+        String tagsString = parts.length == 3 ? parts[2].trim() : "";
 
-        Predicate<ResumeEntry> tagPredicate = createTagPredicate(tags);
+        Predicate<ResumeEntry> tagPredicate = createTagPredicate(tagsString);
         Predicate<ResumeEntry> catePredicate = createCategoryPredicate(cateName);
 
         sections.add(new TemplateSection(title, catePredicate, tagPredicate));
 
-        stringRepresentation += String.format("%s: ~%s\n%s\n", title, cateName, tags.equals("") ? "" : tags + "\n");
+        sectionsString += String.format("%s: ~%s\n%s\n", title, cateName,
+                tagsString.equals("") ? "" : tagsString + "\n");
     }
 
     /**
@@ -85,23 +91,20 @@ public class Template {
         }
 
         /*
-         * nus&java nus&c recent
-         * split sum of products into array of products:
-         * [nus&java, nus&c, recent]
-         * TODO: see if can be renamed to be clearer
+         * start with sum of products: "nus&java nus&c recent"
+         * and split into array of products/tag groups: [nus&java, nus&c, recent]
          */
-        String[] products = tags.split(OR_DELIMITER);
+        String[] tagGroups = tags.split(OR_DELIMITER);
 
         ArrayList<ArrayList<Tag>> expressions = new ArrayList<>();
 
-        for (int i = 0; i < products.length; i++) {
-            //nus&java
-            ArrayList<Tag> andTags = new ArrayList<>();
-
-            for (String and : products[i].split(AND_DELIMITER)) { //[nus, java]
-                andTags.add(new Tag(and));
+        for (int i = 0; i < tagGroups.length; i++) {
+            ArrayList<Tag> expression = new ArrayList<>();
+            // for each product: [nus&java], split into tags: [nus, java]
+            for (String tag : tagGroups[i].split(AND_DELIMITER)) {
+                expression.add(new Tag(tag));
             }
-            expressions.add(andTags);
+            expressions.add(expression);
         }
 
         return entry -> {
@@ -119,7 +122,7 @@ public class Template {
                 }
 
                 if (fitsAllInExpression) {
-                    fitsOneExpression = true; //found an OR which it fits
+                    fitsOneExpression = true;
                     break;
                 }
             }
@@ -132,12 +135,12 @@ public class Template {
     }
 
     public ArrayList<TemplateSection> getSections() {
-        return new ArrayList<TemplateSection>(sections);
+        return new ArrayList<>(sections);
     }
 
     @Override
     public String toString() {
-        return stringRepresentation;
+        return filePath + "\n" + sectionsString;
     }
 
     @Override
@@ -154,7 +157,7 @@ public class Template {
 
         // state check
         Template other = (Template) obj;
-        return filepath.equals(other.filepath)
-                && stringRepresentation.equals(other.stringRepresentation);
+        return filePath.equals(other.filePath)
+                && sectionsString.equals(other.sectionsString);
     }
 }

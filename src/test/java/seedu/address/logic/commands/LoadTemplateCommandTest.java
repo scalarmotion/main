@@ -92,16 +92,16 @@ public class LoadTemplateCommandTest {
 
     private class LoadTemplateCommandStubAlwaysValid extends LoadTemplateCommand {
 
-        LoadTemplateCommandStubAlwaysValid(Path filepath) {
-            super(filepath);
+        LoadTemplateCommandStubAlwaysValid(Path filePath) {
+            super(filePath);
             setSuccessful(true);
         }
     }
 
     private class LoadTemplateCommandStubAlwaysInvalidFilepath extends LoadTemplateCommand {
 
-        LoadTemplateCommandStubAlwaysInvalidFilepath(Path filepath) {
-            super(filepath);
+        LoadTemplateCommandStubAlwaysInvalidFilepath(Path filePath) {
+            super(filePath);
             setSuccessful(false);
             setException(new IOException());
         }
@@ -109,8 +109,8 @@ public class LoadTemplateCommandTest {
 
     private class LoadTemplateCommandStubAlwaysInvalidFormat extends LoadTemplateCommand {
 
-        LoadTemplateCommandStubAlwaysInvalidFormat(Path filepath) {
-            super(filepath);
+        LoadTemplateCommandStubAlwaysInvalidFormat(Path filePath) {
+            super(filePath);
             setSuccessful(false);
             setException(new InvalidTemplateFileException("Specified file has invalid format."));
         }
