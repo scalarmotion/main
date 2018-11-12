@@ -311,8 +311,9 @@ Remove all current tags and replace them with given tags (space separated).
 
 Each entry must be tied to a specific category, hence, any retagging must include a valid category.
 
-Examples: *
-`tag rt 1 ~work #java` +
+Examples:
+
+* `tag rt 1 ~work #java` +
 Removes all tags and categories from entry 1, and then adds category `~work` and tag `#java` to entry 1.
 
 //end::tags[]
