@@ -580,11 +580,11 @@ image::resumeStorageExtensionClassDiagram.png[width="800"]
 
 // end::resume[]
 
-// tag:: contextualAwareness[]
+// tag::contextualAwareness[]
 === Contextual Awareness
 
 ==== Key Terms
-Here are some terms that are used often when discussing Contexual Awareness. +
+Below are some terms that are used often when discussing Contexual Awareness. +
 Please review their definitions in the Glossary before reading further. +
 
 * <<event, Events>>
@@ -596,85 +596,133 @@ Please review their definitions in the Glossary before reading further. +
 ==== Overview
 Contextual Awareness enables ResuMaker to: +
 
-* Create pre-filled ResumeEntries for standard <<event, Events>>.
+* Create pre-filled ResumeEntries for standard <<event, Events>> (university modules, well known competitions, etc).
 * Understand slang and partial phrases in the user's input.
 
-The flowchart below illustrates the overall flow taken by an end-user when working with the Contextual Awareness feature. +
+The flowchart below shows the overall flow taken by an user when working with the Contextual Awareness feature. +
 
-image::AwarenessFlow.png[width="800"]
+image::awarenessFlow.png[width=250, height=250]
 
-The flowchart highlights the 4 separate steps involved in the Contextual Awareness feature:
+The diagrams shows that there are 2 functions provided as part of the Contextual Awareness feature.
+One is a real-time function that updates the User Interface **as the user types (without pressing `Enter`) ** +
+The other functions adds a ResumeEntry to the internal EntryBook, and is triggered only when the user presses `Enter`.
 
-1. Providing feedback to the user, as he types in an `<expression>`.
-2. Guessing an Event name, based on the user provided `<expression>`.
-3. Matching the guessed Event name, with an actual Event, as defined in the user provided data.
-4. Creating a ResumeEntry for the matched Event.
+Both functions require the following steps to be executed.
 
-In this guide, we will discuss Steps 2, and 3.
+1. Guess the name of the Event that the user was referring to, when he / she typed `<argument>`.
+2. Matching the guessed Event name, with a pre-filled ResumeEntry.
 
-==== Guessing an Event name, based on user provided `<expression>`
-To guess the Event name, we parse the `slang`, `partial phrases` and `full phrases` in the `expression` to get a `possibleEventName`.
-This parsing is done by the `Awareness` class.
+In Step 1 (`Guess` step), the `<argument>` is called a `expression`.
+In Step 2 (`Match` step), the guessed Event name is called a `possibleEventName`.
 
-As shown <<Design-Storage, earlier>>, an instance of the Awareness class is initialised from user provided XML data, upon startup.
+The following sections examine these 2 steps, in the context of the **second function**.
+The real-time function is similar, and is discussed later.
 
-The following Figure shows the structure of the Awareness class.
+==== Guessing an Event name, Matching it with a ResumeEntry, and Adding the Matched ResumeEntry
+The Awareness class exposes a `getPossibleEventName` method that accepts a `expression` and returns a `possibleEventName`. The `getPossibleEventName` corresponds to Step 1 mentioned in <<Overview, overview>>. +
 
-image::awarenessStructure.png[width="600"]
+Awareness also exposes a `getContextualEntry` method that accepts a `possibleEventName` and returns a matching `ResumeEntry` (if it exists).
+Hence, the `possibleEventName` serves as a unique `key` to identify a `ResumeEntry`.
+The `getContextualEntry` method corresponds to Step 2 mentioned in <<Overview, overview>>. +
 
-Parsing the `slang`, `partial phrases` and `full phrases` is a 2-step process:
+The information above is illustrated in the following sequence diagram. +
 
-First, use the `dictionary` (see Figure) to replace each `slang` with its corresponding `full phrase`. +
-After this step, the `expression` will only contain `partial phrases` and `full phrases`. +
-Now, replace each `partial phrase` with its corresponding `full phrase`.
+image::awarenessHighLevelSeq.png[width=400, height=350]
 
-This gives us a string of `full phrases`, which is our `possibleEventName`.
+As seen, `ContextCommand` is responsible for (indirectly) called Awareness. Note that `ContextCommand` leverage on the existing `AddEntryCommand` to add the Matching ResumeEntry to the EntryBook. +
 
-As an example, suppose our initial `expression` was: `ug research assist`.
-In this `expression`, we have:
+==== Guessing an Event name, and Matching it with a ResumeEntry (Internal implementation)
+The previous section considered Awareness as a black box. This section describes how the `Guess` and `Match` steps are implemented internally in Awareness. +
+The following diagram shows the internal structure of Awareness.
 
-* A slang (`ug` - slang for `undegraduate`)
-* A partial phrase (`assist` - short for `assistant`)
-* A full phrase (`research`)
+image::awarenessStructure.png[width=350, height=200]
 
-After the first step, our expression will be `undergraduate research assist`. +
-After the second step, our expression will be `undergraduate research assistant` +
-Thus, our `possibleEventName` will be `undergraduate research assistant`.
+As seen, an Awareness object will hold a reference to a Dictionary and a TreeMap. +
+In fact, Awareness implements `getPossibleEventName` by calling `getPossibleEventName` on the Dictionary. To find a matching resume entry, this `possibleEventName` is used as a key to locate the corresponding ResumeEntry in the `nameToEntryMappings` TreeMap.
 
-==== Matching the guessed Event Name, with an actual Event [Work In Progress]
+==== Internal implementation of Dictionary
 
-Work in Progress
+As seen in the diagram, the Dictionary supports the following operations:
 
+* Register a mapping between a particular piece of slang, and a full phrase (e.g. "cs" maps to "computer science").
+* Register a full phrase to be tracked by the Dictionary.
+* Given an expression, guess the name of the event that the expression refers to, and return this `possibleEventName`.
 
+When a client attempts to register mappings / full phrases, defensive checks are done and invalid mappings / full phrases are rejected. +
+The User Guide provides details on the rules that determine the validity of a mapping / full phrase.
+
+* To form the `possibleEventName`, the Dictionary breaks the given `expression` into a stream of space delimited tokens. +
+* Then, all empty string tokens are filtered out.
+* Next, each token is treated as a slang, and the internal `mappings` HashMap is searched to determine if the token should be expanded into a full phrase.
+* Next, each token is treated as a partial phrase and internal `allFullPhrases` TreeSet is searched to determine if the token should be expanded into a full phrase.
+* Finally, all tokens are joined into a single string.
+* This gives us a string of `full phrases`, which is our `possibleEventName`.
+
+This algorithm is described in the following code snippet:
+```
+    public String getPossibleEventName(String expression) {
+        requireNonNull(expression);
+
+        return Arrays.stream(tokenize(expression))
+                     .filter(token -> !isEmptyString(token))
+                     .map(slang -> getFullPhraseFromSlang(slang))
+                     .map(partialPhrase -> getFullPhraseFromPartialPhrase(partialPhrase))
+                     .collect(Collectors.joining(SPACE));
+    }
+```
 ==== Design Choices
 
 ===== ContextCommand
-The ContextCommand is constructed by passing it a CommandSupplier.
-This construction is done by ContextCommandParser.
-When it is time to `execute` the ContextCommand, the CommandSupplier supplies the relevant command.
+The ContextCommand adds a ResumeEntry to the Entrybook by creating and calling `execute` on an AddEntryCommand object.
 
-Pros:
+Pros: Re-uses existing code
 
-* ContextCommand can be decoupled from specific commands like AddCommand.
-* ContextCommand can be _extended_ to perform any type of Command, by passing the relevant CommandSupplier.
+Cons: Couples ContextCommand with AddEntryCommand. The writer of ContextCommand would need to be aware about any future changes done to AddEntryCommand (e.g. changes in API).
 
 Alternatives:
 
-* Create different types of ContextCommands for different purpose: i.e. ContextAddCommand, ContextFindCommand, etc
+ContextCommand should take advantage of polymorphism. Instead of creating and executing a AddEntryCommand object, it should obtain an instance of a Command and execute that. This would mean ContextCommand only needs to know about Command.
 
-The alternative may be equally valid.
+To implement the alternative, we could create a CommandSupplier class, which exposes a `supply` method that takes an instance of the Model, and returns a Command.
+ContextCommand would be constructed by passing a CommandSupplier to its constructor. ContextCommandParser would assume the responsibility of creating the correct ContextCommand by passing in an appropriate CommandSupplier.
 
-===== Awareness class
-The Awareness class is constructed by passing it a Dictionary containing slang - full phrase mappings.
+When it is time to `execute`, ContextCommand would call the `supply` method of CommandSupplier, and call `execute` on the supplied Command.
+
+Decision made:
+
+The alternative may be valid in another project, **where ContextCommand is required to provide many types of functionality**. +
+For this project, creating the CommandSupplier class is a violation of the You-Ain't-Gonna-Need-It (YAGNI) principle.
+
+===== Passing Dictionary into Awareness for construction
+The Awareness class is constructed by passing it a Dictionary.
 
 Alternatives:
 
-* Create the Dictionary instance within the constructor of Awareness, rather than accepting it.
+* Create the Dictionary instance within the constructor of Awareness, rather than accepting it as an argument.
 
 Pros:
 
-* Increased testability as the dependancy (Dictionary object) _can be controlled_ since it is passed into the constructor.
+* The Awareness features become __more extensibile__. Future projects can pass in different types of Dictionaries without having to rewrite the Awareness code.
+* Achieves better separation of concerns, where the Dictionary effectively acts as a blackbox that Awareness need not know about.
+* Increased testability as the dependancy (Dictionary object) _can be better controlled_ since it is passed into the constructor.
 
+===== Lack of copying in Awareness constructor.
+The Dictionary and TreeMap passed into the Awareness constructor are stored directly as members of the Awareness object.
+
+Alternatives:
+
+* __**Defensively**__ copy the Dictionary and TreeMap. This ensures that future modifications to the Dictionary / TreeMap does not change the behaviour of Awareness.
+
+Justification for my approach:
+
+In summary, defensive copying was not appropriate for the intended vision and possible use cases for Awareness.
+
+* Original vision for Awareness - It is true that Awareness can be indirectly modified by the callee, by modifying the Dictionary and TreeMap. However, Awareness was not envisioned to be used directly by the callee. After all, the callee already has access to both the Dictionary and TreeMap (eliminating the need for an Awareness class). It is expected that the callee will, rather than using the Awareness object, pass the Awareness object to another component of the application - which then uses Awareness as a black box. In our application, for example, the XML serialisation classes create the Awareness object and pass it to the Storage component.
+* Increased flexiblity for callee - The callee can keep a reference to the Dictionary and TreeMap, and keep updating them over time. This will easily update the Awareness class. Such a situation may be needed if a `WebDictionary` was implemented, where a `WebDictionary` would dynamically add mappings via a web service.
+In this case, the user of the Awareness object could continue to use the same instance, while enjoying the new updates made to its internal components.
+* The Dictionary class has sufficient defensive checks to prevent a callee from creating invalid conditions within the Awareness class.
+
+// end::contextualAwareness[]
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.

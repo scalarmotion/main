@@ -1,4 +1,4 @@
-= Anubhav - Project Portfolio
+== Anubhav - Project Portfolio
 :site-section: AboutUs
 :imagesDir: ../images
 :stylesDir: ../stylesheets
@@ -42,17 +42,18 @@ ResuMaker is a fast and flexible resume generator, optimised for students in the
 
 
 |===
-|_Given below are sections I contributed to the User Guide.
+|_Given below are sections I contributed to the User Guide._
+|===
 
 include::../UserGuide.adoc[tag=intro]
 include::../UserGuide.adoc[tag=anubhavUG]
 
+
 == Contributions to the Developer Guide
 
 |===
-|_Given below are sections I contributed to the Developer Guide.
+|_Given below are sections I contributed to the Developer Guide._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=contextualAwareness]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]

@@ -264,8 +264,8 @@ Deletes the 1st bullet of the 1st entry displayed under education category of Re
 
 
 // tag::anubhavUG[]
-=== Creating a Contextual Event (Project / Work Experience / Skill): `nus`
-There are times when we just don't want to manually enter every piece of required information into a computer programme.
+=== Adding pre-filled Resume Entries (Contextual Events): `nus`
+There are times when we just don't want to manually enter every piece of required information into a computer program.
 After all, shouldn't some things __just be common knowledge?__
 
 With ResuMaker, you can auto-populate resume Entries if ResuMaker already knows about them!
@@ -274,20 +274,20 @@ We call such Entries __Contextual Events__.
 Format: `nus EVENT_NAME`
 
 [TIP]
-The `EVENT_NAME` can be a combination of an  Event's **full name** (Mathematics and Computer Science Double Degree Programme), **acronyms** (math - cs ddp), or even
+The `EVENT_NAME` can be a combination of an  Event's **full name** (mathematics and computer science double degree programme), **acronyms** (math - cs ddp), or even
 **partially matching phrases** (math - comp sci double deg prog)
 
 Examples:
 
 * `nus cs2103t` +
-Creates a Project Entry for `CS2103T` - A rigorous software engineering module at NUS.
+Creates a Resume Entry for CS2103T - A rigorous software engineering class at NUS.
 * `nus ta ma1101r` OR `nus teaching asst ma1101r` +
-Creates a Work Experience Entry for `Teaching Assistant MA1101R`
-* `nus `computing cl exco` +
-Creates a Nonacademics Entry for an Executive Commitee position in the Computing Club.
+Creates a Resume Entry for a MA1101R teaching assistant position. (MA1101R is an undergraduate linear algebra class at NUS)
+* `nus computing cl exco` +
+Creates a Resume Entry for an executive commitee position in the Computing Club at SoC.
 
 [NOTE]
-Slang and acronyms must be correctly configured in application data. In future releases, ResuMaker will ship with NUS / SOC specific slang and acronyms.
+Slang and acronyms must be correctly configured in application data. ResuMaker ships with NUS / SOC specific slang and acronyms - <<Quick Start, available here>>.
 
 //end::anubhavUG[]
 
@@ -485,6 +485,82 @@ There is no need to save manually.
 
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
+
+== Configuring Resume data
+
+All your resume entries are saved in the XML format. +
+The filepath to the XML file can be specified in the `preferences.json` file. +
+If the file cannot be found, ResuMaker will start with sample resume data. +
+If the file cannot be read or has errors in its XML, ResuMaker will start with no resume data.
+
+== Configuring Awareness data
+
+Awareness data can be provided via XML. +
+Create a XML file (with `.xml` extension) called `awareness` and place it in the same folder as `resumaker.jar`. +
+If the file cannot be found, ResuMaker will start with sample awareness data. +
+If the file cannot be read or has errors in its XML, ResuMaker will start with no awareness data.
+
+If you know some XML, you can easily configure your own slang and contextual events!
+The Awareness XML file consists of a series of `mapping` elements and a series of `context-entry` elements.
+Each `mapping` element defines a mapping between some slang (e.g. cs) and a full phrase (e.g computer science).
+
+These are the main rules to follow when writing the `mapping` elements.
+
+* You cannot use the same slang in multiple mapping elements.
+* Each slang can only be one word.
+* Each `slang` and `full phrase` element cannot be purely whitespace.
+
+These are the rules to follow when writing the `context-entry` elements.
+
+* Give each `context-entry` a unique name, and provide it in the `eventName` attribute.
+* For best results, do not have unnecessary spaces in your `eventName`.
+* The `eventName` cannot be purely whitespace.
+* For the resume entry's XML, follow the same format as used by the resume entries' XML file.
+
+The following can be used as a template for your awareness data.
+
+```
+<awareness>
+  <mapping>
+    <fullPhrase>Computer Science</fullPhrase>
+      <slang>cs</slang>
+      <slang>computing</slang>
+   </mapping>
+  <mapping>
+    <fullPhrase>financial technology</fullPhrase>
+      <slang>fintech</slang>
+      <slang>ft</slang>
+   </mapping>
+  <mapping>
+    <fullPhrase>machine learning</fullPhrase>
+      <slang>ml</slang>
+   </mapping>
+  <mapping>
+    <fullPhrase>singapore</fullPhrase>
+      <slang>sg</slang>
+   </mapping>
+  <mapping>
+    <fullPhrase>financial technology</fullPhrase>
+      <slang>fintech</slang>
+   </mapping>
+  <mapping>
+    <fullPhrase>hackathon</fullPhrase>
+   </mapping>
+   <context-entry eventName="uni">
+     <entry category="education">
+        <entryInfo title="National University of Singapore" subheader="Bachelor of computing" duration="2010 - 2013"/>
+        <tags>education</tags>
+     </entry>
+   </context-entry>
+   <context-entry eventName="noc">
+     <entry category="education">
+        <entryInfo title="NUS Overseas College" subheader="Attended entrepreneurship modules and worked at a startup" duration="2011 Semester "/>
+        <tags>Leadership</tags>
+        <tags>Entrepreneurship</tags>
+     </entry>
+   </context-entry>
+</awareness>
+```
 
 == FAQ
 
