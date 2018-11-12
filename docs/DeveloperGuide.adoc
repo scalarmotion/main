@@ -473,14 +473,23 @@ Rather than asking Logic to interact directly with UI to request for changes in 
 // tag::resume[]
 === Resume Generation
 This section describes the implementation of the resume generation feature, explains the underlying classes and
-supporting data structures, and highlights areas that are open to extension.
+supporting data structures, justifies a key design decision and highlights areas that are open to extension.
 
 ==== Resume Structure
 
 The `Resume` contains a list of `ResumeSections`,
 each comprising a title and a list of `ResumeEntries` associated with it
-(as stipulated by the `Template` used to generate the `Resume`). +
-_[CLASS DIAGRAM]_
+(as stipulated by the `Template` used to generate the `Resume`).
+The class structure is shown by the following class diagram:
+
+.Class diagram for Resume related classes
+image::resumeClassDiagram.png[width="800"]
+<<<
+The creation of a `Resume` by a `make` command is shown by this sequence diagram:
+
+.Sequence diagram for Resume creation
+image::generateResumeSequenceDiagram.png[width="800"]
+
 
 ==== Storage Management
 
@@ -488,8 +497,8 @@ When a resume is to be saved to a file, the `ModelManager` raises a `ResumeSaveE
 the complete `Resume` as well as the specified file `Path`. This event is captured by the `StorageManager`,
 which passes the data to the `MarkdownResumeStorage` class. The `Resume` object is then converted to a markdown `String`
 by the `MarkdownConverter` utility class, after which it is written to a file (with the specified name) by the `MdUtil` class. +
-_[DIAGRAM]_
 
+<<<
 
 ==== Markdown Conversion
 
@@ -503,6 +512,35 @@ An external link:https://github.com/Steppschuh/Java-Markdown-Generator[Java Mark
 was used to handle the generation of the markdown `String` in `MarkdownConverter`,
 as it was built on a `Builder` pattern which made it easier and more organised to progressively
 generate markdown text for each part of the resume and combine it all together in the end.
+
+===== Design Consideration
+
+There were some considerations regarding how and where the conversion of
+`Resume` objects to markdown `Strings` would be done. We had to decide between these alternative approaches:
+
+====== Approach 1:
+
+All markdown conversion is done in a class (`MarkdownConverter`) separate from the `Resume` and `ResumeEntry` packages.
+This ensures that the "abstract" data classes in the `Model` are completely separated from the conversion to "concrete"
+markdown text in accordance to the Single Responsibility Principle and also allows for extension by adding a different
+class to format the markdown differently. However, this causes heavy coupling in `MarkdownConverter`, as any change to
+the internal structure of `Resume` and `ResumeEntry` classes would require extensive changes across multiple methods in
+`MarkdownConverter`.
+
+====== Approach 2:
+
+Every class that could be converted to markdown would contain a `toMarkdown` method, possibly implementing a
+`Markdownable` interface. This would ensure that any change to the structure or formatting of a particular class would
+only require changes to the `toMarkdown` method of that class. However, this exposes the "abstract" data classes in the
+`Model` to the implementation of using markdown text in `Storage` and does not allow for the extension of adding a
+different markdown layout without replacing the existing markdown formatting.
+
+====== Decision
+
+Ultimately, we decided that it was more important to enforce the separation between the `Model` and `Storage` modules
+as well as allow for potential further extension, so we chose Approach 1.
+
+<<<
 
 ==== Possible Extensions
 
@@ -521,8 +559,11 @@ While we have chosen to implement conversion into markdown, you may prefer a dif
 the hassle of converting markdown to other formats outside the application. To this end, you can extend ResuMaker by
 adding support for saving `Resumes` to a new format. +
 To achieve this, you would have to design your own class implementing the `ResumeStorage` interface. This new class would
-then need new utility methods to handle conversion of the `Resume` into another text format, such as XML. +
-_[DIAGRAM OF NECESSARY ADDITIONS]_
+also need new utility methods to handle conversion of the `Resume` into another text format.
+The diagram below illustrates the key additions necessary to implement saving resumes in a new file format:
+
+.Class diagram for Resume Storage extension
+image::resumeStorageExtensionClassDiagram.png[width="800"]
 
 
 // end::resume[]
