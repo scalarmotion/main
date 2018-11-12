@@ -118,7 +118,42 @@ public class Resume {
 
 Test code snippet:
 ```
+    @Test
+    public void resumeConstructorTest() {
+        // no template loaded
+        assertThrows(IllegalArgumentException.class, "Template cannot be blank.", () -> new Resume(new ModelManager()));
 
+        Model testModel = TypicalResumeModel.getDefaultTemplateModel();
+
+        // default template, no entries
+        Resume blankResume = new Resume(testModel);
+        List<ResumeSection> expectedBlankSectionList = new ArrayList<>();
+        Template defaultTemplate = Template.getDefaultTemplate();
+        for (TemplateSection templateSection : defaultTemplate.getSections()) {
+            expectedBlankSectionList.add(new ResumeSection(templateSection.getTitle(), new ArrayList<ResumeEntry>()));
+        }
+        assertEquals(expectedBlankSectionList, blankResume.getSectionList());
+
+        // default template, typical entries
+        List<ResumeEntry> typicalEntries = TypicalEntrys.getTypicalEntries();
+        for (ResumeEntry entry : typicalEntries) {
+            testModel.addEntry(entry);
+        }
+        Resume typicalResume = new Resume(testModel);
+        // filtering entries manually to get expected section list
+        List<ResumeSection> expectedTypicalSectionList = new ArrayList<>();
+        for (TemplateSection templateSection : defaultTemplate.getSections()) {
+            List<ResumeEntry> testEntryList = new ArrayList<>();
+            for (ResumeEntry entry : typicalEntries) {
+                if (templateSection.getCategoryPredicate().test(entry)
+                        && templateSection.getTagPredicate().test(entry)) {
+                    testEntryList.add(entry);
+                }
+            }
+            expectedTypicalSectionList.add(new ResumeSection(templateSection.getTitle(), testEntryList));
+        }
+        assertEquals(expectedTypicalSectionList, typicalResume.getSectionList());
+    }
 ```
 
 <<<
