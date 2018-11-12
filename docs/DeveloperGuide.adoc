@@ -405,6 +405,18 @@ Otherwise, a `TemplateLoadingExceptionEvent` will be raised and handled by `Mode
 .Component interactions for loadtemplate template1.txt command (part 2)
 image::Template_SD2.png[width="800"]
 
+==== Design Considerations
+===== Aspect: When to load the template
+
+* **Alternative 1 (current choice):** Have a dedicated `loadtemplate` command and only load it when the command is called
+** Pros:
+*** Application can store an active Template which can be displayed in the UI
+*** Clearer and more logical separation of functionality between `make` and `loadtemplate`
+** Cons: More work to implement
+* **Alternative 2:** The Template filepath is specified as a parameter to the `make` command and loaded when `make` is called, right before the resume is generated
+** Pros: One less command has to be implemented
+** Cons: There is no active Template; every `make` command will load the Template again even if the same filepath is given, making the application do redundant work
+
 
 // end::template[]
 

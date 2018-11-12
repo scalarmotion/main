@@ -20,11 +20,21 @@ The application can then generate a resume in Markdown format displaying all the
 
 * *Major enhancement*: added *the ability to use templates to specify resume formats*
 ** What it does: This allows the user to use template text files to specify how the resume will be generated, in terms of the ordering and title of sections, and which entries will appear under each section based on its tags.
-** Justification: This feature enables one of the core value propositions of our product, which is to be able to easily generate resumes for different contexts. While the application will hold all of the user's entries and experiences,
-templates allow the user to customize the generated resume for specific purposes, or depending on which company they are applying to.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** Justification: This feature enables one of the core value propositions of our product, which is to be able to easily generate resumes for different contexts.
+While the application will hold all of the user's experiences as entries,
+templates allow the user to customize the generated resume for specific purposes, or depending on which company they are applying to, by specifying the types of entries to include.
+** Highlights: Templates accommodate a basic boolean logic system. In the template text files, users can specify the tags to include in a sum-of-products form.
+The user can specify a list of tag groups, where an entry which fulfils at least one would be included. Each tag group is a tag or the logical AND of any number of them.
+E.g. `java python&datascience swift` means "entries should be tagged with (java) OR (python AND datascience) OR (swift)".
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+
+* *Minor enhancement*: added the ability for users to specify their particulars and contact details in the preferences file,
+for them to be displayed in the generated resume.
+
+* *Minor enhancement*: implemented the saving of entries into an XML file.
+
+* *Code contributed*:
+https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=marvintxd[Project Code Dashboard]
 
 * *Other contributions*:
 
@@ -35,16 +45,15 @@ templates allow the user to customize the generated resume for specific purposes
 *** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
 ** Documentation:
 *** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Updated component diagrams: [ ]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
+*** PRs reviewed (with non-trivial review comments): https://github.com/CS2103-AY1819S1-W17-1/main/pull/267[#267], https://github.com/CS2103-AY1819S1-W17-1/main/pull/150[#150]
+*** Bugs reported on teammates' features: https://github.com/CS2103-AY1819S1-W17-1/main/issues/290[#290]
 *** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
 *** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
 *** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Set up Travis CI and autopublishing of docs for the project
 
 == Contributions to the User Guide
 
