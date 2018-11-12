@@ -15,6 +15,8 @@ import seedu.address.model.tag.Tag;
  */
 public class ResumeEntry implements Taggable {
 
+    private static final String NEW_LINE = "\n";
+
     private Category category;
     private EntryInfo entryInfo; // contains either title,subheader and duration of the entry, or none at all
     private Set<Tag> tags = new HashSet<>();
@@ -155,11 +157,18 @@ public class ResumeEntry implements Taggable {
     // note: Description is omitted
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(" Category: ")
+        builder.append("Category: ")
                 .append(category)
+                .append(NEW_LINE)
                 .append(entryInfo)
-                .append(" Tags: ");
+                .append(NEW_LINE)
+                .append("Tags: ");
         getTags().forEach(builder::append);
+        builder.append(NEW_LINE)
+                .append(NEW_LINE)
+                .append("Bullet Description:")
+                .append(NEW_LINE)
+                .append(description);
         return builder.toString();
     }
 

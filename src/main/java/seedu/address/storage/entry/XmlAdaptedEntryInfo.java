@@ -21,7 +21,25 @@ public class XmlAdaptedEntryInfo {
     @XmlAttribute
     private String duration;
 
+    /**
+     * Default constructor required by JAXB.
+     */
     public XmlAdaptedEntryInfo() {}
+
+    public XmlAdaptedEntryInfo(EntryInfo source) {
+        title = source.getTitle();
+        subheader = source.getSubHeader();
+        duration = source.getDuration();
+    }
+
+    /**
+     * Constructs a {@code XmlAdaptedEntryInfo} with the given details.
+     */
+    public XmlAdaptedEntryInfo(String title, String subheader, String duration) {
+        this.title = title;
+        this.subheader = subheader;
+        this.duration = duration;
+    }
 
     /**
      * Converts this jaxb-friendly adapted entry info object into the model's EntryInfo object
@@ -30,7 +48,7 @@ public class XmlAdaptedEntryInfo {
      */
     public EntryInfo toModelType() throws IllegalValueException {
 
-        /** If entryInfo has been specified in XML, all 3 fields must be provided */
+        /* If entryInfo has been specified in XML, all 3 fields must be provided */
         if (title == null) {
             throw new IllegalValueException(String.format(MESSAGE_MISSING_ENTRY_INFO, "title"));
         }

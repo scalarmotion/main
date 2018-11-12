@@ -45,7 +45,15 @@ public class EntryDescription {
      */
     public void addBullet(String bullet) {
         checkArgument(isValidBullet(bullet), MESSAGE_ENTRYDESC_CONSTRAINTS);
+
         descriptionList.add(bullet);
+    }
+
+    /**
+     * checks if a bullet is contained in the EntryDescription.
+     */
+    public boolean contains(String bullet) {
+        return descriptionList.contains(bullet);
     }
 
     /**
